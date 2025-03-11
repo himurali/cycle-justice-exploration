@@ -1,12 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import NavBar from "../components/NavBar";
+import Hero from "../components/Hero";
+import InequalitySection from "../components/InequalitySection";
+import CallToAction from "../components/CallToAction";
+import Footer from "../components/Footer";
+import { inequalityData } from "../constants/inequalityData";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <NavBar />
+      <main>
+        <Hero />
+        {inequalityData.map((data, i) => (
+          <InequalitySection
+            key={data.id}
+            data={data}
+            isReversed={i % 2 !== 0}
+            index={i}
+          />
+        ))}
+        <CallToAction />
+      </main>
+      <Footer />
     </div>
   );
 };
