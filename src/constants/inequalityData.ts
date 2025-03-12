@@ -14,6 +14,7 @@ export interface InequalityData {
     context?: string;
   }[];
   imageUrl: string;
+  bicycleSolution: string;
 }
 
 export const inequalityData: InequalityData[] = [
@@ -41,7 +42,8 @@ export const inequalityData: InequalityData[] = [
         context: "increase in respiratory conditions in high-traffic areas"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+    bicycleSolution: "Regular cycling reduces risk of cardiovascular disease by 46% and improves mental health while creating zero emissions."
   },
   {
     id: "environmental",
@@ -67,7 +69,8 @@ export const inequalityData: InequalityData[] = [
         context: "reduction in major cities due to road expansion"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1606041011872-596597976b25?q=80&w=1972&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1606041011872-596597976b25?q=80&w=1972&auto=format&fit=crop",
+    bicycleSolution: "Bicycles produce zero emissions and replacing just 20% of car trips could reduce CO2 emissions by 11% while preserving green spaces."
   },
   {
     id: "intergenerational",
@@ -93,7 +96,8 @@ export const inequalityData: InequalityData[] = [
         context: "reduction in accessible outdoor spaces for children"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1516731415730-0c29380043f2?q=80&w=2070&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1516731415730-0c29380043f2?q=80&w=2070&auto=format&fit=crop",
+    bicycleSolution: "Cycling infrastructure creates cleaner air and safer streets for future generations, building a sustainable legacy for children to inherit."
   },
   {
     id: "economic",
@@ -119,7 +123,8 @@ export const inequalityData: InequalityData[] = [
         context: "ratio of cycling to road infrastructure funding"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1636360264463-16fb4b699acd?q=80&w=2070&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1636360264463-16fb4b699acd?q=80&w=2070&auto=format&fit=crop",
+    bicycleSolution: "Bicycles cost just 1% of a car to purchase and maintain, saving households up to ₹1.3 lakh annually while providing reliable mobility."
   },
   {
     id: "political",
@@ -145,7 +150,8 @@ export const inequalityData: InequalityData[] = [
         context: "of transportation plans include meaningful public input"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1444252455043-a895c95c2b8e?q=80&w=2069&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1444252455043-a895c95c2b8e?q=80&w=2069&auto=format&fit=crop",
+    bicycleSolution: "Bicycle-friendly policies democratize mobility, giving voice and access to all citizens regardless of income or status."
   },
   {
     id: "social",
@@ -171,6 +177,7 @@ export const inequalityData: InequalityData[] = [
         context: "reduced access to employment for non-drivers"
       }
     ],
-    imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop"
+    imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+    bicycleSolution: "Cycling creates connected communities, reduces isolation, and enables equal access to opportunities for all citizens."
   }
 ];
