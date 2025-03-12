@@ -113,7 +113,7 @@ const InequalitySection = ({ data, isReversed = false, index }: InequalitySectio
                 </div>
                 
                 <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: data.color }}>
-                  The Bicycle Solution
+                  Bicycle Justice Delivers
                 </h3>
                 
                 <ul className="space-y-3">
