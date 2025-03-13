@@ -112,9 +112,13 @@ const InequalitySection = ({ data, isReversed = false, index }: InequalitySectio
                   </svg>
                 </div>
                 
-                <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: data.color }}>
+                <h3 className="text-2xl font-bold mb-1 text-center" style={{ color: data.color }}>
                   Bicycle Justice Delivers
                 </h3>
+                
+                <p className="text-sm italic text-center text-justice-text/70 mb-4">
+                  Bicycle Justice in Motion
+                </p>
                 
                 <ul className="space-y-3">
                   {data.bicycleSolution.split('. ').filter(s => s.length > 0).map((point, i) => (
