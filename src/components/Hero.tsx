@@ -63,12 +63,14 @@ const Hero = () => {
               <div className="glass-card w-full h-full flex flex-col items-center justify-center p-6 border-4 border-justice-blue shadow-xl bg-white/95">
                 <div className="grid grid-cols-3 gap-6 items-center w-full h-full">
                   {/* Left image */}
-                  <div className="h-full flex items-center justify-center">
-                    <img 
-                      src="https://images.unsplash.com/photo-1472396961693-142e6e269027" 
-                      alt="Nature and sustainability" 
-                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
-                    />
+                  <div className="h-full flex items-center justify-center aspect-square">
+                    <div className="w-full h-0 pb-[100%] relative rounded-lg overflow-hidden shadow-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1485965120184-e220f721d03e" 
+                        alt="Road bicycle" 
+                        className="absolute inset-0 w-full h-full object-cover" 
+                      />
+                    </div>
                   </div>
                   
                   {/* Center text */}
@@ -79,12 +81,14 @@ const Hero = () => {
                   </div>
                   
                   {/* Right image */}
-                  <div className="h-full flex items-center justify-center">
-                    <img 
-                      src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" 
-                      alt="Technology" 
-                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
-                    />
+                  <div className="h-full flex items-center justify-center aspect-square">
+                    <div className="w-full h-0 pb-[100%] relative rounded-lg overflow-hidden shadow-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8" 
+                        alt="Mountain bike" 
+                        className="absolute inset-0 w-full h-full object-cover" 
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -95,12 +99,14 @@ const Hero = () => {
               <div className="glass-card w-full h-full flex flex-col items-center justify-center p-6 border-4 border-justice-dark shadow-xl bg-white/95">
                 <div className="grid grid-cols-3 gap-6 items-center w-full h-full">
                   {/* Left image */}
-                  <div className="h-full flex items-center justify-center">
-                    <img 
-                      src="https://images.unsplash.com/photo-1566871277326-ba6874a95344" 
-                      alt="Bicycle commuting" 
-                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
-                    />
+                  <div className="h-full flex items-center justify-center aspect-square">
+                    <div className="w-full h-0 pb-[100%] relative rounded-lg overflow-hidden shadow-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1571068316344-75bc76f77890" 
+                        alt="Bicycle commuting" 
+                        className="absolute inset-0 w-full h-full object-cover" 
+                      />
+                    </div>
                   </div>
                   
                   {/* Center text */}
@@ -111,12 +117,14 @@ const Hero = () => {
                   </div>
                   
                   {/* Right image */}
-                  <div className="h-full flex items-center justify-center">
-                    <img 
-                      src="https://images.unsplash.com/photo-1505705694340-019e1e335916" 
-                      alt="Nature path" 
-                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
-                    />
+                  <div className="h-full flex items-center justify-center aspect-square">
+                    <div className="w-full h-0 pb-[100%] relative rounded-lg overflow-hidden shadow-lg">
+                      <img 
+                        src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7" 
+                        alt="Bike in urban setting" 
+                        className="absolute inset-0 w-full h-full object-cover" 
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
