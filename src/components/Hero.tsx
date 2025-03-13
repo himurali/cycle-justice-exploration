@@ -63,11 +63,11 @@ const Hero = () => {
               <div className="glass-card w-full h-full flex flex-col items-center justify-center p-6 border-4 border-justice-blue shadow-xl bg-white/95">
                 <div className="grid grid-cols-3 gap-6 items-center w-full h-full">
                   {/* Left image */}
-                  <div className="h-full">
+                  <div className="h-full flex items-center justify-center">
                     <img 
                       src="https://images.unsplash.com/photo-1472396961693-142e6e269027" 
                       alt="Nature and sustainability" 
-                      className="w-full h-full object-cover shadow-lg rounded-lg" 
+                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
                     />
                   </div>
                   
@@ -79,11 +79,11 @@ const Hero = () => {
                   </div>
                   
                   {/* Right image */}
-                  <div className="h-full">
+                  <div className="h-full flex items-center justify-center">
                     <img 
                       src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" 
                       alt="Technology" 
-                      className="w-full h-full object-cover shadow-lg rounded-lg" 
+                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
                     />
                   </div>
                 </div>
@@ -95,11 +95,11 @@ const Hero = () => {
               <div className="glass-card w-full h-full flex flex-col items-center justify-center p-6 border-4 border-justice-dark shadow-xl bg-white/95">
                 <div className="grid grid-cols-3 gap-6 items-center w-full h-full">
                   {/* Left image */}
-                  <div className="h-full">
+                  <div className="h-full flex items-center justify-center">
                     <img 
                       src="https://images.unsplash.com/photo-1566871277326-ba6874a95344" 
                       alt="Bicycle commuting" 
-                      className="w-full h-full object-cover shadow-lg rounded-lg" 
+                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
                     />
                   </div>
                   
@@ -111,11 +111,11 @@ const Hero = () => {
                   </div>
                   
                   {/* Right image */}
-                  <div className="h-full">
+                  <div className="h-full flex items-center justify-center">
                     <img 
                       src="https://images.unsplash.com/photo-1505705694340-019e1e335916" 
                       alt="Nature path" 
-                      className="w-full h-full object-cover shadow-lg rounded-lg" 
+                      className="w-full h-auto max-h-full object-cover shadow-lg rounded-lg" 
                     />
                   </div>
                 </div>
