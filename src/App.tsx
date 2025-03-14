@@ -10,6 +10,9 @@ import ShortFilms from "./pages/ShortFilms";
 import Documentaries from "./pages/Documentaries";
 import Interviews from "./pages/Interviews";
 import Stories from "./pages/Stories";
+import AdvocateStories from "./pages/AdvocateStories";
+import TransformationStories from "./pages/TransformationStories";
+import CommunityChampions from "./pages/CommunityChampions";
 
 const queryClient = new QueryClient();
 
@@ -25,9 +28,9 @@ const App = () => (
           <Route path="/documentaries" element={<Documentaries />} />
           <Route path="/interviews" element={<Interviews />} />
           <Route path="/stories" element={<Stories />} />
-          <Route path="/advocate-stories" element={<Stories />} />
-          <Route path="/city-transformations" element={<Stories />} />
-          <Route path="/community-champions" element={<Stories />} />
+          <Route path="/advocate-stories" element={<AdvocateStories />} />
+          <Route path="/city-transformations" element={<TransformationStories />} />
+          <Route path="/community-champions" element={<CommunityChampions />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,31 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import StoryCard from '@/components/StoryCard';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import storiesData from '@/constants/stories.json';
-
-// Get stories data from the JSON file
-const { advocateStories, transformationStories, communityChampions } = storiesData;
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from 'lucide-react';
 
 const Stories = () => {
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState('advocate-stories');
-  
-  // Set the active tab based on the URL path
-  useEffect(() => {
-    const path = location.pathname;
-    if (path === '/advocate-stories') {
-      setActiveTab('advocate-stories');
-    } else if (path === '/city-transformations') {
-      setActiveTab('transformation-stories');
-    } else if (path === '/community-champions') {
-      setActiveTab('community-champions');
-    }
-  }, [location.pathname]);
-  
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
@@ -40,64 +22,52 @@ const Stories = () => {
               </p>
             </div>
             
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full md:w-fit mx-auto grid-cols-1 md:grid-cols-3 mb-10">
-                <TabsTrigger value="advocate-stories" className="px-8">Advocate Stories</TabsTrigger>
-                <TabsTrigger value="transformation-stories" className="px-8">Transformation Stories</TabsTrigger>
-                <TabsTrigger value="community-champions" className="px-8">Community Champions</TabsTrigger>
-              </TabsList>
+            <div className="grid gap-8 md:grid-cols-3">
+              <Card className="flex flex-col">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-baskerville mb-4">Advocate Stories</h2>
+                  <p className="text-justice-text/70 mb-6">
+                    Stories of individuals advocating for safer streets and urban justice.
+                  </p>
+                  <Link to="/advocate-stories">
+                    <Button className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2">
+                      Explore Advocate Stories
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
               
-              <TabsContent value="advocate-stories">
-                <h2 className="text-2xl font-baskerville mb-6">Advocate Stories</h2>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {advocateStories.map(story => (
-                    <StoryCard
-                      key={story.id}
-                      image={story.image}
-                      headline={story.headline}
-                      subhead={story.subhead}
-                      description={story.description}
-                      primaryButtonLabel={story.primaryButtonLabel}
-                      secondaryButtonLabel={story.secondaryButtonLabel}
-                    />
-                  ))}
-                </div>
-              </TabsContent>
+              <Card className="flex flex-col">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-baskerville mb-4">Transformation Stories</h2>
+                  <p className="text-justice-text/70 mb-6">
+                    Stories of cities and neighborhoods that have transformed to prioritize safer streets.
+                  </p>
+                  <Link to="/city-transformations">
+                    <Button className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2">
+                      Explore Transformation Stories
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
               
-              <TabsContent value="transformation-stories">
-                <h2 className="text-2xl font-baskerville mb-6">Transformation Stories</h2>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {transformationStories.map(story => (
-                    <StoryCard
-                      key={story.id}
-                      image={story.image}
-                      headline={story.headline}
-                      subhead={story.subhead}
-                      description={story.description}
-                      primaryButtonLabel={story.primaryButtonLabel}
-                      secondaryButtonLabel={story.secondaryButtonLabel}
-                    />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="community-champions">
-                <h2 className="text-2xl font-baskerville mb-6">Community Champions</h2>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {communityChampions.map(story => (
-                    <StoryCard
-                      key={story.id}
-                      image={story.image}
-                      headline={story.headline}
-                      subhead={story.subhead}
-                      description={story.description}
-                      primaryButtonLabel={story.primaryButtonLabel}
-                      secondaryButtonLabel={story.secondaryButtonLabel}
-                    />
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
+              <Card className="flex flex-col">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-baskerville mb-4">Community Champions</h2>
+                  <p className="text-justice-text/70 mb-6">
+                    Stories of community leaders and organizations championing for safer streets.
+                  </p>
+                  <Link to="/community-champions">
+                    <Button className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2">
+                      Explore Community Champions
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </main>
