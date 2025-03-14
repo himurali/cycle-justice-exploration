@@ -85,7 +85,7 @@ const JusticeSlider = () => {
               initial="hidden"
               animate="visible"
             >
-              <TabsList className="grid w-full grid-cols-5">
+              <TabsList className="grid w-full grid-cols-5 bg-slate-100/70">
                 {justiceTypes.map((justice) => (
                   <motion.div
                     key={justice.id}
@@ -110,7 +110,7 @@ const JusticeSlider = () => {
           </Tabs>
 
           {/* Main slider control */}
-          <div className="mb-12">
+          <div className="mb-12 mt-10">
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
@@ -138,7 +138,7 @@ const JusticeSlider = () => {
                     className="grid md:grid-cols-2 gap-8 p-1"
                   >
                     {/* City Example Card */}
-                    <Card className="overflow-hidden border-2" style={{ borderColor: justice.color }}>
+                    <Card className="overflow-hidden border-2 bg-white/90" style={{ borderColor: justice.color }}>
                       <div className="aspect-square w-full overflow-hidden">
                         <img
                           src={justice.imageUrl}
@@ -155,7 +155,7 @@ const JusticeSlider = () => {
                     </Card>
 
                     {/* Justice Explanation Card */}
-                    <Card className="h-full flex flex-col">
+                    <Card className="h-full flex flex-col bg-white/90">
                       <CardContent className="p-6 flex flex-col justify-between h-full">
                         <div className="flex flex-col items-center text-center mb-6">
                           <motion.div 
@@ -174,7 +174,7 @@ const JusticeSlider = () => {
                           </p>
                         </div>
 
-                        <div className="glass-card p-6 border-t">
+                        <div className="glass-card p-6 border-t bg-slate-50">
                           <h4 className="font-semibold mb-2">Impact of Cycling</h4>
                           <ul className="space-y-2">
                             {[
