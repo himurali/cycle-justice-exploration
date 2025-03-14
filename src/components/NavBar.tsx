@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -7,7 +7,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const isMobile = useIsMobile();
+  const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +23,24 @@ const NavBar = () => {
     };
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (activeDropdown && dropdownRefs.current[activeDropdown] && 
+          !dropdownRefs.current[activeDropdown]?.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [activeDropdown]);
+
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
     const element = document.getElementById(sectionId);
     if (element) {
       const topOffset = element.getBoundingClientRect().top + window.pageYOffset - 80;
@@ -30,6 +48,14 @@ const NavBar = () => {
         top: topOffset,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const toggleDropdown = (id: string) => {
+    if (activeDropdown === id) {
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(id);
     }
   };
 
@@ -156,12 +182,18 @@ const NavBar = () => {
             {navigationItems.map((item) => (
               <li key={item.id} className="relative">
                 {item.hasSubmenu ? (
-                  <div className="group relative">
+                  <div 
+                    className="relative" 
+                    ref={el => dropdownRefs.current[item.id] = el}
+                  >
                     <button 
+                      onClick={() => toggleDropdown(item.id)}
                       className="text-justice-text hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-justice-blue md:p-0 font-baskerville font-medium flex items-center justify-between w-full md:w-auto"
+                      aria-expanded={activeDropdown === item.id}
                     >
                       {item.label}
-                      <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <svg className={`w-4 h-4 ml-1 transform transition-transform duration-200 ${activeDropdown === item.id ? 'rotate-180' : ''}`} 
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path
                           fillRule="evenodd"
                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -169,7 +201,11 @@ const NavBar = () => {
                         />
                       </svg>
                     </button>
-                    <div className="hidden group-hover:block absolute z-10 bg-white rounded shadow-lg py-2 mt-1 w-48">
+                    <div 
+                      className={`absolute z-10 bg-white rounded shadow-lg py-2 mt-1 w-48 transition-all duration-200 ${
+                        activeDropdown === item.id ? 'opacity-100 visible' : 'opacity-0 invisible'
+                      }`}
+                    >
                       <ul>
                         {item.submenu?.map((subItem, idx) => (
                           <li key={idx}>
