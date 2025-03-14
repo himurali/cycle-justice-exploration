@@ -110,28 +110,26 @@ const JusticeSlider = () => {
             </motion.div>
           </Tabs>
 
-          {/* Main slider control */}
+          {/* Main slider control - Fix for the margin issue */}
           <div className="mb-12 mt-10">
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
               step={1}
-              className="w-full"
+              className="w-full mt-8" // Added margin-top to increase space between text and slider
               onValueChange={handleSliderChange}
-              // Remove the unsupported props that were causing TypeScript errors
             />
             
-            {/* Add custom styling for the slider track using CSS class instead */}
-            <style jsx>{`
-              /* Custom styling for the slider track based on the current justice color */
-              :global(.slider-${currentJustice.id} [data-radix-slider-range]) {
-                background-color: ${currentJustice.color};
+            {/* Custom styling for the slider track using direct style override */}
+            <style dangerouslySetInnerHTML={{ __html: `
+              [data-radix-slider-range] {
+                background-color: ${currentJustice.color} !important;
               }
-              :global(.slider-${currentJustice.id} [data-radix-slider-thumb]) {
-                background-color: ${currentJustice.color};
-                border-color: ${currentJustice.color};
+              [data-radix-slider-thumb] {
+                background-color: ${currentJustice.color} !important;
+                border-color: ${currentJustice.color} !important;
               }
-            `}</style>
+            `}} />
           </div>
 
           {/* Justice Content Carousel */}
