@@ -10,10 +10,19 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +48,7 @@ const NavBar = () => {
     }
   };
 
-  // Navigation structure with submenus
+  // Updated navigation structure with submenus to match the image
   const navigationItems = [
     { 
       id: 'home', 
@@ -53,9 +62,8 @@ const NavBar = () => {
       href: '#transformation',
       hasSubmenu: true,
       submenu: [
-        { label: 'Our Vision', href: '#vision' },
-        { label: 'Justice Framework', href: '#framework' },
-        { label: 'Policy Recommendations', href: '#policy' }
+        { label: 'Cities', href: '#cities' },
+        { label: 'Policy Changes', href: '#policy-changes' }
       ]
     },
     { 
@@ -64,15 +72,21 @@ const NavBar = () => {
       href: '#stories',
       hasSubmenu: true,
       submenu: [
-        { label: 'Community Stories', href: '#community-stories' },
-        { label: 'Personal Narratives', href: '#narratives' }
+        { label: 'Advocate Stories', href: '#advocate-stories' },
+        { label: 'City Transformations', href: '#city-transformations' },
+        { label: 'Community Champions', href: '#community-champions' }
       ]
     },
     { 
       id: 'videos', 
       label: 'Videos',
       href: '#videos',
-      hasSubmenu: false
+      hasSubmenu: true,
+      submenu: [
+        { label: 'Documentaries', href: '#documentaries' },
+        { label: 'Short Films', href: '#short-films' },
+        { label: 'Interviews', href: '#interviews' }
+      ]
     },
     { 
       id: 'inequities', 
@@ -80,16 +94,17 @@ const NavBar = () => {
       href: '#inequities',
       hasSubmenu: true,
       submenu: [
-        { label: 'Racial Disparities', href: '#racial' },
-        { label: 'Economic Barriers', href: '#economic' },
-        { label: 'Infrastructure Gaps', href: '#infrastructure' }
+        { label: 'Multi-dimensional Inequities', href: '#multi-dimensional-inequities' }
       ]
     },
     { 
       id: 'books', 
       label: 'Books',
       href: '#books',
-      hasSubmenu: false
+      hasSubmenu: true,
+      submenu: [
+        { label: 'Essential Reading', href: '#essential-reading' }
+      ]
     },
     { 
       id: 'research', 
@@ -103,27 +118,6 @@ const NavBar = () => {
       ]
     }
   ];
-
-  // For mobile navigation, flatten the structure
-  const getMobileMenuItems = () => {
-    const items = [];
-    
-    navigationItems.forEach(item => {
-      items.push(item);
-      if (item.hasSubmenu && item.submenu) {
-        item.submenu.forEach(subItem => {
-          items.push({
-            id: `${item.id}-${subItem.label.toLowerCase().replace(/\s+/g, '-')}`,
-            label: `→ ${subItem.label}`,
-            href: subItem.href,
-            hasSubmenu: false
-          });
-        });
-      }
-    });
-    
-    return items;
-  };
 
   return (
     <nav 
@@ -166,7 +160,7 @@ const NavBar = () => {
                           {item.label}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <ul className="grid gap-3 p-4 w-[220px]">
+                          <ul className="grid gap-3 p-4 min-w-[220px] bg-white">
                             {item.submenu?.map((subItem, idx) => (
                               <li key={idx}>
                                 <NavigationMenuLink asChild>
@@ -232,24 +226,51 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Completely restructured for better submenu display */}
       <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-        isMobileMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
+        isMobileMenuOpen ? 'max-h-[80vh] opacity-100 py-4' : 'max-h-0 opacity-0'
       }`}>
-        <div className="glass-card mx-4 max-h-[80vh] overflow-y-auto divide-y divide-gray-100">
-          {getMobileMenuItems().map(item => (
-            <button 
-              key={item.id}
-              onClick={() => {
-                scrollToSection(item.href?.substring(1) || item.id);
-              }}
-              className={`block w-full text-left px-5 py-3 font-medium 
-                ${item.label.startsWith('→') ? 'pl-8 text-sm text-justice-text/70' : 'text-justice-text/80'}
-                ${item.id === 'research' && !item.label.startsWith('→') ? 'text-justice-blue' : ''}
-                hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
-            >
-              {item.label}
-            </button>
+        <div className="bg-white mx-4 rounded-lg shadow-lg max-h-[80vh] overflow-y-auto divide-y divide-gray-100">
+          {navigationItems.map((item) => (
+            <div key={item.id} className="py-2">
+              {/* Main menu item */}
+              {item.hasSubmenu ? (
+                <div className="px-4 py-2">
+                  <div className="font-medium text-lg mb-2">{item.label}</div>
+                  {/* Submenu items with indentation */}
+                  <div className="ml-4 border-l-2 border-justice-blue pl-3 space-y-2">
+                    {item.submenu?.map((subItem, idx) => (
+                      <a
+                        key={idx}
+                        href={subItem.href}
+                        className="block py-2 text-justice-text/80 hover:text-justice-blue transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection(subItem.href.substring(1));
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a
+                  href={item.href}
+                  className={`block px-5 py-3 font-medium ${
+                    item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
+                  } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {item.label}
+                </a>
+              )}
+            </div>
           ))}
         </div>
       </div>
