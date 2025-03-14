@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -117,133 +116,135 @@ const ShortFilms = () => {
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       
-      {/* Header Section */}
-      <header className="bg-gradient-to-b from-gray-800 to-gray-600 py-16 px-4 rounded-b-3xl mb-8">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 font-baskerville">Short Films</h1>
-          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
-            Quick insights into cycling justice and urban transformation
-          </p>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 pb-16">
-        {/* Filter Section */}
-        <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div className="flex flex-wrap gap-2">
-            {continents.map((continent) => (
-              <button
-                key={continent}
-                onClick={() => handleContinentChange(continent)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedContinent === continent
-                    ? "bg-gray-200 text-gray-800"
-                    : "bg-transparent border border-gray-300 text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                {continent}
-              </button>
-            ))}
+      <div className="pt-20">
+        {/* Header Section - moved below the NavBar with padding top to avoid overlap */}
+        <div className="bg-gradient-to-b from-gray-800 to-gray-600 py-16 px-4 rounded-b-3xl mb-8">
+          <div className="container mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 font-baskerville">Short Films</h1>
+            <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+              Quick insights into cycling justice and urban transformation
+            </p>
           </div>
-          
-          <div className="flex items-center gap-4 self-end md:self-auto">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">Items per page:</span>
-              <Select
-                value={itemsPerPage}
-                onValueChange={handleItemsPerPageChange}
-              >
-                <SelectTrigger className="w-16 h-9">
-                  <SelectValue placeholder="6" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="6">6</SelectItem>
-                  <SelectItem value="12">12</SelectItem>
-                  <SelectItem value="18">18</SelectItem>
-                </SelectContent>
-              </Select>
+        </div>
+
+        <main className="container mx-auto px-4 pb-16">
+          {/* Filter Section */}
+          <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-wrap gap-2">
+              {continents.map((continent) => (
+                <button
+                  key={continent}
+                  onClick={() => handleContinentChange(continent)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    selectedContinent === continent
+                      ? "bg-gray-200 text-gray-800"
+                      : "bg-transparent border border-gray-300 text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  {continent}
+                </button>
+              ))}
             </div>
             
-            <div className="text-sm text-gray-500">
-              {totalItems > 0 ? `${startIndex + 1}-${endIndex} of ${totalItems}` : "0 items"}
-            </div>
-          </div>
-        </div>
-
-        {/* Films Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {currentItems.map((film) => (
-            <Card key={film.id} className="overflow-hidden hover:shadow-md transition-shadow duration-300">
-              <div className="relative">
-                <img 
-                  src={film.thumbnail} 
-                  alt={film.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute top-2 right-2 bg-gray-200/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium flex items-center">
-                  <Clock className="h-3 w-3 mr-1" />
-                  {film.duration}
-                </div>
+            <div className="flex items-center gap-4 self-end md:self-auto">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Items per page:</span>
+                <Select
+                  value={itemsPerPage}
+                  onValueChange={handleItemsPerPageChange}
+                >
+                  <SelectTrigger className="w-16 h-9">
+                    <SelectValue placeholder="6" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="6">6</SelectItem>
+                    <SelectItem value="12">12</SelectItem>
+                    <SelectItem value="18">18</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               
-              <CardContent className="p-4">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{film.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{film.description}</p>
-                
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {film.tags.map((tag, idx) => (
-                    <Badge key={idx} variant="outline" className="bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-200">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Globe className="h-4 w-4 mr-1" />
-                    {film.continent}
-                  </div>
-                  <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                    <Share2 className="h-4 w-4" />
-                  </button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              <div className="text-sm text-gray-500">
+                {totalItems > 0 ? `${startIndex + 1}-${endIndex} of ${totalItems}` : "0 items"}
+              </div>
+            </div>
+          </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <Pagination className="mt-8">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
-                />
-              </PaginationItem>
-              
-              {[...Array(totalPages)].map((_, i) => (
-                <PaginationItem key={i}>
-                  <PaginationLink
-                    onClick={() => setCurrentPage(i + 1)}
-                    isActive={currentPage === i + 1}
-                  >
-                    {i + 1}
-                  </PaginationLink>
+          {/* Films Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {currentItems.map((film) => (
+              <Card key={film.id} className="overflow-hidden hover:shadow-md transition-shadow duration-300">
+                <div className="relative">
+                  <img 
+                    src={film.thumbnail} 
+                    alt={film.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-2 right-2 bg-gray-200/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    {film.duration}
+                  </div>
+                </div>
+                
+                <CardContent className="p-4">
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{film.title}</h3>
+                  <p className="text-gray-600 text-sm mb-3">{film.description}</p>
+                  
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {film.tags.map((tag, idx) => (
+                      <Badge key={idx} variant="outline" className="bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-200">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Globe className="h-4 w-4 mr-1" />
+                      {film.continent}
+                    </div>
+                    <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                      <Share2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <Pagination className="mt-8">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                  />
                 </PaginationItem>
-              ))}
-              
-              <PaginationItem>
-                <PaginationNext
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        )}
-      </main>
+                
+                {[...Array(totalPages)].map((_, i) => (
+                  <PaginationItem key={i}>
+                    <PaginationLink
+                      onClick={() => setCurrentPage(i + 1)}
+                      isActive={currentPage === i + 1}
+                    >
+                      {i + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
+        </main>
+      </div>
 
       <Footer />
     </div>
