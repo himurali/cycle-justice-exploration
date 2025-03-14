@@ -85,9 +85,9 @@ const NavBar = () => {
       href: '#stories',
       hasSubmenu: true,
       submenu: [
-        { label: 'Advocate Stories', href: '#advocate-stories' },
-        { label: 'City Transformations', href: '#city-transformations' },
-        { label: 'Community Champions', href: '#community-champions' }
+        { label: 'Advocate Stories', href: '/advocate-stories', isPageLink: true },
+        { label: 'City Transformations', href: '/city-transformations', isPageLink: true },
+        { label: 'Community Champions', href: '/community-champions', isPageLink: true }
       ]
     },
     { 
