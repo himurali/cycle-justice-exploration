@@ -96,9 +96,9 @@ const NavBar = () => {
       href: '#videos',
       hasSubmenu: true,
       submenu: [
-        { label: 'Documentaries', href: '#documentaries' },
+        { label: 'Documentaries', href: '/documentaries', isPageLink: true },
         { label: 'Short Films', href: '/short-films', isPageLink: true },
-        { label: 'Interviews', href: '#interviews' }
+        { label: 'Interviews', href: '/interviews', isPageLink: true }
       ]
     },
     { 
