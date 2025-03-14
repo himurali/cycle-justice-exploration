@@ -94,14 +94,15 @@ const JusticeSlider = () => {
                   >
                     <TabsTrigger 
                       value={justice.id}
-                      className="text-sm md:text-base font-medium w-full py-3 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                      className="text-sm md:text-base font-medium w-full py-4 px-2 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:scale-105"
                       style={{ 
                         color: justice.id === currentJustice.id ? justice.color : 'inherit',
-                        borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none'
+                        borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
+                        backgroundColor: justice.id === currentJustice.id ? `${justice.color}15` : 'transparent'
                       }}
                     >
-                      <justice.icon className="size-5 md:size-6" />
-                      <span>{justice.title}</span>
+                      <justice.icon className="size-6 md:size-7" />
+                      <span className="font-semibold text-base md:text-lg">{justice.title}</span>
                     </TabsTrigger>
                   </motion.div>
                 ))}
@@ -117,6 +118,8 @@ const JusticeSlider = () => {
               step={1}
               className="w-full"
               onValueChange={handleSliderChange}
+              trackStyle={{ backgroundColor: currentJustice.color }}
+              thumbStyle={{ backgroundColor: currentJustice.color, borderColor: currentJustice.color }}
             />
           </div>
 
@@ -191,7 +194,7 @@ const JusticeSlider = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5 + (i * 0.1) }}
                               >
-                                <span className="mr-2 mt-1 text-green-500">✓</span>
+                                <span className="mr-2 mt-1" style={{ color: justice.color }}>✓</span>
                                 <span className="text-sm">{point}</span>
                               </motion.li>
                             ))}
