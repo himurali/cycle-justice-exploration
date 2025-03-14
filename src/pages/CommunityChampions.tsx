@@ -1,12 +1,70 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
 import storiesData from '@/constants/stories.json';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Globe } from "lucide-react";
+
+// Types
+type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
+
+interface Story {
+  id: number;
+  image: string;
+  headline: string;
+  subhead: string;
+  description: string;
+  primaryButtonLabel: string;
+  secondaryButtonLabel: string;
+  continent: Continent;
+}
+
+// Define all continents for filter
+const continents: ("All Continents" | Continent)[] = [
+  "All Continents",
+  "Africa",
+  "Asia",
+  "Europe", 
+  "North America",
+  "South America", 
+  "Australia", 
+  "Antarctica"
+];
 
 const CommunityChampions = () => {
   const { communityChampions } = storiesData;
+  
+  // State for filtering and pagination
+  const [selectedContinent, setSelectedContinent] = useState<"All Continents" | Continent>("All Continents");
+  const [itemsPerPage, setItemsPerPage] = useState<string>("6");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  
+  // Filter stories by selected continent
+  const filteredStories = selectedContinent === "All Continents" 
+    ? communityChampions 
+    : communityChampions.filter(story => story.continent === selectedContinent);
+  
+  // Calculate pagination
+  const totalItems = filteredStories.length;
+  const totalPages = Math.ceil(totalItems / parseInt(itemsPerPage));
+  const startIndex = (currentPage - 1) * parseInt(itemsPerPage);
+  const endIndex = Math.min(startIndex + parseInt(itemsPerPage), totalItems);
+  const currentItems = filteredStories.slice(startIndex, endIndex);
+  
+  // Handle continent filter change
+  const handleContinentChange = (continent: "All Continents" | Continent) => {
+    setSelectedContinent(continent);
+    setCurrentPage(1); // Reset to first page when filter changes
+  };
+  
+  // Handle items per page change
+  const handleItemsPerPageChange = (value: string) => {
+    setItemsPerPage(value);
+    setCurrentPage(1); // Reset to first page when items per page changes
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -22,19 +80,99 @@ const CommunityChampions = () => {
               </p>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {communityChampions.map(story => (
-                <StoryCard
-                  key={story.id}
-                  image={story.image}
-                  headline={story.headline}
-                  subhead={story.subhead}
-                  description={story.description}
-                  primaryButtonLabel={story.primaryButtonLabel}
-                  secondaryButtonLabel={story.secondaryButtonLabel}
-                />
+            {/* Filter Section */}
+            <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div className="flex flex-wrap gap-2">
+                {continents.map((continent) => (
+                  <button
+                    key={continent}
+                    onClick={() => handleContinentChange(continent)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      selectedContinent === continent
+                        ? "bg-gray-200 text-gray-800"
+                        : "bg-transparent border border-gray-300 text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    {continent}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="flex items-center gap-4 self-end md:self-auto">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-500">Items per page:</span>
+                  <Select
+                    value={itemsPerPage}
+                    onValueChange={handleItemsPerPageChange}
+                  >
+                    <SelectTrigger className="w-16 h-9">
+                      <SelectValue placeholder="6" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="6">6</SelectItem>
+                      <SelectItem value="9">9</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="text-sm text-gray-500">
+                  {totalItems > 0 ? `${startIndex + 1}-${endIndex} of ${totalItems}` : "0 items"}
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
+              {currentItems.map(story => (
+                <div key={story.id} className="relative">
+                  <StoryCard
+                    image={story.image}
+                    headline={story.headline}
+                    subhead={story.subhead}
+                    description={story.description}
+                    primaryButtonLabel={story.primaryButtonLabel}
+                    secondaryButtonLabel={story.secondaryButtonLabel}
+                  />
+                  {/* Continent badge */}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
+                    <Globe className="h-3 w-3 mr-1 text-gray-600" />
+                    <span className="text-gray-800">{story.continent}</span>
+                  </div>
+                </div>
               ))}
             </div>
+            
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <Pagination className="mt-8">
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                  
+                  {[...Array(totalPages)].map((_, i) => (
+                    <PaginationItem key={i}>
+                      <PaginationLink
+                        onClick={() => setCurrentPage(i + 1)}
+                        isActive={currentPage === i + 1}
+                      >
+                        {i + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
           </div>
         </div>
       </main>

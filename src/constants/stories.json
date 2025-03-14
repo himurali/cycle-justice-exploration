@@ -8,7 +8,8 @@
       "subhead": "Advocate for Safe Streets",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "Read More",
-      "secondaryButtonLabel": "Share"
+      "secondaryButtonLabel": "Share",
+      "continent": "North America"
     },
     {
       "id": 2,
@@ -17,7 +18,8 @@
       "subhead": "Champion for Accessible Transport",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "View Story",
-      "secondaryButtonLabel": "Contact"
+      "secondaryButtonLabel": "Contact",
+      "continent": "Europe"
     },
     {
       "id": 3,
@@ -26,7 +28,8 @@
       "subhead": "Advocate for Bike Infrastructure",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "Read Story",
-      "secondaryButtonLabel": "Follow"
+      "secondaryButtonLabel": "Follow",
+      "continent": "Asia"
     }
   ],
   "transformationStories": [
@@ -37,7 +40,8 @@
       "subhead": "Urban Transformation Success",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "Explore Case",
-      "secondaryButtonLabel": "Key Facts"
+      "secondaryButtonLabel": "Key Facts",
+      "continent": "North America"
     },
     {
       "id": 2,
@@ -46,7 +50,8 @@
       "subhead": "How a City Transformed for Cyclists",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "See Changes",
-      "secondaryButtonLabel": "Timeline"
+      "secondaryButtonLabel": "Timeline",
+      "continent": "Europe"
     },
     {
       "id": 3,
@@ -55,7 +60,8 @@
       "subhead": "A South American Success Story",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "View Changes",
-      "secondaryButtonLabel": "Stats"
+      "secondaryButtonLabel": "Stats",
+      "continent": "South America"
     }
   ],
   "communityChampions": [
@@ -66,7 +72,8 @@
       "subhead": "Building Grassroots Support",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "Meet Team",
-      "secondaryButtonLabel": "Join"
+      "secondaryButtonLabel": "Join",
+      "continent": "North America"
     },
     {
       "id": 2,
@@ -75,7 +82,8 @@
       "subhead": "Connecting Local Advocates",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "View Projects",
-      "secondaryButtonLabel": "Events"
+      "secondaryButtonLabel": "Events",
+      "continent": "Europe"
     },
     {
       "id": 3,
@@ -84,7 +92,8 @@
       "subhead": "Volunteers Making a Difference",
       "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
       "primaryButtonLabel": "Learn More",
-      "secondaryButtonLabel": "Volunteer"
+      "secondaryButtonLabel": "Volunteer",
+      "continent": "Australia"
     }
   ]
 }
