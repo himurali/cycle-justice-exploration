@@ -1,11 +1,13 @@
+
 import React, { useState } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Globe, Share2, Clock } from "lucide-react";
+import { Globe, Share2, Clock, Play, ExternalLink } from "lucide-react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 
 // Types for our film data
 type FilmTag = string;
@@ -19,6 +21,7 @@ interface Film {
   duration: string;
   tags: FilmTag[];
   continent: Continent;
+  videoUrl: string; // Added videoUrl property
 }
 
 // Sample film data
@@ -30,7 +33,8 @@ const films: Film[] = [
     thumbnail: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     duration: "5:45",
     tags: ["daily life", "commuting", "urban cycling"],
-    continent: "North America"
+    continent: "North America",
+    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
   },
   {
     id: 2,
@@ -39,7 +43,8 @@ const films: Film[] = [
     thumbnail: "https://images.unsplash.com/photo-1519677584237-752f8853252e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     duration: "8:30",
     tags: ["infrastructure", "safety", "design"],
-    continent: "Europe"
+    continent: "Europe",
+    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
   },
   {
     id: 3,
@@ -48,7 +53,8 @@ const films: Film[] = [
     thumbnail: "https://images.unsplash.com/photo-1527585065299-489e027a87ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     duration: "12:15",
     tags: ["activism", "community", "environment"],
-    continent: "Africa"
+    continent: "Africa",
+    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
   },
   {
     id: 4,
@@ -57,7 +63,8 @@ const films: Film[] = [
     thumbnail: "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
     duration: "7:20",
     tags: ["technology", "e-bikes", "future"],
-    continent: "Asia"
+    continent: "Asia",
+    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
   },
   {
     id: 5,
@@ -66,7 +73,8 @@ const films: Film[] = [
     thumbnail: "https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
     duration: "9:45",
     tags: ["economy", "urban planning", "community"],
-    continent: "North America"
+    continent: "North America",
+    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
   }
 ];
 
@@ -110,6 +118,35 @@ const ShortFilms = () => {
   const handleItemsPerPageChange = (value: string) => {
     setItemsPerPage(value);
     setCurrentPage(1); // Reset to first page when items per page changes
+  };
+
+  // Handle opening video URL in new tab
+  const handleVideoClick = (videoUrl: string) => {
+    window.open(videoUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // Handle sharing the video
+  const handleShareClick = (event: React.MouseEvent, film: Film) => {
+    event.stopPropagation(); // Prevent triggering the card click
+    
+    if (navigator.share) {
+      navigator.share({
+        title: film.title,
+        text: film.description,
+        url: film.videoUrl,
+      }).catch(err => {
+        console.log('Error sharing:', err);
+      });
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      navigator.clipboard.writeText(film.videoUrl)
+        .then(() => {
+          alert('Link copied to clipboard!');
+        })
+        .catch(err => {
+          console.log('Error copying to clipboard:', err);
+        });
+    }
   };
 
   return (
@@ -173,21 +210,43 @@ const ShortFilms = () => {
           {/* Films Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {currentItems.map((film) => (
-              <Card key={film.id} className="overflow-hidden hover:shadow-md transition-shadow duration-300">
+              <Card 
+                key={film.id} 
+                className="overflow-hidden hover:shadow-md transition-shadow duration-300 group cursor-pointer"
+                onClick={() => handleVideoClick(film.videoUrl)}
+              >
                 <div className="relative">
                   <img 
                     src={film.thumbnail} 
                     alt={film.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover group-hover:brightness-75 transition-all"
                   />
                   <div className="absolute top-2 right-2 bg-gray-200/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium flex items-center">
                     <Clock className="h-3 w-3 mr-1" />
                     {film.duration}
                   </div>
+                  
+                  {/* Play icon overlay that appears on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="rounded-full bg-black/50 p-3">
+                      <Play className="h-8 w-8 text-white" fill="white" />
+                    </div>
+                  </div>
                 </div>
                 
                 <CardContent className="p-4">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{film.title}</h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-bold text-gray-800">{film.title}</h3>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-8 w-8 text-gray-400 hover:text-gray-600"
+                      onClick={(e) => handleShareClick(e, film)}
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
                   <p className="text-gray-600 text-sm mb-3">{film.description}</p>
                   
                   <div className="flex flex-wrap gap-1 mb-4">
@@ -203,9 +262,7 @@ const ShortFilms = () => {
                       <Globe className="h-4 w-4 mr-1" />
                       {film.continent}
                     </div>
-                    <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                      <Share2 className="h-4 w-4" />
-                    </button>
+                    <ExternalLink className="h-4 w-4 text-gray-400" />
                   </div>
                 </CardContent>
               </Card>
