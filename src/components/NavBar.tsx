@@ -151,7 +151,7 @@ const NavBar = () => {
             <NavigationMenu>
               <NavigationMenuList className="gap-1">
                 {navigationItems.map(item => (
-                  <NavigationMenuItem key={item.id} className="relative">
+                  <NavigationMenuItem key={item.id} className="static">
                     {item.hasSubmenu ? (
                       <>
                         <NavigationMenuTrigger
@@ -159,7 +159,7 @@ const NavBar = () => {
                         >
                           {item.label}
                         </NavigationMenuTrigger>
-                        <NavigationMenuContent className="absolute left-0">
+                        <NavigationMenuContent>
                           <ul className="grid gap-3 p-4 min-w-[220px] bg-white">
                             {item.submenu?.map((subItem, idx) => (
                               <li key={idx}>
