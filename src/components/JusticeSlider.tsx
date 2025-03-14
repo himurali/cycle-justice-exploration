@@ -89,9 +89,6 @@ const JusticeSlider = () => {
               startIndex: activeIndex,
               loop: false
             }}
-            onSelect={(api) => {
-              if (api) setActiveIndex(api.selectedScrollSnap());
-            }}
           >
             <CarouselContent>
               {justiceTypes.map((justice, index) => (
