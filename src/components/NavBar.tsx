@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Bike, ChevronDown } from 'lucide-react';
+import { Bike } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,12 +10,6 @@ import {
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
 const NavBar = () => {
@@ -48,7 +41,6 @@ const NavBar = () => {
     }
   };
 
-  // Updated navigation structure with submenus to match the image
   const navigationItems = [
     { 
       id: 'home', 
@@ -146,12 +138,11 @@ const NavBar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation Menu - With improved alignment */}
           <div className="hidden md:block">
             <NavigationMenu>
               <NavigationMenuList className="gap-1">
                 {navigationItems.map(item => (
-                  <NavigationMenuItem key={item.id} className="relative">
+                  <NavigationMenuItem key={item.id}>
                     {item.hasSubmenu ? (
                       <>
                         <NavigationMenuTrigger
@@ -159,7 +150,7 @@ const NavBar = () => {
                         >
                           {item.label}
                         </NavigationMenuTrigger>
-                        <NavigationMenuContent className="absolute">
+                        <NavigationMenuContent>
                           <ul className="grid gap-3 p-4 min-w-[220px] bg-white">
                             {item.submenu?.map((subItem, idx) => (
                               <li key={idx}>
@@ -203,7 +194,6 @@ const NavBar = () => {
             </NavigationMenu>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -226,18 +216,15 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - Better organized with clear visual hierarchy */}
       <div className={`md:hidden transition-all duration-300 overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[80vh] opacity-100 py-4' : 'max-h-0 opacity-0'
       }`}>
         <div className="bg-white mx-4 rounded-lg shadow-lg max-h-[80vh] overflow-y-auto divide-y divide-gray-100">
           {navigationItems.map((item) => (
             <div key={item.id} className="py-2">
-              {/* Main menu item */}
               {item.hasSubmenu ? (
                 <div className="px-4 py-2">
                   <div className="font-baskerville font-medium text-xl mb-2">{item.label}</div>
-                  {/* Submenu items with indentation */}
                   <div className="ml-4 border-l-2 border-justice-blue pl-3 space-y-2">
                     {item.submenu?.map((subItem, idx) => (
                       <a
