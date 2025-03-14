@@ -1,0 +1,53 @@
+
+[
+  {
+    "id": 1,
+    "title": "Janette Sadik-Khan: Redesigning Our Streets",
+    "description": "The former NYC Transportation Commissioner discusses how she transformed the city's streets for cycling and pedestrians.",
+    "thumbnail": "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "duration": "32:15",
+    "tags": ["urban planning", "policy", "leadership"],
+    "continent": "North America",
+    "videoUrl": "https://www.youtube.com/watch?v=SvOZfxIMMzg"
+  },
+  {
+    "id": 2,
+    "title": "Cycling Through Adversity: Paralympian Stories",
+    "description": "Paralympic cycling champions share their journeys and how cycling has changed their lives.",
+    "thumbnail": "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "duration": "28:45",
+    "tags": ["paralympics", "sports", "inspiration"],
+    "continent": "Europe",
+    "videoUrl": "https://www.youtube.com/watch?v=SvOZfxIMMzg"
+  },
+  {
+    "id": 3,
+    "title": "The Bike Mayor Movement: An Interview with Katelijne Boerma",
+    "description": "The Amsterdam Bike Mayor discusses the growing international network of bicycle advocates.",
+    "thumbnail": "https://images.unsplash.com/photo-1606946887361-78faaf97caae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "duration": "24:30",
+    "tags": ["advocacy", "leadership", "policy"],
+    "continent": "Europe",
+    "videoUrl": "https://www.youtube.com/watch?v=SvOZfxIMMzg"
+  },
+  {
+    "id": 4,
+    "title": "Bicycle Entrepreneurship: From Garage to Global",
+    "description": "Founders of innovative cycling startups share their stories and visions for the future.",
+    "thumbnail": "https://images.unsplash.com/photo-1608506375591-b90e056b3031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+    "duration": "34:20",
+    "tags": ["business", "innovation", "technology"],
+    "continent": "North America",
+    "videoUrl": "https://www.youtube.com/watch?v=SvOZfxIMMzg"
+  },
+  {
+    "id": 5,
+    "title": "Voices from the Global South: Cycling for Development",
+    "description": "Community leaders discuss how bicycle programs are empowering communities across Africa and Asia.",
+    "thumbnail": "https://images.unsplash.com/photo-1609275399720-597ba50a6579?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "duration": "29:50",
+    "tags": ["development", "community", "social impact"],
+    "continent": "Africa",
+    "videoUrl": "https://www.youtube.com/watch?v=SvOZfxIMMzg"
+  }
+]
