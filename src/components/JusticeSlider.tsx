@@ -83,10 +83,14 @@ const JusticeSlider = () => {
           </div>
 
           {/* Justice Content Carousel */}
-          <Carousel className="w-full" 
-            value={{ selectedIndex: activeIndex }}
-            onValueChange={(details) => {
-              setActiveIndex(details.selectedIndex);
+          <Carousel 
+            className="w-full"
+            opts={{
+              startIndex: activeIndex,
+              loop: false
+            }}
+            onSelect={(api) => {
+              if (api) setActiveIndex(api.selectedScrollSnap());
             }}
           >
             <CarouselContent>
