@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,7 +65,9 @@ const NavBar = () => {
       id: 'home', 
       label: 'Home',
       href: '#home',
-      hasSubmenu: false
+      hasSubmenu: false,
+      isPageLink: true,
+      pagePath: '/'
     },
     { 
       id: 'transformation', 
@@ -94,7 +97,7 @@ const NavBar = () => {
       hasSubmenu: true,
       submenu: [
         { label: 'Documentaries', href: '#documentaries' },
-        { label: 'Short Films', href: '#short-films' },
+        { label: 'Short Films', href: '/short-films', isPageLink: true },
         { label: 'Interviews', href: '#interviews' }
       ]
     },
@@ -209,36 +212,63 @@ const NavBar = () => {
                       <ul>
                         {item.submenu?.map((subItem, idx) => (
                           <li key={idx}>
-                            <a
-                              href={subItem.href}
-                              className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 font-baskerville"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                scrollToSection(subItem.href.substring(1));
-                              }}
-                            >
-                              {subItem.label}
-                            </a>
+                            {subItem.isPageLink ? (
+                              <Link
+                                to={subItem.href}
+                                className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 font-baskerville"
+                                onClick={() => {
+                                  setActiveDropdown(null);
+                                  setIsMobileMenuOpen(false);
+                                }}
+                              >
+                                {subItem.label}
+                              </Link>
+                            ) : (
+                              <a
+                                href={subItem.href}
+                                className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 font-baskerville"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  scrollToSection(subItem.href.substring(1));
+                                }}
+                              >
+                                {subItem.label}
+                              </a>
+                            )}
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
                 ) : (
-                  <a
-                    href={item.href}
-                    className={`${
-                      item.id === 'home' 
-                        ? 'bg-justice-blue md:bg-transparent text-white md:text-justice-blue' 
-                        : 'text-justice-text hover:text-justice-blue'
-                    } block pl-3 pr-4 py-2 md:p-0 rounded focus:outline-none font-baskerville font-medium`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.id);
-                    }}
-                  >
-                    {item.label}
-                  </a>
+                  item.isPageLink ? (
+                    <Link
+                      to={item.pagePath || '/'}
+                      className={`${
+                        item.id === 'home' 
+                          ? 'bg-justice-blue md:bg-transparent text-white md:text-justice-blue' 
+                          : 'text-justice-text hover:text-justice-blue'
+                      } block pl-3 pr-4 py-2 md:p-0 rounded focus:outline-none font-baskerville font-medium`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className={`${
+                        item.id === 'home' 
+                          ? 'bg-justice-blue md:bg-transparent text-white md:text-justice-blue' 
+                          : 'text-justice-text hover:text-justice-blue'
+                      } block pl-3 pr-4 py-2 md:p-0 rounded focus:outline-none font-baskerville font-medium`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(item.id);
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  )
                 )}
               </li>
             ))}
@@ -260,35 +290,60 @@ const NavBar = () => {
                   <div className="font-baskerville font-medium text-xl mb-2">{item.label}</div>
                   <div className="ml-4 border-l-2 border-justice-blue pl-3 space-y-2">
                     {item.submenu?.map((subItem, idx) => (
-                      <a
-                        key={idx}
-                        href={subItem.href}
-                        className="font-baskerville block py-2 text-lg text-justice-text/80 hover:text-justice-blue transition-colors"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollToSection(subItem.href.substring(1));
-                          setIsMobileMenuOpen(false);
-                        }}
-                      >
-                        {subItem.label}
-                      </a>
+                      subItem.isPageLink ? (
+                        <Link
+                          key={idx}
+                          to={subItem.href}
+                          className="font-baskerville block py-2 text-lg text-justice-text/80 hover:text-justice-blue transition-colors"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                          }}
+                        >
+                          {subItem.label}
+                        </Link>
+                      ) : (
+                        <a
+                          key={idx}
+                          href={subItem.href}
+                          className="font-baskerville block py-2 text-lg text-justice-text/80 hover:text-justice-blue transition-colors"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            scrollToSection(subItem.href.substring(1));
+                            setIsMobileMenuOpen(false);
+                          }}
+                        >
+                          {subItem.label}
+                        </a>
+                      )
                     ))}
                   </div>
                 </div>
               ) : (
-                <a
-                  href={item.href}
-                  className={`font-baskerville block py-3 text-xl font-medium ${
-                    item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
-                  } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.id);
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  {item.label}
-                </a>
+                item.isPageLink ? (
+                  <Link
+                    to={item.pagePath || '/'}
+                    className={`font-baskerville block py-3 text-xl font-medium ${
+                      item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
+                    } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className={`font-baskerville block py-3 text-xl font-medium ${
+                      item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
+                    } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.id);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                )
               )}
             </div>
           ))}
