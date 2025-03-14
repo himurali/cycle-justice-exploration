@@ -74,7 +74,7 @@ const JusticeSlider = () => {
           {/* Justice Type Tabs */}
           <Tabs
             value={currentJustice.id}
-            className="w-full mb-8"
+            className="w-full mb-12" // Increased bottom margin from mb-8 to mb-12
             onValueChange={(value) => {
               const newIndex = justiceTypes.findIndex(j => j.id === value);
               if (newIndex !== -1) setActiveIndex(newIndex);
@@ -111,12 +111,12 @@ const JusticeSlider = () => {
           </Tabs>
 
           {/* Main slider control - Fix for the margin issue */}
-          <div className="mb-12 mt-10">
+          <div className="mb-12 mt-16"> {/* Increased top margin from mt-10 to mt-16 */}
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
               step={1}
-              className="w-full mt-8" // Added margin-top to increase space between text and slider
+              className="w-full mt-8" 
               onValueChange={handleSliderChange}
             />
             
