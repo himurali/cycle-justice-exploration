@@ -11,7 +11,7 @@ const advocateStories = [
   {
     id: 1,
     image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
-    headline: 'Jane's Journey for Urban Justice',
+    headline: 'Jane\'s Journey for Urban Justice',
     subhead: 'Advocate for Safe Streets',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'Read More',
@@ -20,7 +20,7 @@ const advocateStories = [
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
-    headline: 'Mark's Mission for Mobility',
+    headline: 'Mark\'s Mission for Mobility',
     subhead: 'Champion for Accessible Transport',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'View Story',
@@ -29,7 +29,7 @@ const advocateStories = [
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
-    headline: 'Sarah's Stand for Safer Cycling',
+    headline: 'Sarah\'s Stand for Safer Cycling',
     subhead: 'Advocate for Bike Infrastructure',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'Read Story',
@@ -41,7 +41,7 @@ const transformationStories = [
   {
     id: 1,
     image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b',
-    headline: 'Portland's Path to Progress',
+    headline: 'Portland\'s Path to Progress',
     subhead: 'Urban Transformation Success',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'Explore Case',
@@ -50,7 +50,7 @@ const transformationStories = [
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-    headline: 'Amsterdam's Amazing Revolution',
+    headline: 'Amsterdam\'s Amazing Revolution',
     subhead: 'How a City Transformed for Cyclists',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'See Changes',
@@ -59,7 +59,7 @@ const transformationStories = [
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
-    headline: 'Bogotá's Bold Beginning',
+    headline: 'Bogotá\'s Bold Beginning',
     subhead: 'A South American Success Story',
     description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
     primaryButtonLabel: 'View Changes',
