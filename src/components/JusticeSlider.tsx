@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { 
   Carousel, 
@@ -74,7 +73,7 @@ const JusticeSlider = () => {
           {/* Justice Type Tabs */}
           <Tabs
             value={currentJustice.id}
-            className="w-full mb-12" // Increased bottom margin from mb-8 to mb-12
+            className="w-full mb-16"
             onValueChange={(value) => {
               const newIndex = justiceTypes.findIndex(j => j.id === value);
               if (newIndex !== -1) setActiveIndex(newIndex);
@@ -113,13 +112,13 @@ const JusticeSlider = () => {
             </motion.div>
           </Tabs>
 
-          {/* Main slider control - Fix for the margin issue */}
-          <div className="mb-12 mt-16"> {/* Increased top margin from mt-10 to mt-16 */}
+          {/* Main slider control - Increased spacing */}
+          <div className="mb-12 mt-20">
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
               step={1}
-              className="w-full mt-8" 
+              className="w-full" 
               onValueChange={handleSliderChange}
             />
             
