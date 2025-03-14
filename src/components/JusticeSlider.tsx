@@ -118,9 +118,20 @@ const JusticeSlider = () => {
               step={1}
               className="w-full"
               onValueChange={handleSliderChange}
-              trackStyle={{ backgroundColor: currentJustice.color }}
-              thumbStyle={{ backgroundColor: currentJustice.color, borderColor: currentJustice.color }}
+              // Remove the unsupported props that were causing TypeScript errors
             />
+            
+            {/* Add custom styling for the slider track using CSS class instead */}
+            <style jsx>{`
+              /* Custom styling for the slider track based on the current justice color */
+              :global(.slider-${currentJustice.id} [data-radix-slider-range]) {
+                background-color: ${currentJustice.color};
+              }
+              :global(.slider-${currentJustice.id} [data-radix-slider-thumb]) {
+                background-color: ${currentJustice.color};
+                border-color: ${currentJustice.color};
+              }
+            `}</style>
           </div>
 
           {/* Justice Content Carousel */}
