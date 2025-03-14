@@ -30,6 +30,17 @@ const NavBar = () => {
     }
   };
 
+  // New menu items
+  const menuItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'transformation', label: 'Transformation' },
+    { id: 'stories', label: 'Stories' },
+    { id: 'videos', label: 'Videos' },
+    { id: 'inequities', label: 'Inequities' },
+    { id: 'books', label: 'Books' },
+    { id: 'research', label: 'Research' }
+  ];
+
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -58,21 +69,21 @@ const NavBar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {['health', 'environmental', 'intergenerational', 'economic', 'political', 'social'].map(item => (
+          <div className="hidden md:flex space-x-6">
+            {menuItems.slice(0, -1).map(item => (
               <button 
-                key={item}
-                onClick={() => scrollToSection(item)}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
                 className="font-medium text-justice-text/80 hover:text-justice-blue transition-colors"
               >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
+                {item.label}
               </button>
             ))}
             <button 
-              onClick={() => scrollToSection('action')}
+              onClick={() => scrollToSection('research')}
               className="font-medium px-4 py-2 rounded-full bg-justice-blue text-white hover:bg-justice-blue/90 transition-colors"
             >
-              Take Action
+              Research
             </button>
           </div>
 
@@ -104,21 +115,15 @@ const NavBar = () => {
         isMobileMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
       }`}>
         <div className="glass-card mx-4 divide-y divide-gray-100">
-          {['health', 'environmental', 'intergenerational', 'economic', 'political', 'social'].map(item => (
+          {menuItems.map(item => (
             <button 
-              key={item}
-              onClick={() => scrollToSection(item)}
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
               className="block w-full text-left px-5 py-3 font-medium text-justice-text/80 hover:text-justice-blue hover:bg-justice-blue/5 transition-colors"
             >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+              {item.label}
             </button>
           ))}
-          <button 
-            onClick={() => scrollToSection('action')}
-            className="block w-full text-left px-5 py-3 font-medium text-justice-blue hover:bg-justice-blue/5 transition-colors"
-          >
-            Take Action
-          </button>
         </div>
       </div>
     </nav>
