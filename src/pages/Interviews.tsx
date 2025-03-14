@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -12,7 +11,7 @@ import interviewsData from "@/constants/interviews.json";
 
 // Types for our interview data
 type InterviewTag = string;
-type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
+type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia";
 
 interface Interview {
   id: number;
@@ -33,8 +32,7 @@ const continents: ("All Continents" | Continent)[] = [
   "Europe", 
   "North America",
   "South America", 
-  "Australia", 
-  "Antarctica"
+  "Australia"
 ];
 
 // Parse the JSON data to ensure it matches our Interview type
