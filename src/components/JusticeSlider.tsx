@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { 
   Carousel, 
@@ -73,7 +74,7 @@ const JusticeSlider = () => {
           {/* Justice Type Tabs */}
           <Tabs
             value={currentJustice.id}
-            className="w-full mb-16"
+            className="w-full mb-18" // Increased from mb-16 to mb-18
             onValueChange={(value) => {
               const newIndex = justiceTypes.findIndex(j => j.id === value);
               if (newIndex !== -1) setActiveIndex(newIndex);
@@ -113,7 +114,7 @@ const JusticeSlider = () => {
           </Tabs>
 
           {/* Main slider control - Increased spacing */}
-          <div className="mb-12 mt-20">
+          <div className="mb-12 mt-22"> {/* Increased from mt-20 to mt-22 */}
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
