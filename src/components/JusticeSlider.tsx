@@ -94,15 +94,18 @@ const JusticeSlider = () => {
                   >
                     <TabsTrigger 
                       value={justice.id}
-                      className="text-sm md:text-base font-medium w-full py-4 px-2 flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:scale-105"
+                      className="text-sm md:text-base font-medium w-full py-4 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
                       style={{ 
-                        color: justice.id === currentJustice.id ? justice.color : 'inherit',
+                        color: justice.id === currentJustice.id ? 'white' : justice.color,
+                        backgroundColor: justice.id === currentJustice.id ? justice.color : 'transparent',
                         borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
-                        backgroundColor: justice.id === currentJustice.id ? `${justice.color}15` : 'transparent'
                       }}
                     >
                       <justice.icon className="size-6 md:size-7" />
                       <span className="font-semibold text-base md:text-lg">{justice.title}</span>
+                      <span className="text-xs opacity-80 font-normal">
+                        {justice.symbolism}
+                      </span>
                     </TabsTrigger>
                   </motion.div>
                 ))}
