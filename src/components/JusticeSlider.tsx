@@ -12,6 +12,7 @@ import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { justiceTypes } from "../constants/justiceData";
+import { motion } from "framer-motion";
 
 const JusticeSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -25,6 +26,27 @@ const JusticeSlider = () => {
 
   const currentJustice = justiceTypes[activeIndex];
   const IconComponent = currentJustice.icon;
+
+  // Animation variants for the tabs
+  const tabContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const tabItemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { type: "spring", stiffness: 300, damping: 24 }
+    }
+  };
 
   return (
     <section 
@@ -58,17 +80,33 @@ const JusticeSlider = () => {
               if (newIndex !== -1) setActiveIndex(newIndex);
             }}
           >
-            <TabsList className="grid w-full grid-cols-5">
-              {justiceTypes.map((justice) => (
-                <TabsTrigger 
-                  key={justice.id} 
-                  value={justice.id}
-                  className="text-xs md:text-sm"
-                >
-                  {justice.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <motion.div
+              variants={tabContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <TabsList className="grid w-full grid-cols-5">
+                {justiceTypes.map((justice) => (
+                  <motion.div
+                    key={justice.id}
+                    variants={tabItemVariants}
+                    className="w-full"
+                  >
+                    <TabsTrigger 
+                      value={justice.id}
+                      className="text-sm md:text-base font-medium w-full py-3 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                      style={{ 
+                        color: justice.id === currentJustice.id ? justice.color : 'inherit',
+                        borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none'
+                      }}
+                    >
+                      <justice.icon className="size-5 md:size-6" />
+                      <span>{justice.title}</span>
+                    </TabsTrigger>
+                  </motion.div>
+                ))}
+              </TabsList>
+            </motion.div>
           </Tabs>
 
           {/* Main slider control */}
@@ -93,7 +131,12 @@ const JusticeSlider = () => {
             <CarouselContent>
               {justiceTypes.map((justice, index) => (
                 <CarouselItem key={justice.id}>
-                  <div className="grid md:grid-cols-2 gap-8 p-1">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: index === activeIndex ? 1 : 0, y: index === activeIndex ? 0 : 20 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="grid md:grid-cols-2 gap-8 p-1"
+                  >
                     {/* City Example Card */}
                     <Card className="overflow-hidden border-2" style={{ borderColor: justice.color }}>
                       <div className="aspect-square w-full overflow-hidden">
@@ -115,12 +158,14 @@ const JusticeSlider = () => {
                     <Card className="h-full flex flex-col">
                       <CardContent className="p-6 flex flex-col justify-between h-full">
                         <div className="flex flex-col items-center text-center mb-6">
-                          <div 
+                          <motion.div 
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
                             className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
                             style={{ backgroundColor: justice.color + '20', color: justice.color }}
                           >
                             <IconComponent size={36} />
-                          </div>
+                          </motion.div>
                           <h3 className="text-2xl font-bold mb-2" style={{ color: justice.color }}>
                             {justice.title}
                           </h3>
@@ -139,16 +184,22 @@ const JusticeSlider = () => {
                               "Reduces noise pollution and stress in urban areas",
                               "Strengthens local economies through increased foot traffic"
                             ].map((point, i) => (
-                              <li key={i} className="flex items-start">
+                              <motion.li 
+                                key={i} 
+                                className="flex items-start"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5 + (i * 0.1) }}
+                              >
                                 <span className="mr-2 mt-1 text-green-500">✓</span>
                                 <span className="text-sm">{point}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </ul>
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -161,7 +212,7 @@ const JusticeSlider = () => {
           {/* Justice Type Indicator */}
           <div className="mt-8 flex justify-center gap-2">
             {justiceTypes.map((justice, index) => (
-              <button
+              <motion.button
                 key={justice.id}
                 onClick={() => setActiveIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
@@ -171,6 +222,8 @@ const JusticeSlider = () => {
                 }`}
                 style={{ backgroundColor: justice.color }}
                 aria-label={`View ${justice.title}`}
+                whileHover={{ scale: 1.5 }}
+                whileTap={{ scale: 0.9 }}
               />
             ))}
           </div>
