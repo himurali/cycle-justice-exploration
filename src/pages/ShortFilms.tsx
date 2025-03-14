@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,6 +7,7 @@ import { Globe, Share2, Clock, Play, ExternalLink } from "lucide-react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import shortFilmsData from "@/constants/shortFilms.json";
 
 // Types for our film data
 type FilmTag = string;
@@ -21,62 +21,8 @@ interface Film {
   duration: string;
   tags: FilmTag[];
   continent: Continent;
-  videoUrl: string; // Added videoUrl property
+  videoUrl: string;
 }
-
-// Sample film data
-const films: Film[] = [
-  {
-    id: 1,
-    title: "A Day in the Life: Bike Commuter",
-    description: "Follow Alex as they navigate their daily bike commute through a busy urban landscape.",
-    thumbnail: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    duration: "5:45",
-    tags: ["daily life", "commuting", "urban cycling"],
-    continent: "North America",
-    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
-  },
-  {
-    id: 2,
-    title: "Building Better Bike Lanes",
-    description: "How one city transformed its infrastructure to prioritize cyclist safety and accessibility.",
-    thumbnail: "https://images.unsplash.com/photo-1519677584237-752f8853252e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    duration: "8:30",
-    tags: ["infrastructure", "safety", "design"],
-    continent: "Europe",
-    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
-  },
-  {
-    id: 3,
-    title: "Cycling as Resistance",
-    description: "Exploring how cycling communities are fighting for environmental justice in urban spaces.",
-    thumbnail: "https://images.unsplash.com/photo-1527585065299-489e027a87ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    duration: "12:15",
-    tags: ["activism", "community", "environment"],
-    continent: "Africa",
-    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
-  },
-  {
-    id: 4,
-    title: "The Future of Micro-Mobility",
-    description: "Investigating how electric bikes and scooters are changing transportation dynamics.",
-    thumbnail: "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-    duration: "7:20",
-    tags: ["technology", "e-bikes", "future"],
-    continent: "Asia",
-    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
-  },
-  {
-    id: 5,
-    title: "Bicycles & Business",
-    description: "How bike-friendly streets are boosting local economies and revitalizing neighborhoods.",
-    thumbnail: "https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-    duration: "9:45",
-    tags: ["economy", "urban planning", "community"],
-    continent: "North America",
-    videoUrl: "https://www.youtube.com/watch?v=SvOZfxIMMzg"
-  }
-];
 
 // Define all continents for filter
 const continents: ("All Continents" | Continent)[] = [
@@ -89,6 +35,9 @@ const continents: ("All Continents" | Continent)[] = [
   "Australia", 
   "Antarctica"
 ];
+
+// Parse the JSON data to ensure it matches our Film type
+const films: Film[] = shortFilmsData as Film[];
 
 const ShortFilms = () => {
   // State for filtering and pagination
