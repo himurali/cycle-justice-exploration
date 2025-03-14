@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
-import storiesData from '@/constants/stories.json';
+import communityChampions from '@/constants/communityChampions.json';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe } from "lucide-react";
@@ -35,8 +35,6 @@ const continents: ("All Continents" | Continent)[] = [
 ];
 
 const CommunityChampions = () => {
-  const { communityChampions } = storiesData;
-  
   // State for filtering and pagination
   const [selectedContinent, setSelectedContinent] = useState<"All Continents" | Continent>("All Continents");
   const [itemsPerPage, setItemsPerPage] = useState<string>("6");

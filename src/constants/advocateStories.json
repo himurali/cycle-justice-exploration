@@ -1,0 +1,33 @@
+
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+    "headline": "Jane's Journey for Urban Justice",
+    "subhead": "Advocate for Safe Streets",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "Read More",
+    "secondaryButtonLabel": "Share",
+    "continent": "North America"
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    "headline": "Mark's Mission for Mobility",
+    "subhead": "Champion for Accessible Transport",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "View Story",
+    "secondaryButtonLabel": "Contact",
+    "continent": "Europe"
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    "headline": "Sarah's Stand for Safer Cycling",
+    "subhead": "Advocate for Bike Infrastructure",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "Read Story",
+    "secondaryButtonLabel": "Follow",
+    "continent": "Asia"
+  }
+]

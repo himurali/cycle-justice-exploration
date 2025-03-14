@@ -1,0 +1,33 @@
+
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
+    "headline": "Portland's Path to Progress",
+    "subhead": "Urban Transformation Success",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "Explore Case",
+    "secondaryButtonLabel": "Key Facts",
+    "continent": "North America"
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    "headline": "Amsterdam's Amazing Revolution",
+    "subhead": "How a City Transformed for Cyclists",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "See Changes",
+    "secondaryButtonLabel": "Timeline",
+    "continent": "Europe"
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+    "headline": "Bogotá's Bold Beginning",
+    "subhead": "A South American Success Story",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "View Changes",
+    "secondaryButtonLabel": "Stats",
+    "continent": "South America"
+  }
+]

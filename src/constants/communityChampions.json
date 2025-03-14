@@ -1,0 +1,33 @@
+
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    "headline": "Community Cycling Coalition",
+    "subhead": "Building Grassroots Support",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "Meet Team",
+    "secondaryButtonLabel": "Join",
+    "continent": "North America"
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    "headline": "Neighborhood Network",
+    "subhead": "Connecting Local Advocates",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "View Projects",
+    "secondaryButtonLabel": "Events",
+    "continent": "Europe"
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1473091534298-04dcbce3278c",
+    "headline": "Safety Street Squad",
+    "subhead": "Volunteers Making a Difference",
+    "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
+    "primaryButtonLabel": "Learn More",
+    "secondaryButtonLabel": "Volunteer",
+    "continent": "Australia"
+  }
+]
