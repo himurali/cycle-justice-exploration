@@ -1,6 +1,7 @@
 
 import NavBar from "../components/NavBar";
 import Hero from "../components/Hero";
+import JusticeSlider from "../components/JusticeSlider";
 import InequalitySection from "../components/InequalitySection";
 import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
@@ -12,6 +13,7 @@ const Index = () => {
       <NavBar />
       <main>
         <Hero />
+        <JusticeSlider />
         {inequalityData.map((data, i) => (
           <InequalitySection
             key={data.id}
