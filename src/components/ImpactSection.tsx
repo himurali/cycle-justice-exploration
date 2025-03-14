@@ -1,8 +1,7 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InequalitySection from "./InequalitySection";
-import { inequalityData } from "../constants/inequalityData";
 import { motion } from "framer-motion";
 import { 
   Heart, 
@@ -10,21 +9,56 @@ import {
   Scale, 
   Building, 
   User, 
-  Globe 
+  Globe,
+  LucideIcon
 } from "lucide-react";
+import inequalityDataJson from "../data/inequalityData.json";
 
-// Map justice areas to icons and colors
-const justiceIcons = {
-  "health": { icon: User, color: "#ea384c" },
-  "environment": { icon: Leaf, color: "#0EA5E9" },
-  "intergenerational": { icon: Globe, color: "#D946EF" },
-  "economic": { icon: Scale, color: "#F97316" },
-  "political": { icon: Building, color: "#8B5CF6" },
-  "social": { icon: Heart, color: "#9b87f5" }
+interface InequalityDataType {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  iconName: string;
+  color: string;
+  stats: {
+    label: string;
+    value: string;
+    context?: string;
+  }[];
+  imageUrl: string;
+  bicycleSolution: string;
+}
+
+// Map icon names to Lucide icon components
+const iconMap: Record<string, LucideIcon> = {
+  "Heart": Heart,
+  "Leaf": Leaf,
+  "Scale": Scale,
+  "Building": Building,
+  "User": User,
+  "Globe": Globe,
 };
 
 const ImpactSection = () => {
   const [activeTab, setActiveTab] = useState("health");
+  const [inequalityData, setInequalityData] = useState<InequalityDataType[]>([]);
+  
+  useEffect(() => {
+    // Set the inequality data from the JSON file
+    setInequalityData(inequalityDataJson as InequalityDataType[]);
+  }, []);
+
+  // Map justice areas to icons and colors
+  const justiceIcons = inequalityData.reduce((acc, item) => {
+    return {
+      ...acc,
+      [item.id]: { 
+        icon: iconMap[item.iconName], 
+        color: item.color 
+      }
+    };
+  }, {} as Record<string, { icon: LucideIcon, color: string }>);
   
   const tabContainerVariants = {
     hidden: { opacity: 0 },
@@ -45,6 +79,17 @@ const ImpactSection = () => {
       transition: { type: "spring", stiffness: 300, damping: 24 }
     }
   };
+
+  // If data hasn't loaded yet, show a loading state
+  if (inequalityData.length === 0) {
+    return (
+      <section className="py-20 px-4 bg-gradient-to-b from-background to-slate-50/30">
+        <div className="max-w-6xl mx-auto text-center">
+          <p>Loading impact data...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-background to-slate-50/30">
@@ -98,14 +143,22 @@ const ImpactSection = () => {
             <TabsContent key={key} value={key} className="mt-6">
               {inequalityData
                 .filter(data => data.id === key)
-                .map((data, i) => (
-                  <InequalitySection
-                    key={data.id}
-                    data={data}
-                    isReversed={i % 2 !== 0}
-                    index={i}
-                  />
-                ))}
+                .map((data, i) => {
+                  // Convert the data to match the component's expected props
+                  const processedData = {
+                    ...data,
+                    icon: iconMap[data.iconName]
+                  };
+                  
+                  return (
+                    <InequalitySection
+                      key={data.id}
+                      data={processedData}
+                      isReversed={i % 2 !== 0}
+                      index={i}
+                    />
+                  );
+                })}
             </TabsContent>
           ))}
         </Tabs>

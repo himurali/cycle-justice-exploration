@@ -1,6 +1,22 @@
 
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
-import { InequalityData } from "../constants/inequalityData";
+import { LucideIcon } from "lucide-react";
+
+interface InequalityData {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: LucideIcon;
+  color: string;
+  stats: {
+    label: string;
+    value: string;
+    context?: string;
+  }[];
+  imageUrl: string;
+  bicycleSolution: string;
+}
 
 interface InequalitySectionProps {
   data: InequalityData;
