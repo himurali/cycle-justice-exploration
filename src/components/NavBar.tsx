@@ -142,20 +142,20 @@ const NavBar = () => {
                 className="text-justice-blue mr-2 transition-transform duration-300 group-hover:scale-110" 
                 size={28} 
               />
-              <span className="font-medium text-xl">Cycle Justice</span>
+              <span className="font-baskerville font-medium text-xl md:text-2xl">Cycle Justice</span>
             </a>
           </div>
 
-          {/* Desktop Navigation Menu */}
+          {/* Desktop Navigation Menu - INCREASED SIZE */}
           <div className="hidden md:block">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="gap-1">
                 {navigationItems.map(item => (
                   <NavigationMenuItem key={item.id}>
                     {item.hasSubmenu ? (
                       <>
                         <NavigationMenuTrigger
-                          className="font-medium text-justice-text/80 hover:text-justice-blue transition-colors bg-transparent hover:bg-transparent focus:bg-transparent"
+                          className="font-baskerville text-base md:text-lg font-medium text-justice-text/80 hover:text-justice-blue transition-colors bg-transparent hover:bg-transparent focus:bg-transparent px-4 py-2"
                         >
                           {item.label}
                         </NavigationMenuTrigger>
@@ -166,13 +166,13 @@ const NavBar = () => {
                                 <NavigationMenuLink asChild>
                                   <a
                                     href={subItem.href}
-                                    className="block select-none space-y-1 rounded-md p-3 hover:bg-justice-blue/10 transition-colors hover:text-justice-blue"
+                                    className="font-baskerville block select-none space-y-1 rounded-md p-3 text-base hover:bg-justice-blue/10 transition-colors hover:text-justice-blue"
                                     onClick={(e) => {
                                       e.preventDefault();
                                       scrollToSection(subItem.href.substring(1));
                                     }}
                                   >
-                                    <div className="text-sm font-medium">{subItem.label}</div>
+                                    <div className="text-sm md:text-base font-medium">{subItem.label}</div>
                                   </a>
                                 </NavigationMenuLink>
                               </li>
@@ -188,7 +188,7 @@ const NavBar = () => {
                           scrollToSection(item.id);
                         }}
                         className={cn(
-                          "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2",
+                          "font-baskerville inline-flex items-center justify-center rounded-md text-base md:text-lg font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2",
                           item.id === 'research' 
                             ? "bg-justice-blue text-white hover:bg-justice-blue/90" 
                             : "font-medium text-justice-text/80 hover:text-justice-blue"
@@ -226,7 +226,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - Completely restructured for better submenu display */}
+      {/* Mobile Menu - Larger font sizes */}
       <div className={`md:hidden transition-all duration-300 overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[80vh] opacity-100 py-4' : 'max-h-0 opacity-0'
       }`}>
@@ -236,14 +236,14 @@ const NavBar = () => {
               {/* Main menu item */}
               {item.hasSubmenu ? (
                 <div className="px-4 py-2">
-                  <div className="font-medium text-lg mb-2">{item.label}</div>
+                  <div className="font-baskerville font-medium text-xl mb-2">{item.label}</div>
                   {/* Submenu items with indentation */}
                   <div className="ml-4 border-l-2 border-justice-blue pl-3 space-y-2">
                     {item.submenu?.map((subItem, idx) => (
                       <a
                         key={idx}
                         href={subItem.href}
-                        className="block py-2 text-justice-text/80 hover:text-justice-blue transition-colors"
+                        className="font-baskerville block py-2 text-lg text-justice-text/80 hover:text-justice-blue transition-colors"
                         onClick={(e) => {
                           e.preventDefault();
                           scrollToSection(subItem.href.substring(1));
@@ -258,7 +258,7 @@ const NavBar = () => {
               ) : (
                 <a
                   href={item.href}
-                  className={`block px-5 py-3 font-medium ${
+                  className={`font-baskerville block px-5 py-3 text-xl font-medium ${
                     item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
                   } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
                   onClick={(e) => {
