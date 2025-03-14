@@ -5,97 +5,10 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import storiesData from '@/constants/stories.json';
 
-// Sample data for the three types of stories
-const advocateStories = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
-    headline: 'Jane\'s Journey for Urban Justice',
-    subhead: 'Advocate for Safe Streets',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'Read More',
-    secondaryButtonLabel: 'Share'
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
-    headline: 'Mark\'s Mission for Mobility',
-    subhead: 'Champion for Accessible Transport',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'View Story',
-    secondaryButtonLabel: 'Contact'
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
-    headline: 'Sarah\'s Stand for Safer Cycling',
-    subhead: 'Advocate for Bike Infrastructure',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'Read Story',
-    secondaryButtonLabel: 'Follow'
-  }
-];
-
-const transformationStories = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b',
-    headline: 'Portland\'s Path to Progress',
-    subhead: 'Urban Transformation Success',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'Explore Case',
-    secondaryButtonLabel: 'Key Facts'
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-    headline: 'Amsterdam\'s Amazing Revolution',
-    subhead: 'How a City Transformed for Cyclists',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'See Changes',
-    secondaryButtonLabel: 'Timeline'
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
-    headline: 'Bogotá\'s Bold Beginning',
-    subhead: 'A South American Success Story',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'View Changes',
-    secondaryButtonLabel: 'Stats'
-  }
-];
-
-const communityChampions = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
-    headline: 'Community Cycling Coalition',
-    subhead: 'Building Grassroots Support',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'Meet Team',
-    secondaryButtonLabel: 'Join'
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
-    headline: 'Neighborhood Network',
-    subhead: 'Connecting Local Advocates',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'View Projects',
-    secondaryButtonLabel: 'Events'
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1473091534298-04dcbce3278c',
-    headline: 'Safety Street Squad',
-    subhead: 'Volunteers Making a Difference',
-    description: 'Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.',
-    primaryButtonLabel: 'Learn More',
-    secondaryButtonLabel: 'Volunteer'
-  }
-];
+// Get stories data from the JSON file
+const { advocateStories, transformationStories, communityChampions } = storiesData;
 
 const Stories = () => {
   const location = useLocation();
