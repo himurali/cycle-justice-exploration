@@ -82,8 +82,9 @@ const NavBar = () => {
     { 
       id: 'stories', 
       label: 'Stories',
-      href: '#stories',
+      href: '/stories',
       hasSubmenu: true,
+      isPageLink: true,
       submenu: [
         { label: 'Advocate Stories', href: '/advocate-stories', isPageLink: true },
         { label: 'City Transformations', href: '/city-transformations', isPageLink: true },
