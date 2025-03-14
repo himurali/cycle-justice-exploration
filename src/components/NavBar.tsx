@@ -146,12 +146,12 @@ const NavBar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation Menu - INCREASED SIZE */}
+          {/* Desktop Navigation Menu - With improved alignment */}
           <div className="hidden md:block">
             <NavigationMenu>
               <NavigationMenuList className="gap-1">
                 {navigationItems.map(item => (
-                  <NavigationMenuItem key={item.id}>
+                  <NavigationMenuItem key={item.id} className="relative">
                     {item.hasSubmenu ? (
                       <>
                         <NavigationMenuTrigger
@@ -159,7 +159,7 @@ const NavBar = () => {
                         >
                           {item.label}
                         </NavigationMenuTrigger>
-                        <NavigationMenuContent>
+                        <NavigationMenuContent className="absolute left-0">
                           <ul className="grid gap-3 p-4 min-w-[220px] bg-white">
                             {item.submenu?.map((subItem, idx) => (
                               <li key={idx}>
@@ -226,7 +226,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - Larger font sizes */}
+      {/* Mobile Menu - Better organized with clear visual hierarchy */}
       <div className={`md:hidden transition-all duration-300 overflow-hidden ${
         isMobileMenuOpen ? 'max-h-[80vh] opacity-100 py-4' : 'max-h-0 opacity-0'
       }`}>
