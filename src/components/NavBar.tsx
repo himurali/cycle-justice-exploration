@@ -1,29 +1,13 @@
 
 import { useState, useEffect } from 'react';
-import { Bike, Menu, X } from 'lucide-react';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Button } from "@/components/ui/button";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +23,6 @@ const NavBar = () => {
 
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-    setActiveDropdown(null);
     const element = document.getElementById(sectionId);
     if (element) {
       const topOffset = element.getBoundingClientRect().top + window.pageYOffset - 80;
@@ -47,18 +30,6 @@ const NavBar = () => {
         top: topOffset,
         behavior: 'smooth'
       });
-    }
-  };
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleDropdownToggle = (id: string) => {
-    if (activeDropdown === id) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(id);
     }
   };
 
@@ -159,29 +130,34 @@ const NavBar = () => {
 
         {/* Mobile menu button */}
         <button
-          onClick={toggleMobileMenu}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           type="button"
           className="md:hidden ml-3 text-gray-700 hover:text-justice-blue focus:outline-none focus:ring-2 focus:ring-justice-blue rounded-lg inline-flex items-center justify-center"
           aria-controls="mobile-menu"
           aria-expanded={isMobileMenuOpen}
         >
           <span className="sr-only">Open main menu</span>
-          {!isMobileMenuOpen ? (
-            <Menu className="w-6 h-6" />
-          ) : (
-            <X className="w-6 h-6" />
-          )}
+          <div className="w-6 h-5 flex flex-col justify-between">
+            <span className={`block h-0.5 w-full bg-justice-dark transition-all duration-300 ${
+              isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+            }`}></span>
+            <span className={`block h-0.5 w-full bg-justice-dark transition-opacity duration-300 ${
+              isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+            }`}></span>
+            <span className={`block h-0.5 w-full bg-justice-dark transition-all duration-300 ${
+              isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+            }`}></span>
+          </div>
         </button>
 
-        {/* Desktop & Mobile menu container */}
-        <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:block w-full md:w-auto`} id="mobile-menu">
-          <ul className="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium">
+        {/* Desktop menu */}
+        <div className="hidden md:flex md:w-auto" id="desktop-menu">
+          <ul className="flex flex-row space-x-8 mt-0 text-sm font-medium">
             {navigationItems.map((item) => (
               <li key={item.id} className="relative">
                 {item.hasSubmenu ? (
-                  <>
-                    <button
-                      onClick={() => handleDropdownToggle(item.id)}
+                  <div className="group relative">
+                    <button 
                       className="text-justice-text hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-justice-blue md:p-0 font-baskerville font-medium flex items-center justify-between w-full md:w-auto"
                     >
                       {item.label}
@@ -193,13 +169,8 @@ const NavBar = () => {
                         />
                       </svg>
                     </button>
-                    {/* Dropdown menu */}
-                    <div
-                      className={`${
-                        activeDropdown === item.id ? 'block' : 'hidden'
-                      } bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4 w-44 md:absolute md:left-0`}
-                    >
-                      <ul className="py-1">
+                    <div className="hidden group-hover:block absolute z-10 bg-white rounded shadow-lg py-2 mt-1 w-48">
+                      <ul>
                         {item.submenu?.map((subItem, idx) => (
                           <li key={idx}>
                             <a
@@ -216,7 +187,7 @@ const NavBar = () => {
                         ))}
                       </ul>
                     </div>
-                  </>
+                  </div>
                 ) : (
                   <a
                     href={item.href}
@@ -236,6 +207,55 @@ const NavBar = () => {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      {/* Mobile menu container - with fixed white background */}
+      <div 
+        className={`md:hidden transition-all duration-300 ${
+          isMobileMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
+        } bg-white shadow-lg overflow-hidden`}
+      >
+        <div className="max-h-[80vh] overflow-y-auto divide-y divide-gray-100 px-4 py-3">
+          {navigationItems.map((item) => (
+            <div key={item.id} className="py-2">
+              {item.hasSubmenu ? (
+                <div className="py-2">
+                  <div className="font-baskerville font-medium text-xl mb-2">{item.label}</div>
+                  <div className="ml-4 border-l-2 border-justice-blue pl-3 space-y-2">
+                    {item.submenu?.map((subItem, idx) => (
+                      <a
+                        key={idx}
+                        href={subItem.href}
+                        className="font-baskerville block py-2 text-lg text-justice-text/80 hover:text-justice-blue transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection(subItem.href.substring(1));
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a
+                  href={item.href}
+                  className={`font-baskerville block py-3 text-xl font-medium ${
+                    item.id === 'research' ? 'text-justice-blue' : 'text-justice-text/80'
+                  } hover:text-justice-blue hover:bg-justice-blue/5 transition-colors`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  {item.label}
+                </a>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </nav>
