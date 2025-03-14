@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Bike } from 'lucide-react';
 import {
@@ -142,7 +143,7 @@ const NavBar = () => {
             <NavigationMenu>
               <NavigationMenuList className="gap-1">
                 {navigationItems.map(item => (
-                  <NavigationMenuItem key={item.id}>
+                  <NavigationMenuItem key={item.id} className="relative">
                     {item.hasSubmenu ? (
                       <>
                         <NavigationMenuTrigger
@@ -151,7 +152,7 @@ const NavBar = () => {
                           {item.label}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <ul className="grid gap-3 p-4 min-w-[220px] bg-white">
+                          <ul className="grid gap-3 p-4 w-[220px] bg-white shadow-lg rounded-md">
                             {item.submenu?.map((subItem, idx) => (
                               <li key={idx}>
                                 <NavigationMenuLink asChild>
