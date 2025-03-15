@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -130,13 +129,7 @@ const NavBar = () => {
       isPageLink: true,
       submenu: [
         { label: 'Research Institutions', href: '/research-institutions', isPageLink: true },
-        { label: 'Research Papers', href: '/research-papers', isPageLink: true },
-        { label: 'Equity', href: '/vision-docs/equity', isPageLink: true },
-        { label: 'Infrastructure', href: '/vision-docs/infrastructure', isPageLink: true },
-        { label: 'Health', href: '/vision-docs/health', isPageLink: true },
-        { label: 'Policy', href: '/vision-docs/policy', isPageLink: true },
-        { label: 'Climate', href: '/vision-docs/climate', isPageLink: true },
-        { label: 'Economics', href: '/vision-docs/economics', isPageLink: true }
+        { label: 'Research Papers', href: '/research-papers', isPageLink: true }
       ]
     }
   ];
