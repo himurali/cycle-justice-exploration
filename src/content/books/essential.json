@@ -1,0 +1,75 @@
+
+[
+  {
+    "id": "bike-nation",
+    "title": "Bike Nation: How Cycling Can Save the World",
+    "author": "Peter Walker",
+    "description": "A passionate and persuasive case for the benefits of cycling to create more livable cities and healthier citizens. Walker shows how getting more people on bikes could transform our health, economy, and environment.",
+    "category": "essential",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2017,
+    "publisher": "Yellow Jersey Press",
+    "pages": 256,
+    "tags": ["urban planning", "advocacy", "health"],
+    "reviews": [
+      {
+        "author": "The Guardian",
+        "text": "A fascinating and comprehensive look at cycling culture and its importance to society.",
+        "rating": 5
+      },
+      {
+        "author": "Cycling Weekly",
+        "text": "Essential reading for anyone interested in sustainable urban transportation.",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "street-fight",
+    "title": "Street Fight: Handbook for an Urban Revolution",
+    "author": "Janette Sadik-Khan",
+    "description": "Former NYC Transportation Commissioner shares how she transformed New York City's streets, challenging the status quo to create more people-friendly spaces including better bike infrastructure.",
+    "category": "essential",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2016,
+    "publisher": "Viking",
+    "pages": 368,
+    "tags": ["urban planning", "policy", "infrastructure"],
+    "reviews": [
+      {
+        "author": "The New York Times",
+        "text": "A powerful narrative about the transformation of urban spaces.",
+        "rating": 5
+      },
+      {
+        "author": "Urban Design Forum",
+        "text": "A must-read for city planners and cycling advocates alike.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "mobility-justice",
+    "title": "Mobility Justice: The Politics of Movement in an Age of Extremes",
+    "author": "Mimi Sheller",
+    "description": "An exploration of how power and inequality inform the governance and control of movement. The book argues for a new understanding of mobility rights and equity.",
+    "category": "essential",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2018,
+    "publisher": "Verso",
+    "pages": 288,
+    "tags": ["justice", "equity", "policy"],
+    "reviews": [
+      {
+        "author": "Journal of Urban Studies",
+        "text": "A groundbreaking work that redefines how we think about mobility and justice.",
+        "rating": 5
+      },
+      {
+        "author": "Transportation Research Board",
+        "text": "Innovative and thought-provoking perspectives on transportation equity.",
+        "rating": 4
+      }
+    ]
+  }
+]

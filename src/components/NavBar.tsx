@@ -117,9 +117,9 @@ const NavBar = () => {
       hasSubmenu: true,
       isPageLink: true,
       submenu: [
-        { label: 'Essential Reading', href: '/books#essential-reading', isPageLink: true },
-        { label: 'Academic Works', href: '/books#academic-works', isPageLink: true },
-        { label: 'Practical Guides', href: '/books#practical-guides', isPageLink: true }
+        { label: 'Essential Reading', href: '/essential-books', isPageLink: true },
+        { label: 'Academic Works', href: '/academic-books', isPageLink: true },
+        { label: 'Practical Guides', href: '/practical-books', isPageLink: true }
       ]
     },
     { 

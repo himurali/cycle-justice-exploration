@@ -1,0 +1,75 @@
+
+[
+  {
+    "id": "cycling-cities",
+    "title": "Cycling Cities: The European Experience",
+    "author": "Ruth Oldenziel et al.",
+    "description": "Comparative historical analysis of cycling policy and culture across multiple European cities, showing how different approaches led to different outcomes for urban cycling.",
+    "category": "academic",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2016,
+    "publisher": "Foundation for the History of Technology",
+    "pages": 256,
+    "tags": ["research", "urban planning", "Europe"],
+    "reviews": [
+      {
+        "author": "Journal of Transport History",
+        "text": "A meticulous historical analysis that offers valuable lessons for modern cycling policy.",
+        "rating": 5
+      },
+      {
+        "author": "European Planning Studies",
+        "text": "Essential historical context for understanding contemporary cycling infrastructure.",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "cycling-futures",
+    "title": "Cycling Futures: From Research into Practice",
+    "author": "Jennifer Bonham and Marilyn Johnson",
+    "description": "Collection of academic research on cycling policy, infrastructure, and promotion, with a focus on translating research findings into practical implementations.",
+    "category": "academic",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2015,
+    "publisher": "Routledge",
+    "pages": 324,
+    "tags": ["research", "policy", "implementation"],
+    "reviews": [
+      {
+        "author": "Transportation Research Journal",
+        "text": "Bridges the gap between academic theory and practical application effectively.",
+        "rating": 4
+      },
+      {
+        "author": "International Journal of Sustainable Transportation",
+        "text": "A valuable resource for researchers and practitioners working on cycling promotion.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "bicycle-justice",
+    "title": "Bicycle Justice and Urban Transformation: Biking for All?",
+    "author": "Aaron Golub et al.",
+    "description": "Academic examination of cycling through the lens of social and environmental justice, addressing issues of access, equity, and inclusion in bicycle planning.",
+    "category": "academic",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2016,
+    "publisher": "Routledge",
+    "pages": 272,
+    "tags": ["equity", "justice", "inclusion"],
+    "reviews": [
+      {
+        "author": "Urban Studies",
+        "text": "Tackles issues of equity and access in cycling that are often overlooked in mainstream discussions.",
+        "rating": 5
+      },
+      {
+        "author": "Journal of Planning Education and Research",
+        "text": "A critical contribution to the field of transportation justice research.",
+        "rating": 4
+      }
+    ]
+  }
+]

@@ -1,0 +1,75 @@
+
+[
+  {
+    "id": "urban-cycling",
+    "title": "Urban Cycling: How to Get to Work, Save Money, and Use Your Bike for City Living",
+    "author": "Madi Carlson",
+    "description": "Practical guide for everyday urban cyclists, offering tips on commuting, shopping, and navigating city streets safely and confidently.",
+    "category": "practical",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2015,
+    "publisher": "Mountaineers Books",
+    "pages": 224,
+    "tags": ["commuting", "skills", "urban"],
+    "reviews": [
+      {
+        "author": "Bike Commuter Magazine",
+        "text": "A comprehensive and accessible guide for urban cyclists of all experience levels.",
+        "rating": 4
+      },
+      {
+        "author": "City Cycling USA",
+        "text": "Full of practical advice and real-world solutions for everyday cycling challenges.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "cycling-advocacy",
+    "title": "Building the Cycling City: The Dutch Blueprint for Urban Vitality",
+    "author": "Melissa and Chris Bruntlett",
+    "description": "Explores the evolution of Dutch cycling infrastructure and culture, and provides practical lessons for transforming car-centric cities worldwide.",
+    "category": "practical",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2018,
+    "publisher": "Island Press",
+    "pages": 224,
+    "tags": ["advocacy", "infrastructure", "Netherlands"],
+    "reviews": [
+      {
+        "author": "Momentum Magazine",
+        "text": "Offers clear, applicable lessons from the Dutch cycling model that any city can implement.",
+        "rating": 5
+      },
+      {
+        "author": "Streetsblog",
+        "text": "A practical blueprint for transforming urban mobility based on proven Dutch approaches.",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "bike-repair",
+    "title": "Zinn & the Art of Road Bike Maintenance",
+    "author": "Lennard Zinn",
+    "description": "Comprehensive guide to bicycle maintenance and repair, with step-by-step instructions for everything from basic maintenance to complex repairs.",
+    "category": "practical",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2016,
+    "publisher": "VeloPress",
+    "pages": 488,
+    "tags": ["maintenance", "repair", "skills"],
+    "reviews": [
+      {
+        "author": "VeloNews",
+        "text": "The definitive guide to bicycle maintenance, accessible to beginners yet detailed enough for professionals.",
+        "rating": 5
+      },
+      {
+        "author": "Bicycling Magazine",
+        "text": "Clear, well-illustrated, and comprehensive - an essential reference for any cyclist.",
+        "rating": 5
+      }
+    ]
+  }
+]

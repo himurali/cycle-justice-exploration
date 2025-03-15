@@ -15,6 +15,9 @@ import TransformationStories from "./pages/TransformationStories";
 import CommunityChampions from "./pages/CommunityChampions";
 import StoryDetail from "./pages/StoryDetail";
 import Books from "./pages/Books";
+import EssentialBooks from "./pages/EssentialBooks";
+import AcademicBooks from "./pages/AcademicBooks";
+import PracticalBooks from "./pages/PracticalBooks";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +38,9 @@ const App = () => (
           <Route path="/community-champions" element={<CommunityChampions />} />
           <Route path="/story/:slug" element={<StoryDetail />} />
           <Route path="/books" element={<Books />} />
+          <Route path="/essential-books" element={<EssentialBooks />} />
+          <Route path="/academic-books" element={<AcademicBooks />} />
+          <Route path="/practical-books" element={<PracticalBooks />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
