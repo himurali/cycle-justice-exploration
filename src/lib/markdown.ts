@@ -60,41 +60,50 @@ const getStoriesFromDirectory = (): StoryMeta[] => {
 
 // For client-side usage with imported markdown files
 export const getStories = (): StoryMeta[] => {
-  // In a browser environment, we need to use the imported markdown files
-  // This is a workaround for the fact that we can't use fs in the browser
-  
   try {
-    // Import all markdown files from the content/stories directory using string content
-    const markdownFiles = import.meta.glob('../content/stories/**/*.md', { eager: true, as: 'string' });
+    // Define our static paths to the markdown files
+    const advocacyContext = import.meta.glob('/src/content/stories/advocacy/*.md', { as: 'raw', eager: true });
+    const transformationContext = import.meta.glob('/src/content/stories/transformation/*.md', { as: 'raw', eager: true });
+    const communityContext = import.meta.glob('/src/content/stories/community/*.md', { as: 'raw', eager: true });
+    
     const stories: StoryMeta[] = [];
-
-    for (const path in markdownFiles) {
-      // Get the raw content as string
-      const fileContent = markdownFiles[path] as string;
-      
-      // Extract the category from the path
-      const pathParts = path.split('/');
-      const category = pathParts[pathParts.length - 2] as StoryCategory;
-      
-      // Extract the slug from the filename (remove date prefix and extension)
-      const filename = pathParts[pathParts.length - 1];
-      const slug = filename.replace(/^\d{2}-\d{2}-\d{4}-/, '').replace(/\.md$/, '');
-      
-      // Use gray-matter to parse the frontmatter and content
-      const { data, content } = matter(fileContent);
-      
-      stories.push({
-        slug,
-        title: data.title || '',
-        date: data.date || '',
-        excerpt: data.excerpt || '',
-        image: data.image || '',
-        category,
-        content,
-        author: data.author || ''
+    
+    // Process files from each context
+    [
+      { files: advocacyContext, category: 'advocacy' as StoryCategory },
+      { files: transformationContext, category: 'transformation' as StoryCategory },
+      { files: communityContext, category: 'community' as StoryCategory }
+    ].forEach(({ files, category }) => {
+      // Process each file in the category
+      Object.entries(files).forEach(([path, content]) => {
+        if (typeof content === 'string') {
+          // Extract the filename from the path
+          const filename = path.split('/').pop() || '';
+          
+          // Extract the slug from the filename (remove date prefix and extension)
+          const slug = filename.replace(/^\d{2}-\d{2}-\d{4}-/, '').replace(/\.md$/, '');
+          
+          // Parse the frontmatter and content
+          try {
+            const { data, content: markdownContent } = matter(content);
+            
+            stories.push({
+              slug,
+              title: data.title || '',
+              date: data.date || '',
+              excerpt: data.excerpt || '',
+              image: data.image || '',
+              category,
+              content: markdownContent,
+              author: data.author || ''
+            });
+          } catch (error) {
+            console.error(`Error parsing markdown for ${path}:`, error);
+          }
+        }
       });
-    }
-
+    });
+    
     return stories;
   } catch (error) {
     console.error("Error loading markdown files:", error);
