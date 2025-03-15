@@ -1,6 +1,4 @@
 
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 
 export type StoryCategory = 'advocacy' | 'transformation' | 'community';
@@ -14,50 +12,8 @@ export interface StoryMeta {
   category: StoryCategory;
   content: string;
   author?: string;
-  continent?: string; // Added continent field
+  continent?: string;
 }
-
-// Import stories directly from the content/stories directory
-const getStoriesFromDirectory = (): StoryMeta[] => {
-  const categories: StoryCategory[] = ['advocacy', 'transformation', 'community'];
-  const stories: StoryMeta[] = [];
-
-  // Iterate through each category directory
-  categories.forEach(category => {
-    try {
-      // List all files in the category directory
-      const categoryPath = path.join('src/content/stories', category);
-      const files = fs.readdirSync(categoryPath);
-      
-      // Process each markdown file
-      files.forEach(file => {
-        if (file.endsWith('.md')) {
-          const filePath = path.join(categoryPath, file);
-          const fileContent = fs.readFileSync(filePath, 'utf8');
-          const { data, content } = matter(fileContent);
-          
-          // Extract slug from filename (remove date prefix and extension)
-          const slug = file.replace(/^\d{2}-\d{2}-\d{4}-/, '').replace(/\.md$/, '');
-          
-          stories.push({
-            slug,
-            title: data.title || '',
-            date: data.date || '',
-            excerpt: data.excerpt || '',
-            image: data.image || '',
-            category: category as StoryCategory,
-            content: content,
-            author: data.author || ''
-          });
-        }
-      });
-    } catch (error) {
-      console.error(`Error reading ${category} directory:`, error);
-    }
-  });
-
-  return stories;
-};
 
 // For client-side usage with imported markdown files
 export const getStories = (): StoryMeta[] => {
@@ -86,7 +42,27 @@ export const getStories = (): StoryMeta[] => {
           
           // Parse the frontmatter and content
           try {
-            const { data, content: markdownContent } = matter(content);
+            // Use a browser-compatible approach for parsing
+            const { data, content: markdownContent } = matter(content, {
+              // Disable the use of Buffer for browser compatibility
+              engines: {
+                yaml: {
+                  parse: (yaml) => {
+                    // Use a simple approach for browser
+                    const result = {};
+                    const lines = yaml.split('\n');
+                    lines.forEach(line => {
+                      const match = line.match(/^([^:]+):\s*(.+)$/);
+                      if (match) {
+                        const [, key, value] = match;
+                        result[key.trim()] = value.trim().replace(/^["'](.*)["']$/, '$1');
+                      }
+                    });
+                    return result;
+                  }
+                }
+              }
+            });
             
             stories.push({
               slug,
@@ -97,7 +73,7 @@ export const getStories = (): StoryMeta[] => {
               category,
               content: markdownContent,
               author: data.author || '',
-              continent: data.continent || undefined // Add continent from frontmatter
+              continent: data.continent || undefined
             });
           } catch (error) {
             console.error(`Error parsing markdown for ${path}:`, error);
