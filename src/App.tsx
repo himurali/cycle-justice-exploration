@@ -25,6 +25,7 @@ import ResearchHealth from "./pages/ResearchHealth";
 import ResearchPolicy from "./pages/ResearchPolicy";
 import ResearchClimate from "./pages/ResearchClimate";
 import ResearchEconomics from "./pages/ResearchEconomics";
+import ResearchPapers from "./pages/ResearchPapers";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,7 @@ const App = () => (
           <Route path="/academic-books" element={<AcademicBooks />} />
           <Route path="/practical-books" element={<PracticalBooks />} />
           
-          {/* New research routes */}
+          {/* Research routes */}
           <Route path="/vision-docs" element={<Research />} />
           <Route path="/vision-docs/equity" element={<ResearchEquity />} />
           <Route path="/vision-docs/infrastructure" element={<ResearchInfrastructure />} />
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/vision-docs/policy" element={<ResearchPolicy />} />
           <Route path="/vision-docs/climate" element={<ResearchClimate />} />
           <Route path="/vision-docs/economics" element={<ResearchEconomics />} />
+          <Route path="/research-papers" element={<ResearchPapers />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

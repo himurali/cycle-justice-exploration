@@ -124,17 +124,15 @@ const NavBar = () => {
     { 
       id: 'research', 
       label: 'Research',
-      href: '/vision-docs',
+      href: '#research',
       hasSubmenu: true,
-      isPageLink: true,
       submenu: [
-        { label: 'All Research', href: '/vision-docs', isPageLink: true },
-        { label: 'Equity & Justice', href: '/vision-docs/equity', isPageLink: true },
-        { label: 'Infrastructure', href: '/vision-docs/infrastructure', isPageLink: true },
-        { label: 'Health', href: '/vision-docs/health', isPageLink: true },
-        { label: 'Policy', href: '/vision-docs/policy', isPageLink: true },
-        { label: 'Climate', href: '/vision-docs/climate', isPageLink: true },
-        { label: 'Economics', href: '/vision-docs/economics', isPageLink: true }
+        { label: 'Research Institutions', href: '#research-institutions' },
+        { label: 'Research Papers', href: '/research-papers', isPageLink: true },
+        { label: 'Research Projects', href: '#research-projects' },
+        { label: 'Studies', href: '#studies' },
+        { label: 'Reports', href: '#reports' },
+        { label: 'Academic Papers', href: '#papers' }
       ]
     }
   ];
