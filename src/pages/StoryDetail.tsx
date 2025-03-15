@@ -18,9 +18,14 @@ const StoryDetail = () => {
   
   // If not found, try to find in advocate stories
   if (!story && slug) {
+    // Log to help debug
+    console.log("Looking for story with slug:", slug);
+    console.log("Available advocate stories:", advocateStories.map(s => s.slug));
+    
     const advocateStory = advocateStories.find(s => s.slug === slug);
     
     if (advocateStory) {
+      console.log("Found advocate story:", advocateStory);
       story = {
         title: advocateStory.headline,
         date: new Date().toLocaleDateString(),
@@ -30,6 +35,8 @@ const StoryDetail = () => {
         category: 'advocacy',
         slug: advocateStory.slug
       };
+    } else {
+      console.log("No advocate story found with slug:", slug);
     }
   }
 
