@@ -13,6 +13,7 @@ export interface StoryMeta {
   image?: string;
   category: StoryCategory;
   content: string;
+  author?: string;
 }
 
 // Mock function to simulate server-side file system operations in the browser

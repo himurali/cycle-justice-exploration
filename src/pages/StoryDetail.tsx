@@ -29,16 +29,8 @@ const StoryDetail = () => {
     if (advocateStory) {
       console.log("Found advocate story:", advocateStory);
       
-      // Create a markdown string in the standardized format
-      const markdownContent = `---
-title: "${advocateStory.headline}"
-date: "${new Date().toISOString().split('T')[0]}"
-author: "Street Justice Advocate"
-category: "Advocacy Stories"
-image: "${advocateStory.image}"
-excerpt: "${advocateStory.description}"
----
-
+      // Create a formatted content string without the frontmatter syntax visible
+      const storyContent = `
 ![${advocateStory.headline}](${advocateStory.image})
 
 ## The Story
@@ -54,7 +46,7 @@ Want to share your story? Join our community and be part of the change!
         title: advocateStory.headline,
         date: new Date().toLocaleDateString(),
         image: advocateStory.image,
-        content: markdownContent,
+        content: storyContent,
         excerpt: advocateStory.description,
         category: 'advocacy',
         slug: advocateStory.slug,
