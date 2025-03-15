@@ -15,6 +15,8 @@ interface StoryCardProps {
   secondaryButtonLabel?: string;
   secondaryButtonAction?: () => void;
   slug?: string;
+  author?: string;
+  category?: string;
 }
 
 const StoryCard = ({
@@ -26,7 +28,9 @@ const StoryCard = ({
   primaryButtonAction,
   secondaryButtonLabel,
   secondaryButtonAction,
-  slug
+  slug,
+  author,
+  category
 }: StoryCardProps) => {
   console.log("Rendering StoryCard with slug:", slug);
   
@@ -41,7 +45,9 @@ const StoryCard = ({
       </div>
       <CardContent className="flex-grow p-6">
         <h3 className="text-2xl font-semibold tracking-tight mb-2 font-baskerville">{headline}</h3>
-        <h4 className="text-base text-justice-text/80 mb-4 font-baskerville">{subhead}</h4>
+        <h4 className="text-base text-justice-text/80 mb-2 font-baskerville">{subhead}</h4>
+        {author && <p className="text-sm text-justice-text/70 mb-2">By {author}</p>}
+        {category && <p className="text-sm text-justice-blue mb-4">{category}</p>}
         <p className="text-sm text-justice-text/70 leading-relaxed">{description}</p>
       </CardContent>
       <CardFooter className="p-6 pt-0 flex gap-3">

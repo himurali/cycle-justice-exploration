@@ -28,14 +28,37 @@ const StoryDetail = () => {
     
     if (advocateStory) {
       console.log("Found advocate story:", advocateStory);
+      
+      // Create a markdown string in the standardized format
+      const markdownContent = `---
+title: "${advocateStory.headline}"
+date: "${new Date().toISOString().split('T')[0]}"
+author: "Street Justice Advocate"
+category: "Advocacy Stories"
+image: "${advocateStory.image}"
+excerpt: "${advocateStory.description}"
+---
+
+![${advocateStory.headline}](${advocateStory.image})
+
+## The Story
+
+${advocateStory.description}
+
+## Join Our Movement
+
+Want to share your story? Join our community and be part of the change!
+`;
+      
       story = {
         title: advocateStory.headline,
         date: new Date().toLocaleDateString(),
         image: advocateStory.image,
-        content: advocateStory.description,
+        content: markdownContent,
         excerpt: advocateStory.description,
         category: 'advocacy',
-        slug: advocateStory.slug
+        slug: advocateStory.slug,
+        author: "Street Justice Advocate"
       };
     } else {
       console.log("No advocate story found with slug:", slug);
@@ -88,7 +111,7 @@ const StoryDetail = () => {
           </Button>
           
           <div className="prose prose-lg max-w-none">
-            {story.image && (
+            {story.image && !story.content.includes(story.image) && (
               <div className="aspect-video w-full overflow-hidden rounded-xl mb-10">
                 <img 
                   src={story.image} 
@@ -100,7 +123,11 @@ const StoryDetail = () => {
             
             <div className="mb-6">
               <h1 className="text-4xl md:text-5xl font-baskerville font-medium mb-4">{story.title}</h1>
-              <p className="text-justice-text/70">Published: {story.date}</p>
+              <div className="flex flex-wrap gap-3 text-justice-text/70">
+                <p>Published: {story.date}</p>
+                {story.author && <p>• Author: {story.author}</p>}
+                {story.category && <p>• Category: {story.category}</p>}
+              </div>
             </div>
             
             <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
