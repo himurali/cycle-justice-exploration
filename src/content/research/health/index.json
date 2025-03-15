@@ -1,0 +1,25 @@
+
+[
+  {
+    "id": "health1",
+    "title": "Active Mobility and Public Health: A Systematic Review of Cycling's Impact on Population Health",
+    "authors": ["Sarah Chen", "Michael Brown", "Elena Rodriguez"],
+    "year": 2023,
+    "journal": "Journal of Public Health",
+    "abstract": "This systematic review examines the relationship between active mobility, particularly cycling, and public health outcomes. The study synthesizes evidence from 50 international studies, demonstrating significant health benefits including reduced rates of cardiovascular disease, improved mental health, and lower healthcare costs.",
+    "tags": ["active mobility", "public health", "systematic review", "mental health"],
+    "url": "https://example.com/paper5",
+    "category": "health"
+  },
+  {
+    "id": "health2",
+    "title": "E-Bikes and Older Adults: Health Benefits and Risk Analysis",
+    "authors": ["Robert Kim", "Jennifer Walsh"],
+    "year": 2022,
+    "journal": "Journal of Aging and Physical Activity",
+    "abstract": "This research investigates the physical and mental health impacts of e-bike usage among adults aged 65+. Our mixed-methods study combines quantitative health measurements with qualitative interviews to understand how e-bikes may support extended mobility and independence for aging populations.",
+    "tags": ["e-bikes", "public health", "active mobility", "accessibility"],
+    "url": "https://example.com/paper6",
+    "category": "health"
+  }
+]

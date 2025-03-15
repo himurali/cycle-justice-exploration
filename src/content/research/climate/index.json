@@ -1,0 +1,25 @@
+
+[
+  {
+    "id": "climate1",
+    "title": "Quantifying Bicycle Infrastructure's Contribution to Carbon Emission Reduction",
+    "authors": ["Alex Wong", "Jordan Taylor"],
+    "year": 2022,
+    "journal": "Journal of Cleaner Production",
+    "abstract": "This research develops a comprehensive methodology for calculating the carbon emission reductions attributable to cycling infrastructure investments. Using life-cycle assessment combined with mode-shift modeling, we quantify both direct and indirect emission reductions across three implementation scenarios.",
+    "tags": ["climate change", "emissions", "lifecycle assessment", "infrastructure"],
+    "url": "https://example.com/paper9",
+    "category": "climate"
+  },
+  {
+    "id": "climate2",
+    "title": "Adapting Cycling Infrastructure for Climate Resilience",
+    "authors": ["Priya Sharma", "Daniel Martinez"],
+    "year": 2021,
+    "journal": "Urban Climate",
+    "abstract": "This study examines how urban cycling infrastructure can be designed to address both climate mitigation and adaptation goals. We present case studies of innovative design approaches that enhance resilience to extreme weather events while continuing to provide low-carbon mobility options.",
+    "tags": ["climate change", "infrastructure", "urban planning", "sustainable transportation"],
+    "url": "https://example.com/paper10",
+    "category": "climate"
+  }
+]

@@ -1,0 +1,25 @@
+
+[
+  {
+    "id": "equity1",
+    "title": "Bicycle Justice and Urban Transformation: Biking for All?",
+    "authors": ["Angela Davis", "James Baldwin"],
+    "year": 2021,
+    "journal": "Journal of Transport Geography",
+    "abstract": "This paper explores the concept of bicycle justice in urban settings, examining how cycling infrastructure and policies can either perpetuate or address inequalities. Through case studies of three major North American cities, we identify patterns of exclusion and propose frameworks for more equitable mobility planning.",
+    "tags": ["equity", "social justice", "urban planning", "mobility justice", "infrastructure"],
+    "url": "https://example.com/paper1",
+    "category": "equity"
+  },
+  {
+    "id": "equity2",
+    "title": "Who Gets Left Behind? Examining Socioeconomic Disparities in Bike Share Programs",
+    "authors": ["Maya Johnson", "Carlos Rodriguez"],
+    "year": 2022,
+    "journal": "Transportation Research Part A: Policy and Practice",
+    "abstract": "This research investigates demographic and socioeconomic factors that influence access to and use of bike share systems across 25 major global cities. Our findings reveal significant disparities in system coverage and usage patterns that correlate with income, race, and neighborhood investment levels.",
+    "tags": ["equity", "accessibility", "social justice", "transportation"],
+    "url": "https://example.com/paper2",
+    "category": "equity"
+  }
+]

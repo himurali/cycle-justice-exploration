@@ -1,0 +1,25 @@
+
+[
+  {
+    "id": "infrastructure1",
+    "title": "Sustainable Transportation Systems: Integrating Cycling Infrastructure in Urban Environments",
+    "authors": ["James Wilson", "Maria Garcia"],
+    "year": 2023,
+    "journal": "Sustainable Cities and Society",
+    "abstract": "This research evaluates the role of cycling infrastructure in creating sustainable urban transportation systems. Through case studies of 15 global cities, the study identifies key success factors in reducing carbon emissions while improving mobility for diverse populations.",
+    "tags": ["sustainable transportation", "infrastructure", "urban planning", "emissions"],
+    "url": "https://example.com/paper3",
+    "category": "infrastructure"
+  },
+  {
+    "id": "infrastructure2",
+    "title": "Designing for All: Universal Access in Cycling Infrastructure",
+    "authors": ["Sophia Nguyen", "Tomas Schmidt"],
+    "year": 2020,
+    "journal": "Journal of Urban Design",
+    "abstract": "This paper presents a comprehensive framework for evaluating and designing cycling infrastructure that serves riders of all ages, abilities, and backgrounds. We examine how physical design elements can enable or constrain participation in cycling for different demographic groups.",
+    "tags": ["accessibility", "infrastructure", "urban planning", "equity"],
+    "url": "https://example.com/paper4",
+    "category": "infrastructure"
+  }
+]

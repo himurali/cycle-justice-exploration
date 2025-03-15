@@ -18,6 +18,13 @@ import Books from "./pages/Books";
 import EssentialBooks from "./pages/EssentialBooks";
 import AcademicBooks from "./pages/AcademicBooks";
 import PracticalBooks from "./pages/PracticalBooks";
+import Research from "./pages/Research";
+import ResearchEquity from "./pages/ResearchEquity";
+import ResearchInfrastructure from "./pages/ResearchInfrastructure";
+import ResearchHealth from "./pages/ResearchHealth";
+import ResearchPolicy from "./pages/ResearchPolicy";
+import ResearchClimate from "./pages/ResearchClimate";
+import ResearchEconomics from "./pages/ResearchEconomics";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +48,16 @@ const App = () => (
           <Route path="/essential-books" element={<EssentialBooks />} />
           <Route path="/academic-books" element={<AcademicBooks />} />
           <Route path="/practical-books" element={<PracticalBooks />} />
+          
+          {/* New research routes */}
+          <Route path="/vision-docs" element={<Research />} />
+          <Route path="/vision-docs/equity" element={<ResearchEquity />} />
+          <Route path="/vision-docs/infrastructure" element={<ResearchInfrastructure />} />
+          <Route path="/vision-docs/health" element={<ResearchHealth />} />
+          <Route path="/vision-docs/policy" element={<ResearchPolicy />} />
+          <Route path="/vision-docs/climate" element={<ResearchClimate />} />
+          <Route path="/vision-docs/economics" element={<ResearchEconomics />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
