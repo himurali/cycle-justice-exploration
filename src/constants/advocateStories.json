@@ -8,7 +8,8 @@
     "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
     "primaryButtonLabel": "Read More",
     "secondaryButtonLabel": "Share",
-    "continent": "North America"
+    "continent": "North America",
+    "slug": "janes-journey-urban-justice"
   },
   {
     "id": 2,
@@ -18,7 +19,8 @@
     "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
     "primaryButtonLabel": "View Story",
     "secondaryButtonLabel": "Contact",
-    "continent": "Europe"
+    "continent": "Europe",
+    "slug": "marks-mission-mobility"
   },
   {
     "id": 3,
@@ -28,6 +30,7 @@
     "description": "Magnis porttitor penatibus facilisis feugiat hendrerit. Feugiat semper tincidunt mattis lacinia sed velit egestas.",
     "primaryButtonLabel": "Read Story",
     "secondaryButtonLabel": "Follow",
-    "continent": "Asia"
+    "continent": "Asia",
+    "slug": "sarahs-stand-safer-cycling"
   }
 ]
