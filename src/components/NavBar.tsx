@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -124,15 +125,18 @@ const NavBar = () => {
     { 
       id: 'research', 
       label: 'Research',
-      href: '#research',
+      href: '/vision-docs',
       hasSubmenu: true,
+      isPageLink: true,
       submenu: [
-        { label: 'Research Institutions', href: '#research-institutions' },
+        { label: 'Research Institutions', href: '/research-institutions', isPageLink: true },
         { label: 'Research Papers', href: '/research-papers', isPageLink: true },
-        { label: 'Research Projects', href: '#research-projects' },
-        { label: 'Studies', href: '#studies' },
-        { label: 'Reports', href: '#reports' },
-        { label: 'Academic Papers', href: '#papers' }
+        { label: 'Equity', href: '/vision-docs/equity', isPageLink: true },
+        { label: 'Infrastructure', href: '/vision-docs/infrastructure', isPageLink: true },
+        { label: 'Health', href: '/vision-docs/health', isPageLink: true },
+        { label: 'Policy', href: '/vision-docs/policy', isPageLink: true },
+        { label: 'Climate', href: '/vision-docs/climate', isPageLink: true },
+        { label: 'Economics', href: '/vision-docs/economics', isPageLink: true }
       ]
     }
   ];
@@ -146,20 +150,16 @@ const NavBar = () => {
       }`}
     >
       <div className="container mx-auto flex flex-wrap items-center justify-between px-4">
-        <a 
-          href="#top" 
+        <Link 
+          to="/"
           className="flex items-center group"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
         >
           <Bike 
             className="text-justice-blue mr-2 transition-transform duration-300 group-hover:scale-110" 
             size={28} 
           />
           <span className="font-baskerville font-medium text-xl md:text-2xl">Cycle Justice</span>
-        </a>
+        </Link>
 
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
