@@ -7,6 +7,7 @@ import advocateStories from '@/constants/advocateStories.json';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 // Types
 type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
@@ -20,6 +21,7 @@ interface Story {
   primaryButtonLabel: string;
   secondaryButtonLabel: string;
   continent: Continent;
+  slug?: string; // Add slug property
 }
 
 // Define all continents for filter
@@ -130,6 +132,7 @@ const AdvocateStories = () => {
                     description={story.description}
                     primaryButtonLabel={story.primaryButtonLabel}
                     secondaryButtonLabel={story.secondaryButtonLabel}
+                    slug={story.slug} // Pass the slug
                   />
                   {/* Continent badge */}
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">

@@ -23,7 +23,7 @@ const StoryCard = ({
   subhead,
   description,
   primaryButtonLabel = "Read More",
-  primaryButtonAction = () => {},
+  primaryButtonAction,
   secondaryButtonLabel,
   secondaryButtonAction,
   slug
@@ -54,7 +54,7 @@ const StoryCard = ({
         )}
         {primaryButtonLabel && (
           slug ? (
-            <Link to={`/story/${slug}`}>
+            <Link to={`/story/${slug}`} className="inline-block">
               <Button 
                 className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
               >
