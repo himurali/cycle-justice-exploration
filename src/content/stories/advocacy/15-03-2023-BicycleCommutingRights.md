@@ -9,7 +9,7 @@ continent: "Asia"
 tags: ["bicycle commuting", "legal protection", "cycling", "advocacy", "urban mobility"]
 ---
 
-# Fighting for Bicycle Commuting Rights
+## Fighting for Bicycle Commuting Rights
 
 When Maria Gonzalez began commuting by bicycle to her downtown law office in 2018, she quickly realized that cyclists operated in a precarious legal environment. After experiencing several close calls and witnessing a fellow cyclist's accident, Gonzalez decided to use her legal expertise to address these systemic issues.
 

@@ -9,7 +9,7 @@ continent: "Europe"
 tags: ["car-free", "Europe", "urban planning", "pedestrianization", "public space"]
 ---
 
-# The European Car-Free Movement
+## The European Car-Free Movement
 
 In the heart of Brussels, what was once a congested four-lane highway is now a vibrant pedestrian plaza filled with cafes, street performers, and children playing. This transformation didn't happen by accident—it was the result of years of persistent advocacy by the European Car-Free Movement.
 
