@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Copy, Check } from 'lucide-react';
+import { useToast } from "@/components/ui/use-toast";
 
 interface StoryCardProps {
   image: string;
@@ -32,7 +33,25 @@ const StoryCard = ({
   author,
   category
 }: StoryCardProps) => {
-  console.log("Rendering StoryCard with slug:", slug);
+  const { toast } = useToast();
+  const [isCopied, setIsCopied] = useState(false);
+  
+  const copyToClipboard = () => {
+    const url = `${window.location.origin}/story/${slug}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setIsCopied(true);
+      toast({
+        title: "Link copied!",
+        description: "The story link has been copied to your clipboard.",
+        duration: 3000,
+      });
+      
+      // Reset the copied state after 2 seconds
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    });
+  };
   
   return (
     <Card className="flex flex-col overflow-hidden border border-gray-200 rounded-xl shadow-sm h-full">
@@ -47,24 +66,15 @@ const StoryCard = ({
         <h3 className="text-2xl font-semibold tracking-tight mb-2 font-baskerville">{headline}</h3>
         <h4 className="text-base text-justice-text/80 mb-2 font-baskerville">{subhead}</h4>
         {author && <p className="text-sm text-justice-text/70 mb-2">By {author}</p>}
-        {category && <p className="text-sm text-justice-blue mb-4">{category}</p>}
         <p className="text-sm text-justice-text/70 leading-relaxed">{description}</p>
       </CardContent>
-      <CardFooter className="p-6 pt-0 flex gap-3">
-        {secondaryButtonLabel && (
-          <Button 
-            variant="outline" 
-            className="rounded-full bg-gray-300 hover:bg-gray-400 border-none text-justice-text text-sm"
-            onClick={secondaryButtonAction}
-          >
-            {secondaryButtonLabel}
-          </Button>
-        )}
+      <CardFooter className="p-6 pt-0 flex flex-col items-start gap-3">
+        {/* Primary button (Read Story) */}
         {primaryButtonLabel && (
           slug ? (
-            <Link to={`/story/${slug}`} className="inline-block">
+            <Link to={`/story/${slug}`} className="inline-block w-full">
               <Button 
-                className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
+                className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2 w-full"
               >
                 {primaryButtonLabel}
                 <ArrowRight className="h-4 w-4" />
@@ -72,7 +82,7 @@ const StoryCard = ({
             </Link>
           ) : (
             <Button 
-              className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
+              className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2 w-full"
               onClick={primaryButtonAction}
             >
               {primaryButtonLabel}
@@ -80,6 +90,38 @@ const StoryCard = ({
             </Button>
           )
         )}
+        
+        {/* Secondary tag and copy link button */}
+        <div className="flex justify-between items-center w-full">
+          {secondaryButtonLabel && (
+            <span 
+              className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
+            >
+              {secondaryButtonLabel}
+            </span>
+          )}
+          
+          {slug && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-xs text-gray-500 hover:text-gray-900 ml-auto"
+              onClick={copyToClipboard}
+            >
+              {isCopied ? (
+                <>
+                  <Check className="h-3.5 w-3.5 mr-1" />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-3.5 w-3.5 mr-1" />
+                  Copy Link
+                </>
+              )}
+            </Button>
+          )}
+        </div>
       </CardFooter>
     </Card>
   );
