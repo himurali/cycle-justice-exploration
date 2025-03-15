@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
@@ -13,6 +14,7 @@ interface StoryCardProps {
   primaryButtonAction?: () => void;
   secondaryButtonLabel?: string;
   secondaryButtonAction?: () => void;
+  slug?: string;
 }
 
 const StoryCard = ({
@@ -23,7 +25,8 @@ const StoryCard = ({
   primaryButtonLabel = "Read More",
   primaryButtonAction = () => {},
   secondaryButtonLabel,
-  secondaryButtonAction
+  secondaryButtonAction,
+  slug
 }: StoryCardProps) => {
   return (
     <Card className="flex flex-col overflow-hidden border border-gray-200 rounded-xl shadow-sm h-full">
@@ -50,13 +53,24 @@ const StoryCard = ({
           </Button>
         )}
         {primaryButtonLabel && (
-          <Button 
-            className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
-            onClick={primaryButtonAction}
-          >
-            {primaryButtonLabel}
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+          slug ? (
+            <Link to={`/story/${slug}`}>
+              <Button 
+                className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
+              >
+                {primaryButtonLabel}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          ) : (
+            <Button 
+              className="rounded-full bg-justice-dark hover:bg-black text-white text-sm gap-2"
+              onClick={primaryButtonAction}
+            >
+              {primaryButtonLabel}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          )
         )}
       </CardFooter>
     </Card>

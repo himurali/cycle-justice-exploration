@@ -13,6 +13,7 @@ import Stories from "./pages/Stories";
 import AdvocateStories from "./pages/AdvocateStories";
 import TransformationStories from "./pages/TransformationStories";
 import CommunityChampions from "./pages/CommunityChampions";
+import StoryDetail from "./pages/StoryDetail";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/advocate-stories" element={<AdvocateStories />} />
           <Route path="/city-transformations" element={<TransformationStories />} />
           <Route path="/community-champions" element={<CommunityChampions />} />
+          <Route path="/story/:slug" element={<StoryDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
