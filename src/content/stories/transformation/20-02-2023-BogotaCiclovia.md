@@ -4,6 +4,9 @@ title: "Bogotá's Ciclovía: Reclaiming Streets for People"
 date: "20-02-2023"
 excerpt: "How a weekly car-free event transformed urban mobility and public health in Colombia's capital."
 image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+author: "Carlos Rojas"
+continent: "South America"
+tags: ["Bogotá", "Ciclovía", "Colombia", "car-free", "Sunday streets", "public health"]
 ---
 
 # Bogotá's Ciclovía: Reclaiming Streets for People

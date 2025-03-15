@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Copy, Check } from 'lucide-react';
+import { ArrowRight, Copy, Check, Tag } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 interface StoryCardProps {
   image: string;
@@ -18,6 +19,8 @@ interface StoryCardProps {
   slug?: string;
   author?: string;
   category?: string;
+  tags?: string[];
+  onTagClick?: (tag: string) => void;
 }
 
 const StoryCard = ({
@@ -31,7 +34,9 @@ const StoryCard = ({
   secondaryButtonAction,
   slug,
   author,
-  category
+  category,
+  tags = [],
+  onTagClick
 }: StoryCardProps) => {
   const { toast } = useToast();
   const [isCopied, setIsCopied] = useState(false);
@@ -67,6 +72,23 @@ const StoryCard = ({
         <h4 className="text-base text-justice-text/80 mb-2 font-baskerville">{subhead}</h4>
         {author && <p className="text-sm text-justice-text/70 mb-2">By {author}</p>}
         <p className="text-sm text-justice-text/70 leading-relaxed">{description}</p>
+        
+        {/* Tags section */}
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-3">
+            {tags.map((tag) => (
+              <Badge 
+                key={tag} 
+                variant="secondary" 
+                className="cursor-pointer text-xs bg-gray-100 hover:bg-gray-200"
+                onClick={() => onTagClick && onTagClick(tag)}
+              >
+                <Tag className="h-3 w-3 mr-1" />
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
       </CardContent>
       <CardFooter className="p-6 pt-0 flex flex-col items-start gap-3">
         {/* Primary button (Read Story) */}

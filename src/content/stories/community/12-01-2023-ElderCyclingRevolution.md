@@ -4,6 +4,9 @@ title: "The Elder Cycling Revolution"
 date: "12-01-2023"
 excerpt: "How seniors are leading the charge for age-friendly streets and mobility options."
 image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+author: "Eleanor Washington"
+continent: "North America"
+tags: ["seniors", "cycling", "age-friendly", "accessibility", "community"]
 ---
 
 # The Elder Cycling Revolution

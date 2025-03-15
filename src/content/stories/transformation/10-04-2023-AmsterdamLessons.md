@@ -4,6 +4,9 @@ title: "Lessons from Amsterdam: How One City Transformed"
 date: "10-04-2023"
 excerpt: "The remarkable story of Amsterdam's evolution from car-centric to cyclist paradise."
 image: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+author: "Jan de Vries"
+continent: "Europe"
+tags: ["Amsterdam", "cycling infrastructure", "urban transformation", "Netherlands", "bike lanes"]
 ---
 
 # Lessons from Amsterdam: How One City Transformed

@@ -6,6 +6,7 @@ excerpt: "How activists are transforming European cities by reclaiming streets f
 image: "https://images.unsplash.com/photo-1603108399005-9b7e9696f020"
 author: "Klaus Weber"
 continent: "Europe"
+tags: ["car-free", "Europe", "urban planning", "pedestrianization", "public space"]
 ---
 
 # The European Car-Free Movement

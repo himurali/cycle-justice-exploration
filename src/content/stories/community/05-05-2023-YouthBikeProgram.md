@@ -4,6 +4,9 @@ title: "Youth Bike Program Transforms Neighborhood Safety"
 date: "05-05-2023"
 excerpt: "How a community bike shop became a catalyst for neighborhood transformation."
 image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+author: "Marcus Johnson"
+continent: "North America"
+tags: ["youth", "Chicago", "community bike shop", "neighborhood safety", "education"]
 ---
 
 # Youth Bike Program Transforms Neighborhood Safety

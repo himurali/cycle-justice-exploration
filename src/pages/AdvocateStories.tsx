@@ -1,12 +1,14 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Globe } from "lucide-react";
-import { StoryMeta, getStoriesByCategory } from '@/lib/markdown';
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { X, Globe, Search, Tag as TagIcon } from "lucide-react";
+import { StoryMeta, getStoriesByCategory, getAllTags } from '@/lib/markdown';
 
 // Types
 type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
@@ -28,14 +30,57 @@ const AdvocateStories = () => {
   const [selectedContinent, setSelectedContinent] = useState<"All Continents" | Continent>("All Continents");
   const [itemsPerPage, setItemsPerPage] = useState<string>("6");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [allTags, setAllTags] = useState<string[]>([]);
   
   // Get advocacy stories from markdown files
   const advocacyStories = getStoriesByCategory('advocacy');
   
-  // Filter stories by selected continent
-  const filteredStories = selectedContinent === "All Continents" 
-    ? advocacyStories 
-    : advocacyStories.filter(story => story.continent === selectedContinent);
+  // Load all available tags
+  useEffect(() => {
+    setAllTags(getAllTags());
+  }, []);
+  
+  // Handle tag selection
+  const handleTagClick = (tag: string) => {
+    if (!activeTags.includes(tag)) {
+      setActiveTags([...activeTags, tag]);
+      setCurrentPage(1); // Reset to first page when filter changes
+    }
+  };
+  
+  // Remove a tag from filter
+  const removeTag = (tag: string) => {
+    setActiveTags(activeTags.filter(t => t !== tag));
+    setCurrentPage(1); // Reset to first page when filter changes
+  };
+  
+  // Clear all active tag filters
+  const clearAllTags = () => {
+    setActiveTags([]);
+    setCurrentPage(1);
+  };
+  
+  // Filter stories by selected continent and active tags
+  const filteredStories = advocacyStories.filter(story => {
+    // Filter by continent
+    const matchesContinent = selectedContinent === "All Continents" || 
+                            story.continent === selectedContinent;
+    
+    // Filter by tags
+    const matchesTags = activeTags.length === 0 || 
+                        (story.tags && activeTags.every(tag => story.tags?.includes(tag)));
+    
+    // Filter by search term (in title, excerpt, or author)
+    const matchesSearch = searchTerm === "" ||
+                         story.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         story.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (story.author && story.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                         (story.tags && story.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
+    
+    return matchesContinent && matchesTags && matchesSearch;
+  });
   
   // Calculate pagination
   const totalItems = filteredStories.length;
@@ -56,6 +101,12 @@ const AdvocateStories = () => {
     setCurrentPage(1); // Reset to first page when items per page changes
   };
   
+  // Handle search input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page when search changes
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
@@ -70,8 +121,21 @@ const AdvocateStories = () => {
               </p>
             </div>
             
-            {/* Filter Section */}
-            <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            {/* Search and Filter Section */}
+            <div className="mb-8 space-y-4">
+              {/* Search input */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Search stories, authors, or tags..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="pl-9 pr-4 w-full"
+                />
+              </div>
+              
+              {/* Continent filters */}
               <div className="flex flex-wrap gap-2">
                 {continents.map((continent) => (
                   <button
@@ -88,53 +152,102 @@ const AdvocateStories = () => {
                 ))}
               </div>
               
-              <div className="flex items-center gap-4 self-end md:self-auto">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-500">Items per page:</span>
-                  <Select
-                    value={itemsPerPage}
-                    onValueChange={handleItemsPerPageChange}
+              {/* Active tags */}
+              {activeTags.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm text-gray-500 flex items-center">
+                    <TagIcon className="h-3.5 w-3.5 mr-1" />
+                    Active tags:
+                  </span>
+                  
+                  {activeTags.map(tag => (
+                    <Badge 
+                      key={tag} 
+                      variant="secondary"
+                      className="flex items-center gap-1 bg-gray-100"
+                    >
+                      {tag}
+                      <X 
+                        className="h-3 w-3 cursor-pointer hover:text-gray-900" 
+                        onClick={() => removeTag(tag)}
+                      />
+                    </Badge>
+                  ))}
+                  
+                  <button 
+                    onClick={clearAllTags}
+                    className="text-xs text-gray-500 hover:text-gray-900 underline ml-2"
                   >
-                    <SelectTrigger className="w-16 h-9">
-                      <SelectValue placeholder="6" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="3">3</SelectItem>
-                      <SelectItem value="6">6</SelectItem>
-                      <SelectItem value="9">9</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    Clear all
+                  </button>
                 </div>
+              )}
+              
+              {/* Items per page */}
+              <div className="flex justify-between items-center">
+                <p className="text-sm text-gray-500">
+                  {totalItems} {totalItems === 1 ? 'story' : 'stories'} found
+                </p>
                 
-                <div className="text-sm text-gray-500">
-                  {totalItems > 0 ? `${startIndex + 1}-${endIndex} of ${totalItems}` : "0 items"}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-500">Items per page:</span>
+                    <Select
+                      value={itemsPerPage}
+                      onValueChange={handleItemsPerPageChange}
+                    >
+                      <SelectTrigger className="w-16 h-9">
+                        <SelectValue placeholder="6" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="6">6</SelectItem>
+                        <SelectItem value="9">9</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="text-sm text-gray-500">
+                    {totalItems > 0 ? `${startIndex + 1}-${endIndex} of ${totalItems}` : "0 items"}
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
-              {currentItems.map((story) => (
-                <div key={story.slug} className="relative">
-                  <StoryCard
-                    image={story.image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"}
-                    headline={story.title}
-                    subhead={`Published: ${story.date}`}
-                    description={story.excerpt}
-                    primaryButtonLabel="Read Story"
-                    secondaryButtonLabel="Advocacy"
-                    slug={story.slug}
-                    author={story.author}
-                  />
-                  {/* Continent badge */}
-                  {story.continent && (
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
-                      <Globe className="h-3 w-3 mr-1 text-gray-600" />
-                      <span className="text-gray-800">{story.continent}</span>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+            {/* Story Grid */}
+            {currentItems.length > 0 ? (
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                {currentItems.map((story) => (
+                  <div key={story.slug} className="relative">
+                    <StoryCard
+                      image={story.image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"}
+                      headline={story.title}
+                      subhead={`Published: ${story.date}`}
+                      description={story.excerpt}
+                      primaryButtonLabel="Read Story"
+                      secondaryButtonLabel="Advocacy"
+                      slug={story.slug}
+                      author={story.author}
+                      tags={story.tags}
+                      onTagClick={handleTagClick}
+                    />
+                    {/* Continent badge */}
+                    {story.continent && (
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
+                        <Globe className="h-3 w-3 mr-1 text-gray-600" />
+                        <span className="text-gray-800">{story.continent}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 border border-dashed border-gray-300 rounded-lg">
+                <TagIcon className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-1">No stories found</h3>
+                <p className="text-gray-500">Try adjusting your search or filter criteria</p>
+              </div>
+            )}
             
             {/* Pagination */}
             {totalPages > 1 && (
@@ -143,7 +256,7 @@ const AdvocateStories = () => {
                   <PaginationItem>
                     <PaginationPrevious
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                      className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                      className={currentPage <= 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
                     />
                   </PaginationItem>
                   
@@ -152,6 +265,7 @@ const AdvocateStories = () => {
                       <PaginationLink
                         onClick={() => setCurrentPage(i + 1)}
                         isActive={currentPage === i + 1}
+                        className="cursor-pointer"
                       >
                         {i + 1}
                       </PaginationLink>
@@ -161,7 +275,7 @@ const AdvocateStories = () => {
                   <PaginationItem>
                     <PaginationNext
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                      className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                      className={currentPage >= totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
                     />
                   </PaginationItem>
                 </PaginationContent>

@@ -6,6 +6,7 @@ excerpt: "One lawyer's journey to establish legal protections for cycle commuter
 image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
 author: "Maria Gonzalez"
 continent: "Asia"
+tags: ["bicycle commuting", "legal protection", "cycling", "advocacy", "urban mobility"]
 ---
 
 # Fighting for Bicycle Commuting Rights

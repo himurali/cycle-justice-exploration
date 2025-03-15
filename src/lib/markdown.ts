@@ -1,4 +1,3 @@
-
 import matter from 'gray-matter';
 
 export type StoryCategory = 'advocacy' | 'transformation' | 'community';
@@ -13,6 +12,7 @@ export interface StoryMeta {
   content: string;
   author?: string;
   continent?: string;
+  tags?: string[];
 }
 
 // For client-side usage with imported markdown files
@@ -53,7 +53,8 @@ export const getStories = (): StoryMeta[] => {
               category,
               content: markdownContent,
               author: data.author || '',
-              continent: data.continent || undefined
+              continent: data.continent || undefined,
+              tags: data.tags ? parseTagsArray(data.tags) : []
             });
           } catch (error) {
             console.error(`Error parsing markdown for ${path}:`, error);
@@ -69,10 +70,27 @@ export const getStories = (): StoryMeta[] => {
   }
 };
 
+// Parse tags from frontmatter - could be a string or array
+function parseTagsArray(tagsData: any): string[] {
+  if (Array.isArray(tagsData)) {
+    return tagsData;
+  } else if (typeof tagsData === 'string') {
+    // Handle case where tags might be a JSON string
+    try {
+      const parsed = JSON.parse(tagsData.replace(/'/g, '"'));
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      // If it's not valid JSON, split by commas
+      return tagsData.split(',').map(tag => tag.trim());
+    }
+  }
+  return [];
+}
+
 // A simple frontmatter parser for browser environments
-function parseFrontmatter(content: string): { data: Record<string, string>; content: string } {
+function parseFrontmatter(content: string): { data: Record<string, any>; content: string } {
   const lines = content.split('\n');
-  const data: Record<string, string> = {};
+  const data: Record<string, any> = {};
   
   let inFrontmatter = false;
   let contentStartIndex = 0;
@@ -92,11 +110,26 @@ function parseFrontmatter(content: string): { data: Record<string, string>; cont
     }
     
     if (inFrontmatter) {
-      const match = line.match(/^([^:]+):\s*(.+)$/);
-      if (match) {
-        const [, key, value] = match;
-        // Remove quotes if present
-        data[key.trim()] = value.trim().replace(/^["'](.*)["']$/, '$1');
+      // Handle special case for tags array
+      if (line.startsWith('tags:')) {
+        const match = line.match(/^tags:\s*(.+)$/);
+        if (match) {
+          try {
+            // Try to parse as JSON (with either single or double quotes)
+            const tagsText = match[1].replace(/'/g, '"');
+            data.tags = JSON.parse(tagsText);
+          } catch {
+            // If not valid JSON, store as string to be processed later
+            data.tags = match[1];
+          }
+        }
+      } else {
+        const match = line.match(/^([^:]+):\s*(.+)$/);
+        if (match) {
+          const [, key, value] = match;
+          // Remove quotes if present
+          data[key.trim()] = value.trim().replace(/^["'](.*)["']$/, '$1');
+        }
       }
     }
   }
@@ -124,4 +157,26 @@ export const getStoriesByCategory = (category: StoryCategory): StoryMeta[] => {
       // Sort in descending order (newest first)
       return dateB.getTime() - dateA.getTime();
     });
+};
+
+// Get all unique tags from stories
+export const getAllTags = (): string[] => {
+  const stories = getStories();
+  const tagSet = new Set<string>();
+  
+  stories.forEach(story => {
+    if (story.tags && Array.isArray(story.tags)) {
+      story.tags.forEach(tag => tagSet.add(tag));
+    }
+  });
+  
+  return Array.from(tagSet).sort();
+};
+
+// Get stories by tag
+export const getStoriesByTag = (tag: string): StoryMeta[] => {
+  const stories = getStories();
+  return stories.filter(story => 
+    story.tags && Array.isArray(story.tags) && story.tags.includes(tag)
+  );
 };

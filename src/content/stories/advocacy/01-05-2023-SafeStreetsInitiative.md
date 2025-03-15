@@ -6,6 +6,7 @@ excerpt: "How a grassroots movement transformed urban planning priorities in Por
 image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
 author: "Sarah Chen"
 continent: "North America"
+tags: ["urban planning", "pedestrian safety", "community activism", "Portland"]
 ---
 
 # Safe Streets Initiative: A Community-Led Approach
