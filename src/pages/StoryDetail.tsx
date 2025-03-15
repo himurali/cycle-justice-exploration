@@ -13,6 +13,8 @@ const StoryDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   
+  console.log("Current slug from URL:", slug);
+  
   // First try to get story from markdown content
   let story = getStoryBySlug(slug || '');
   
@@ -37,6 +39,15 @@ const StoryDetail = () => {
       };
     } else {
       console.log("No advocate story found with slug:", slug);
+      
+      // Additional debugging - check if any partial matches
+      const possibleMatches = advocateStories.filter(s => 
+        s.slug && slug && s.slug.includes(slug) || (slug && s.slug && slug.includes(s.slug))
+      );
+      
+      if (possibleMatches.length > 0) {
+        console.log("Possible partial matches:", possibleMatches);
+      }
     }
   }
 

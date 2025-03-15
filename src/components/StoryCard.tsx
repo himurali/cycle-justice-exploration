@@ -28,6 +28,8 @@ const StoryCard = ({
   secondaryButtonAction,
   slug
 }: StoryCardProps) => {
+  console.log("Rendering StoryCard with slug:", slug);
+  
   return (
     <Card className="flex flex-col overflow-hidden border border-gray-200 rounded-xl shadow-sm h-full">
       <div className="relative w-full h-60 bg-gray-200">
