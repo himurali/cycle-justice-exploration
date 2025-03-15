@@ -40,29 +40,9 @@ export const getStories = (): StoryMeta[] => {
           // Extract the slug from the filename (remove date prefix and extension)
           const slug = filename.replace(/^\d{2}-\d{2}-\d{4}-/, '').replace(/\.md$/, '');
           
-          // Parse the frontmatter and content
           try {
-            // Use a browser-compatible approach for parsing
-            const { data, content: markdownContent } = matter(content, {
-              // Disable the use of Buffer for browser compatibility
-              engines: {
-                yaml: {
-                  parse: (yaml) => {
-                    // Use a simple approach for browser
-                    const result = {};
-                    const lines = yaml.split('\n');
-                    lines.forEach(line => {
-                      const match = line.match(/^([^:]+):\s*(.+)$/);
-                      if (match) {
-                        const [, key, value] = match;
-                        result[key.trim()] = value.trim().replace(/^["'](.*)["']$/, '$1');
-                      }
-                    });
-                    return result;
-                  }
-                }
-              }
-            });
+            // Use a simpler approach for browser environment
+            const { data, content: markdownContent } = parseFrontmatter(content);
             
             stories.push({
               slug,
@@ -88,6 +68,44 @@ export const getStories = (): StoryMeta[] => {
     return [];
   }
 };
+
+// A simple frontmatter parser for browser environments
+function parseFrontmatter(content: string): { data: Record<string, string>; content: string } {
+  const lines = content.split('\n');
+  const data: Record<string, string> = {};
+  
+  let inFrontmatter = false;
+  let contentStartIndex = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    if (line === '---') {
+      if (!inFrontmatter) {
+        inFrontmatter = true;
+        continue;
+      } else {
+        inFrontmatter = false;
+        contentStartIndex = i + 1;
+        break;
+      }
+    }
+    
+    if (inFrontmatter) {
+      const match = line.match(/^([^:]+):\s*(.+)$/);
+      if (match) {
+        const [, key, value] = match;
+        // Remove quotes if present
+        data[key.trim()] = value.trim().replace(/^["'](.*)["']$/, '$1');
+      }
+    }
+  }
+  
+  return {
+    data,
+    content: lines.slice(contentStartIndex).join('\n')
+  };
+}
 
 export const getStoryBySlug = (slug: string): StoryMeta | undefined => {
   const stories = getStories();

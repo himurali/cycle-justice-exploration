@@ -3,24 +3,13 @@ import React, { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
-import transformationStories from '@/constants/transformationStories.json';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe } from "lucide-react";
+import { StoryMeta, getStoriesByCategory } from '@/lib/markdown';
 
 // Types
 type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
-
-interface Story {
-  id: number;
-  image: string;
-  headline: string;
-  subhead: string;
-  description: string;
-  primaryButtonLabel: string;
-  secondaryButtonLabel: string;
-  continent: Continent;
-}
 
 // Define all continents for filter
 const continents: ("All Continents" | Continent)[] = [
@@ -39,6 +28,10 @@ const TransformationStories = () => {
   const [selectedContinent, setSelectedContinent] = useState<"All Continents" | Continent>("All Continents");
   const [itemsPerPage, setItemsPerPage] = useState<string>("6");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  
+  // Get transformation stories from markdown files
+  const transformationStories = getStoriesByCategory('transformation');
+  console.log("Transformation stories:", transformationStories);
   
   // Filter stories by selected continent
   const filteredStories = selectedContinent === "All Continents" 
@@ -72,9 +65,9 @@ const TransformationStories = () => {
         <div className="section pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-baskerville font-medium mb-4">Transformation Stories</h1>
+              <h1 className="text-4xl md:text-5xl font-baskerville font-medium mb-4">City Transformation Stories</h1>
               <p className="text-lg text-justice-text/80 max-w-3xl mx-auto">
-                Stories of cities and neighborhoods that have transformed to prioritize safer streets.
+                Discover how cities around the world are transforming to prioritize people over cars.
               </p>
             </div>
             
@@ -120,25 +113,35 @@ const TransformationStories = () => {
               </div>
             </div>
             
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
-              {currentItems.map(story => (
-                <div key={story.id} className="relative">
-                  <StoryCard
-                    image={story.image}
-                    headline={story.headline}
-                    subhead={story.subhead}
-                    description={story.description}
-                    primaryButtonLabel={story.primaryButtonLabel}
-                    secondaryButtonLabel={story.secondaryButtonLabel}
-                  />
-                  {/* Continent badge */}
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
-                    <Globe className="h-3 w-3 mr-1 text-gray-600" />
-                    <span className="text-gray-800">{story.continent}</span>
+            {transformationStories.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-lg text-gray-500">Loading stories or no stories available.</p>
+              </div>
+            ) : (
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                {currentItems.map((story) => (
+                  <div key={story.slug} className="relative">
+                    <StoryCard
+                      image={story.image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"}
+                      headline={story.title}
+                      subhead={`Published: ${story.date}`}
+                      description={story.excerpt}
+                      primaryButtonLabel="Read Story"
+                      secondaryButtonLabel="Transformation"
+                      slug={story.slug}
+                      author={story.author}
+                    />
+                    {/* Continent badge */}
+                    {story.continent && (
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
+                        <Globe className="h-3 w-3 mr-1 text-gray-600" />
+                        <span className="text-gray-800">{story.continent}</span>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
             
             {/* Pagination */}
             {totalPages > 1 && (
