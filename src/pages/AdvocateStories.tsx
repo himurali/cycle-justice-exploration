@@ -3,26 +3,13 @@ import React, { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
-import advocateStories from '@/constants/advocateStories.json';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { StoryMeta, getStoriesByCategory } from '@/lib/markdown';
 
 // Types
 type Continent = "Africa" | "Asia" | "Europe" | "North America" | "South America" | "Australia" | "Antarctica";
-
-interface Story {
-  id: number;
-  image: string;
-  headline: string;
-  subhead: string;
-  description: string;
-  primaryButtonLabel: string;
-  secondaryButtonLabel: string;
-  continent: Continent;
-  slug: string; // Changed from optional to required since we added it to the data
-}
 
 // Define all continents for filter
 const continents: ("All Continents" | Continent)[] = [
@@ -42,10 +29,13 @@ const AdvocateStories = () => {
   const [itemsPerPage, setItemsPerPage] = useState<string>("6");
   const [currentPage, setCurrentPage] = useState<number>(1);
   
+  // Get advocacy stories from markdown files
+  const advocacyStories = getStoriesByCategory('advocacy');
+  
   // Filter stories by selected continent
   const filteredStories = selectedContinent === "All Continents" 
-    ? advocateStories 
-    : advocateStories.filter(story => story.continent === selectedContinent);
+    ? advocacyStories 
+    : advocacyStories.filter(story => story.continent === selectedContinent);
   
   // Calculate pagination
   const totalItems = filteredStories.length;
@@ -123,22 +113,25 @@ const AdvocateStories = () => {
             </div>
             
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
-              {currentItems.map(story => (
-                <div key={story.id} className="relative">
+              {currentItems.map((story) => (
+                <div key={story.slug} className="relative">
                   <StoryCard
-                    image={story.image}
-                    headline={story.headline}
-                    subhead={story.subhead}
-                    description={story.description}
-                    primaryButtonLabel={story.primaryButtonLabel}
-                    secondaryButtonLabel={story.secondaryButtonLabel}
-                    slug={story.slug} // Now this is a guaranteed property
+                    image={story.image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"}
+                    headline={story.title}
+                    subhead={`Published: ${story.date}`}
+                    description={story.excerpt}
+                    primaryButtonLabel="Read Story"
+                    secondaryButtonLabel="Advocacy"
+                    slug={story.slug}
+                    author={story.author}
                   />
                   {/* Continent badge */}
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
-                    <Globe className="h-3 w-3 mr-1 text-gray-600" />
-                    <span className="text-gray-800">{story.continent}</span>
-                  </div>
+                  {story.continent && (
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium flex items-center shadow-sm">
+                      <Globe className="h-3 w-3 mr-1 text-gray-600" />
+                      <span className="text-gray-800">{story.continent}</span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

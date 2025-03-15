@@ -4,6 +4,8 @@ title: "Safe Streets Initiative: A Community-Led Approach"
 date: "01-05-2023"
 excerpt: "How a grassroots movement transformed urban planning priorities in Portland."
 image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+author: "Sarah Chen"
+continent: "North America"
 ---
 
 # Safe Streets Initiative: A Community-Led Approach

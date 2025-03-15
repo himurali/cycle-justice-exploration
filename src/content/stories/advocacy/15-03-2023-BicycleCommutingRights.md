@@ -4,6 +4,8 @@ title: "Fighting for Bicycle Commuting Rights"
 date: "15-03-2023"
 excerpt: "One lawyer's journey to establish legal protections for cycle commuters."
 image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+author: "Maria Gonzalez"
+continent: "Asia"
 ---
 
 # Fighting for Bicycle Commuting Rights
