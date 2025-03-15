@@ -54,15 +54,6 @@ Want to share your story? Join our community and be part of the change!
       };
     } else {
       console.log("No advocate story found with slug:", slug);
-      
-      // Additional debugging - check if any partial matches
-      const possibleMatches = advocateStories.filter(s => 
-        s.slug && slug && s.slug.includes(slug) || (slug && s.slug && slug.includes(s.slug))
-      );
-      
-      if (possibleMatches.length > 0) {
-        console.log("Possible partial matches:", possibleMatches);
-      }
     }
   }
 
