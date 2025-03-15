@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -115,7 +116,9 @@ const NavBar = () => {
       href: '#books',
       hasSubmenu: true,
       submenu: [
-        { label: 'Essential Reading', href: '#essential-reading' }
+        { label: 'Essential Reading', href: '#essential-reading' },
+        { label: 'Academic Works', href: '#academic-works' },
+        { label: 'Practical Guides', href: '#practical-guides' }
       ]
     },
     { 
@@ -124,6 +127,9 @@ const NavBar = () => {
       href: '#research',
       hasSubmenu: true,
       submenu: [
+        { label: 'Research Institutions', href: '#research-institutions' },
+        { label: 'Research Papers', href: '#research-papers' },
+        { label: 'Research Projects', href: '#research-projects' },
         { label: 'Studies', href: '#studies' },
         { label: 'Reports', href: '#reports' },
         { label: 'Academic Papers', href: '#papers' }
