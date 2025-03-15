@@ -14,6 +14,7 @@ export interface StoryMeta {
   category: StoryCategory;
   content: string;
   author?: string;
+  continent?: string; // Added continent field
 }
 
 // Import stories directly from the content/stories directory
@@ -95,7 +96,8 @@ export const getStories = (): StoryMeta[] => {
               image: data.image || '',
               category,
               content: markdownContent,
-              author: data.author || ''
+              author: data.author || '',
+              continent: data.continent || undefined // Add continent from frontmatter
             });
           } catch (error) {
             console.error(`Error parsing markdown for ${path}:`, error);
