@@ -10,6 +10,7 @@
     "publishYear": 2016,
     "publisher": "Foundation for the History of Technology",
     "pages": 256,
+    "region": "Europe",
     "tags": ["research", "urban planning", "Europe"],
     "reviews": [
       {
@@ -34,6 +35,7 @@
     "publishYear": 2015,
     "publisher": "Routledge",
     "pages": 324,
+    "region": "Australia",
     "tags": ["research", "policy", "implementation"],
     "reviews": [
       {
@@ -58,6 +60,7 @@
     "publishYear": 2016,
     "publisher": "Routledge",
     "pages": 272,
+    "region": "North America",
     "tags": ["equity", "justice", "inclusion"],
     "reviews": [
       {
@@ -69,6 +72,31 @@
         "author": "Journal of Planning Education and Research",
         "text": "A critical contribution to the field of transportation justice research.",
         "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "velomobility",
+    "title": "Velomobility: The Production of Cycling Spaces and the Remaking of the Cyclist",
+    "author": "Melody L. Hoffmann",
+    "description": "An examination of how urban cycling spaces are produced and how they shape cyclist identities and behaviors in the context of urban social dynamics.",
+    "category": "academic",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2018,
+    "publisher": "Routledge",
+    "pages": 216,
+    "region": "North America",
+    "tags": ["sociology", "urban spaces", "identity"],
+    "reviews": [
+      {
+        "author": "Journal of Urban Affairs",
+        "text": "A nuanced analysis of the social dynamics of cycling spaces and identities.",
+        "rating": 4
+      },
+      {
+        "author": "Mobilities Journal",
+        "text": "Innovative theoretical framework for understanding cyclists as social actors.",
+        "rating": 5
       }
     ]
   }

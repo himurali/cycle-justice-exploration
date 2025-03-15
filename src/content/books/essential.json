@@ -10,6 +10,7 @@
     "publishYear": 2017,
     "publisher": "Yellow Jersey Press",
     "pages": 256,
+    "region": "Europe",
     "tags": ["urban planning", "advocacy", "health"],
     "reviews": [
       {
@@ -34,6 +35,7 @@
     "publishYear": 2016,
     "publisher": "Viking",
     "pages": 368,
+    "region": "North America",
     "tags": ["urban planning", "policy", "infrastructure"],
     "reviews": [
       {
@@ -58,6 +60,7 @@
     "publishYear": 2018,
     "publisher": "Verso",
     "pages": 288,
+    "region": "North America",
     "tags": ["justice", "equity", "policy"],
     "reviews": [
       {
@@ -68,6 +71,81 @@
       {
         "author": "Transportation Research Board",
         "text": "Innovative and thought-provoking perspectives on transportation equity.",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "fighting-traffic",
+    "title": "Fighting Traffic: The Dawn of the Motor Age in the American City",
+    "author": "Peter D. Norton",
+    "description": "A groundbreaking history of how American cities became automobile-dependent, and how citizens fought back against the dominance of cars in urban spaces.",
+    "category": "essential",
+    "coverImage": "/lovable-uploads/ba7d599b-0722-4457-af1c-876d27377954.png",
+    "publishYear": 2011,
+    "publisher": "MIT Press",
+    "pages": 396,
+    "region": "North America",
+    "tags": ["history", "urban planning", "activism"],
+    "reviews": [
+      {
+        "author": "Journal of American History",
+        "text": "A revelatory account of the social construction of our car-centered transportation system.",
+        "rating": 5
+      },
+      {
+        "author": "Technology and Culture",
+        "text": "Essential reading for understanding how cars came to dominate American cities.",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "walkable-city",
+    "title": "Walkable City: How Downtown Can Save America, One Step at a Time",
+    "author": "Jeff Speck",
+    "description": "A compelling case for how to make our cities more walkable and why it matters for our health, economy, and environment.",
+    "category": "essential",
+    "coverImage": "/lovable-uploads/ba7d599b-0722-4457-af1c-876d27377954.png",
+    "publishYear": 2013,
+    "publisher": "North Point Press",
+    "pages": 320,
+    "region": "North America",
+    "tags": ["urban design", "walkability", "sustainability"],
+    "reviews": [
+      {
+        "author": "The Boston Globe",
+        "text": "Makes an unassailable case that the revival of cities depends on making them walkable for everyone.",
+        "rating": 5
+      },
+      {
+        "author": "The Wall Street Journal",
+        "text": "A delightful, insightful, irreverent work that should be read by all urban planners.",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "id": "cycling-revolution",
+    "title": "Cycling Revolution: Global Insights",
+    "author": "Maria Schmidt",
+    "description": "An essential overview of cycling movements and infrastructure development across different continents.",
+    "category": "essential",
+    "coverImage": "/lovable-uploads/ba7d599b-0722-4457-af1c-876d27377954.png",
+    "publishYear": 2019,
+    "publisher": "Thames & Hudson",
+    "pages": 240,
+    "region": "Europe",
+    "tags": ["global perspective", "infrastructure", "policy"],
+    "reviews": [
+      {
+        "author": "Cycling Today",
+        "text": "A comprehensive global analysis of cycling trends and solutions.",
+        "rating": 5
+      },
+      {
+        "author": "Urban Mobility Review",
+        "text": "Essential reading for understanding worldwide cycling developments.",
         "rating": 4
       }
     ]

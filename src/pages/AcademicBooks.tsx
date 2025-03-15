@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Star } from 'lucide-react';
+import { BookOpen, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getAcademicBooks, BookItem } from '@/lib/books';
 
@@ -22,8 +22,9 @@ const AcademicBooks = () => {
               Academic Works
             </h1>
             <p className="text-xl text-center max-w-3xl mx-auto text-justice-text/80 mb-12">
-              Research-based books examining cycling policy, infrastructure development, social equity, and urban transformation 
-              through an academic lens. These works provide evidence-based insights for policy makers and advocates.
+              Scholarly books examining cycling policy, infrastructure development, and social equity. 
+              These research-based works offer data-driven perspectives and theoretical frameworks 
+              for understanding urban mobility.
             </p>
           </div>
         </section>
@@ -32,7 +33,7 @@ const AcademicBooks = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex items-center mb-12">
-              <GraduationCap className="h-8 w-8 text-justice-blue mr-4" />
+              <BookOpen className="h-8 w-8 text-justice-blue mr-4" />
               <h2 className="text-3xl font-baskerville font-semibold text-justice-text">Academic Works</h2>
             </div>
             

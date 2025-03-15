@@ -21,24 +21,32 @@ export interface BookItem {
   pages?: number;
   tags?: string[];
   reviews?: BookReview[];
+  region?: 'Asia' | 'Europe' | 'North America' | 'South America' | 'Africa' | 'Australia';
 }
 
 export function getEssentialBooks(): BookItem[] {
-  return essentialBooks;
+  return essentialBooks as BookItem[];
 }
 
 export function getAcademicBooks(): BookItem[] {
-  return academicBooks;
+  return academicBooks as BookItem[];
 }
 
 export function getPracticalBooks(): BookItem[] {
-  return practicalBooks;
+  return practicalBooks as BookItem[];
 }
 
 export function getAllBooks(): BookItem[] {
-  return [...essentialBooks, ...academicBooks, ...practicalBooks];
+  return [...getEssentialBooks(), ...getAcademicBooks(), ...getPracticalBooks()];
 }
 
 export function getBookById(id: string): BookItem | undefined {
   return getAllBooks().find(book => book.id === id);
+}
+
+export function getBooksByRegion(region?: string): BookItem[] {
+  if (!region || region === 'All Continents') {
+    return getAllBooks();
+  }
+  return getAllBooks().filter(book => book.region === region);
 }

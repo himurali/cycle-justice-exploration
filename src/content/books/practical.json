@@ -10,6 +10,7 @@
     "publishYear": 2015,
     "publisher": "Mountaineers Books",
     "pages": 224,
+    "region": "North America",
     "tags": ["commuting", "skills", "urban"],
     "reviews": [
       {
@@ -34,6 +35,7 @@
     "publishYear": 2018,
     "publisher": "Island Press",
     "pages": 224,
+    "region": "Europe",
     "tags": ["advocacy", "infrastructure", "Netherlands"],
     "reviews": [
       {
@@ -58,6 +60,7 @@
     "publishYear": 2016,
     "publisher": "VeloPress",
     "pages": 488,
+    "region": "North America",
     "tags": ["maintenance", "repair", "skills"],
     "reviews": [
       {
@@ -69,6 +72,31 @@
         "author": "Bicycling Magazine",
         "text": "Clear, well-illustrated, and comprehensive - an essential reference for any cyclist.",
         "rating": 5
+      }
+    ]
+  },
+  {
+    "id": "asian-cycling",
+    "title": "Cycling in Asian Cities: Innovation, Integration, and Infrastructure",
+    "author": "Lin Zhang",
+    "description": "Comprehensive analysis of cycling trends in major Asian cities, focusing on innovative approaches to integrating cycling into urban transportation systems.",
+    "category": "practical",
+    "coverImage": "/placeholder.svg",
+    "publishYear": 2020,
+    "publisher": "Asian Development Press",
+    "pages": 304,
+    "region": "Asia",
+    "tags": ["Asia", "urban planning", "infrastructure"],
+    "reviews": [
+      {
+        "author": "Asian Transport Review",
+        "text": "An invaluable resource for understanding cycling dynamics in rapidly developing Asian urban centers.",
+        "rating": 5
+      },
+      {
+        "author": "Journal of Asian Urbanism",
+        "text": "Provides essential insights into the unique challenges and opportunities for cycling in Asian contexts.",
+        "rating": 4
       }
     ]
   }
