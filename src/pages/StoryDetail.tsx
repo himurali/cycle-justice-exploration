@@ -3,12 +3,13 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Tag } from 'lucide-react';
+import { ArrowLeft, Tag, Share2 } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { getStoryBySlug } from '@/lib/markdown';
 import advocateStories from '@/constants/advocateStories.json';
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 const StoryDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -34,13 +35,21 @@ const StoryDetail = () => {
       const storyContent = `
 ![${advocateStory.headline}](${advocateStory.image})
 
-## The Story
+## The Challenge
 
 ${advocateStory.description}
 
-## Join Our Movement
+## Our Approach
 
 Want to share your story? Join our community and be part of the change!
+
+## Community Impact
+
+Our community of advocates continues to grow each day.
+
+## The Results
+
+Together we can create safer streets for everyone.
 `;
       
       story = {
@@ -51,12 +60,25 @@ Want to share your story? Join our community and be part of the change!
         excerpt: advocateStory.description,
         category: 'advocacy',
         slug: advocateStory.slug,
-        author: "Street Justice Advocate"
+        author: "Street Justice Advocate",
+        tags: ["advocacy", "community", "street safety"]
       };
     } else {
       console.log("No advocate story found with slug:", slug);
     }
   }
+
+  const handleCopyLink = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        toast.success("Link copied to clipboard!");
+      })
+      .catch((error) => {
+        console.error("Error copying link:", error);
+        toast.error("Failed to copy link");
+      });
+  };
 
   if (!story) {
     return (
@@ -82,22 +104,28 @@ Want to share your story? Join our community and be part of the change!
   // Custom render components for ReactMarkdown
   const components = {
     h1: ({ children }: { children: React.ReactNode }) => (
-      <h1 className="text-3xl md:text-4xl font-baskerville font-medium mb-6 mt-10">{children}</h1>
+      <h1 className="text-2xl md:text-3xl font-baskerville font-medium mb-4 mt-8">{children}</h1>
     ),
     h2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="text-2xl md:text-3xl font-baskerville font-medium mb-4 mt-8">{children}</h2>
+      <h2 className="text-xl md:text-2xl font-baskerville font-medium mb-3 mt-6 text-justice-blue">{children}</h2>
     ),
     p: ({ children }: { children: React.ReactNode }) => (
       <p className="mb-4 text-base leading-relaxed text-justice-text/90">{children}</p>
     ),
     img: (props: any) => (
-      <div className="aspect-video w-full overflow-hidden rounded-xl mb-8 mt-2">
+      <div className="aspect-video w-full overflow-hidden rounded-xl mb-6 mt-2">
         <img 
           src={props.src} 
           alt={props.alt || ''} 
           className="w-full h-full object-cover"
         />
       </div>
+    ),
+    ul: ({ children }: { children: React.ReactNode }) => (
+      <ul className="list-disc pl-5 mb-4 text-justice-text/90">{children}</ul>
+    ),
+    li: ({ children }: { children: React.ReactNode }) => (
+      <li className="mb-1">{children}</li>
     )
   };
 
@@ -106,10 +134,10 @@ Want to share your story? Join our community and be part of the change!
       <NavBar />
       
       <main className="flex-grow">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Button 
             variant="ghost" 
-            className="mb-6 gap-2 hover:bg-gray-100"
+            className="mb-4 gap-2 hover:bg-gray-100"
             onClick={() => navigate(-1)}
           >
             <ArrowLeft className="h-4 w-4" />
@@ -129,17 +157,29 @@ Want to share your story? Join our community and be part of the change!
             )}
             
             {/* Story Metadata */}
-            <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-baskerville font-medium mb-4">{story.title}</h1>
-              <div className="flex flex-wrap items-center gap-3 text-justice-text/70 mb-4">
-                <p>Published: {story.date}</p>
-                {story.author && <p>• By {story.author}</p>}
+            <div className="mb-6">
+              <h1 className="text-2xl md:text-3xl font-baskerville font-medium mb-3">{story.title}</h1>
+              <div className="flex flex-wrap items-center gap-3 text-justice-text/70 mb-3">
+                <p className="text-sm">Published: {story.date}</p>
+                {story.author && <p className="text-sm">• By {story.author}</p>}
+                {story.continent && <p className="text-sm">• {story.continent}</p>}
                 {story.category && (
                   <Badge variant="outline" className="text-xs bg-gray-100">
                     {story.category.charAt(0).toUpperCase() + story.category.slice(1)}
                   </Badge>
                 )}
               </div>
+              
+              {/* Share button */}
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-2 mb-4 text-xs gap-1.5"
+                onClick={handleCopyLink}
+              >
+                <Share2 className="h-3.5 w-3.5" />
+                Copy Link to Share
+              </Button>
               
               {/* Display tags if available */}
               {story.tags && story.tags.length > 0 && (
@@ -159,7 +199,7 @@ Want to share your story? Join our community and be part of the change!
             </div>
             
             {/* Story Content */}
-            <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
+            <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/90 prose-a:text-justice-blue border-t pt-4">
               <ReactMarkdown components={components}>
                 {story.content}
               </ReactMarkdown>

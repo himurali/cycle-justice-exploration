@@ -3,7 +3,7 @@
 title: "The European Car-Free Movement"
 date: "20-01-2023"
 excerpt: "How activists are transforming European cities by reclaiming streets from cars."
-image: "https://images.unsplash.com/photo-1603108399005-9b7e9696f020"
+image: "https://images.unsplash.com/photo-1603108399005-9b7e9696f44d"
 author: "Klaus Weber"
 continent: "Europe"
 tags: ["car-free", "Europe", "urban planning", "pedestrianization", "public space"]
@@ -13,7 +13,11 @@ tags: ["car-free", "Europe", "urban planning", "pedestrianization", "public spac
 
 In the heart of Brussels, what was once a congested four-lane highway is now a vibrant pedestrian plaza filled with cafes, street performers, and children playing. This transformation didn't happen by accident—it was the result of years of persistent advocacy by the European Car-Free Movement.
 
-"We faced intense opposition in the beginning," explains Klaus Weber, one of the movement's founders. "Everyone from business owners to taxi drivers warned that restricting cars would destroy the city's economy. The exact opposite happened."
+## The Challenge
+
+"We faced intense opposition in the beginning," explains Klaus Weber, one of the movement's founders. "Everyone from business owners to taxi drivers warned that restricting cars would destroy the city's economy. The exact opposite happened." The challenge was overcoming deeply entrenched beliefs about the necessity of cars in urban centers.
+
+## Our Approach
 
 The movement, which began in 2015, now spans 28 European cities, each with active chapters working to reclaim urban spaces from automobiles. Their approach combines:
 
@@ -22,7 +26,11 @@ The movement, which began in 2015, now spans 28 European cities, each with activ
 - Economic impact studies showing benefits to local businesses
 - Community engagement through car-free day events
 
+## Implementation Strategy
+
 The most successful projects have followed a phased approach, starting with car-free Sundays, then weekend closures, and eventually permanent transformations. The movement has helped facilitate the implementation of over 150 car-free zones across Europe.
+
+## The Results
 
 "What makes this movement different is that we're not anti-car as much as we are pro-human," says Weber. "We're asking a simple question: what are streets for? Moving and storing private vehicles, or creating public spaces where community life can flourish?"
 

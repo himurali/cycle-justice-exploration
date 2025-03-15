@@ -13,6 +13,12 @@ tags: ["seniors", "cycling", "age-friendly", "accessibility", "community"]
 
 When 72-year-old Eleanor Washington started the "Silver Wheels" cycling group in her suburban community, she faced skepticism from neighbors and even her own family. "Everyone thought it was too dangerous for seniors to be cycling on these roads," Washington recalls. "But I knew the real danger was inactivity and isolation."
 
+## The Challenge
+
+Most suburban streets were designed without consideration for older adults who can no longer drive but still need to access services and social opportunities. The infrastructure favored fast-moving vehicles, creating hostile environments for vulnerable road users like seniors on bicycles or mobility devices.
+
+## Our Approach
+
 Three years later, Silver Wheels boasts over 200 active members ranging in age from 65 to 93, and has become an influential voice in local transportation planning. The group has successfully advocated for:
 
 - Lower speed limits on key community corridors
@@ -20,9 +26,13 @@ Three years later, Silver Wheels boasts over 200 active members ranging in age f
 - More benches and rest areas along bicycle and pedestrian routes
 - Extended crossing times at key intersections
 
+## Advocacy Strategy
+
 Their advocacy approach combines personal storytelling with data collection. Members systematically document hazards and barriers to mobility, creating detailed "age-friendly audits" of neighborhoods that have proven persuasive to local officials.
 
 "When we started bringing 20 seniors in matching t-shirts to city council meetings, they couldn't ignore us," laughs Washington. "We vote, we volunteer, we're organized—and we're persistent."
+
+## The Results
 
 Health professionals have taken notice of the program's impact. Dr. Sarah Jennings, a geriatrician at the local medical center, has tracked improved health outcomes among Silver Wheels participants.
 

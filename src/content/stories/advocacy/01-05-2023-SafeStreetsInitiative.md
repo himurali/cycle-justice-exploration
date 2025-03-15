@@ -9,7 +9,7 @@ continent: "North America"
 tags: ["urban planning", "pedestrian safety", "community activism", "Portland"]
 ---
 
-# From Cars to Community
+# Safe Streets Initiative
 
 By Sarah Chen, Urban Planner
 
