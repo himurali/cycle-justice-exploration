@@ -65,9 +65,11 @@ const StoryDetail = () => {
               <p className="text-justice-text/70">Published: {story.date}</p>
             </div>
             
-            <ReactMarkdown className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
-              {story.content}
-            </ReactMarkdown>
+            <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
+              <ReactMarkdown>
+                {story.content}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
       </main>
