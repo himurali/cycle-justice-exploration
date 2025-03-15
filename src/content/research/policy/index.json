@@ -21,5 +21,16 @@
     "tags": ["mobility justice", "social justice", "equity", "transportation"],
     "url": "https://example.com/paper8",
     "category": "policy"
+  },
+  {
+    "id": "policy3",
+    "title": "Active Mobility and Public Health: A Systematic Review of Cycling's Impact on Population Health",
+    "authors": ["Sarah Chen", "Michael Brown", "Elena Rodriguez"],
+    "year": 2023,
+    "journal": "Journal of Public Health",
+    "abstract": "This systematic review examines the relationship between active mobility, particularly cycling, and public health outcomes. The study synthesizes evidence from 50 international studies, demonstrating significant health benefits including reduced rates of cardiovascular disease, improved mental health, and lower healthcare costs.",
+    "tags": ["active mobility", "public health", "systematic review", "mental health"],
+    "url": "https://example.com/paper5",
+    "category": "policy"
   }
 ]

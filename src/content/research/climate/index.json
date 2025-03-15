@@ -21,5 +21,16 @@
     "tags": ["climate change", "infrastructure", "urban planning", "sustainable transportation"],
     "url": "https://example.com/paper10",
     "category": "climate"
+  },
+  {
+    "id": "climate3",
+    "title": "Impact of Cycling Infrastructure on Greenhouse Gas Emissions",
+    "authors": ["Thomas Wilson", "Emma Johnson"],
+    "year": 2023,
+    "journal": "Environmental Science & Technology",
+    "abstract": "This study quantifies the reduction in greenhouse gas emissions achieved through the implementation of dedicated cycling infrastructure in metropolitan areas. Using data from 12 cities, we demonstrate that each kilometer of protected bike lane leads to measurable decreases in transportation-related carbon emissions.",
+    "tags": ["climate change", "emissions", "infrastructure", "urban planning"],
+    "url": "https://example.com/paper13",
+    "category": "climate"
   }
 ]
