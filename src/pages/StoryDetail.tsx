@@ -3,11 +3,12 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Tag } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { getStoryBySlug } from '@/lib/markdown';
 import advocateStories from '@/constants/advocateStories.json';
+import { Badge } from "@/components/ui/badge";
 
 const StoryDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -78,12 +79,34 @@ Want to share your story? Join our community and be part of the change!
     );
   }
 
+  // Custom render components for ReactMarkdown
+  const components = {
+    h1: ({ children }: { children: React.ReactNode }) => (
+      <h1 className="text-3xl md:text-4xl font-baskerville font-medium mb-6 mt-10">{children}</h1>
+    ),
+    h2: ({ children }: { children: React.ReactNode }) => (
+      <h2 className="text-2xl md:text-3xl font-baskerville font-medium mb-4 mt-8">{children}</h2>
+    ),
+    p: ({ children }: { children: React.ReactNode }) => (
+      <p className="mb-4 text-base leading-relaxed text-justice-text/90">{children}</p>
+    ),
+    img: (props: any) => (
+      <div className="aspect-video w-full overflow-hidden rounded-xl mb-8 mt-2">
+        <img 
+          src={props.src} 
+          alt={props.alt || ''} 
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
       
       <main className="flex-grow">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <Button 
             variant="ghost" 
             className="mb-6 gap-2 hover:bg-gray-100"
@@ -94,8 +117,9 @@ Want to share your story? Join our community and be part of the change!
           </Button>
           
           <div className="prose prose-lg max-w-none">
+            {/* Featured Image */}
             {story.image && !story.content.includes(story.image) && (
-              <div className="aspect-video w-full overflow-hidden rounded-xl mb-10">
+              <div className="aspect-video w-full overflow-hidden rounded-xl mb-6">
                 <img 
                   src={story.image} 
                   alt={story.title} 
@@ -104,21 +128,41 @@ Want to share your story? Join our community and be part of the change!
               </div>
             )}
             
-            <div className="mb-6">
-              <h1 className="text-4xl md:text-5xl font-baskerville font-medium mb-4">{story.title}</h1>
-              <div className="flex flex-wrap gap-3 text-justice-text/70">
+            {/* Story Metadata */}
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl font-baskerville font-medium mb-4">{story.title}</h1>
+              <div className="flex flex-wrap items-center gap-3 text-justice-text/70 mb-4">
                 <p>Published: {story.date}</p>
-                {story.author && <p>• Author: {story.author}</p>}
-                {story.category && <p>• Category: {story.category}</p>}
+                {story.author && <p>• By {story.author}</p>}
+                {story.category && (
+                  <Badge variant="outline" className="text-xs bg-gray-100">
+                    {story.category.charAt(0).toUpperCase() + story.category.slice(1)}
+                  </Badge>
+                )}
               </div>
+              
+              {/* Display tags if available */}
+              {story.tags && story.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {story.tags.map((tag: string) => (
+                    <Badge 
+                      key={tag} 
+                      variant="secondary" 
+                      className="text-xs bg-gray-100 hover:bg-gray-200"
+                    >
+                      <Tag className="h-3 w-3 mr-1" />
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
             
+            {/* Story Content */}
             <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
-              <div>
-                <ReactMarkdown>
-                  {story.content}
-                </ReactMarkdown>
-              </div>
+              <ReactMarkdown components={components}>
+                {story.content}
+              </ReactMarkdown>
             </div>
           </div>
         </div>
