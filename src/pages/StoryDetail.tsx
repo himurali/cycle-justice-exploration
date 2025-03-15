@@ -7,11 +7,31 @@ import { ArrowLeft } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { getStoryBySlug } from '@/lib/markdown';
+import advocateStories from '@/constants/advocateStories.json';
 
 const StoryDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const story = getStoryBySlug(slug || '');
+  
+  // First try to get story from markdown content
+  let story = getStoryBySlug(slug || '');
+  
+  // If not found, try to find in advocate stories
+  if (!story && slug) {
+    const advocateStory = advocateStories.find(s => s.slug === slug);
+    
+    if (advocateStory) {
+      story = {
+        title: advocateStory.headline,
+        date: new Date().toLocaleDateString(),
+        image: advocateStory.image,
+        content: advocateStory.description,
+        excerpt: advocateStory.description,
+        category: 'advocacy',
+        slug: advocateStory.slug
+      };
+    }
+  }
 
   if (!story) {
     return (
@@ -43,10 +63,10 @@ const StoryDetail = () => {
           <Button 
             variant="ghost" 
             className="mb-6 gap-2 hover:bg-gray-100"
-            onClick={() => navigate('/stories')}
+            onClick={() => navigate(-1)}
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Stories
+            Back
           </Button>
           
           <div className="prose prose-lg max-w-none">
@@ -66,9 +86,11 @@ const StoryDetail = () => {
             </div>
             
             <div className="prose-headings:font-baskerville prose-headings:font-medium prose-p:text-justice-text/80 prose-a:text-justice-blue">
-              <ReactMarkdown>
-                {story.content}
-              </ReactMarkdown>
+              <div>
+                <ReactMarkdown>
+                  {story.content}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
         </div>
