@@ -113,12 +113,13 @@ const NavBar = () => {
     { 
       id: 'books', 
       label: 'Books',
-      href: '#books',
+      href: '/books',
       hasSubmenu: true,
+      isPageLink: true,
       submenu: [
-        { label: 'Essential Reading', href: '#essential-reading' },
-        { label: 'Academic Works', href: '#academic-works' },
-        { label: 'Practical Guides', href: '#practical-guides' }
+        { label: 'Essential Reading', href: '/books#essential-reading', isPageLink: true },
+        { label: 'Academic Works', href: '/books#academic-works', isPageLink: true },
+        { label: 'Practical Guides', href: '/books#practical-guides', isPageLink: true }
       ]
     },
     { 
