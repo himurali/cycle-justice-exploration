@@ -1,4 +1,11 @@
 
+import equityPapers from '../content/research/equity/index.json';
+import infrastructurePapers from '../content/research/infrastructure/index.json';
+import healthPapers from '../content/research/health/index.json';
+import policyPapers from '../content/research/policy/index.json';
+import climatePapers from '../content/research/climate/index.json';
+import economicsPapers from '../content/research/economics/index.json';
+
 export type ResearchTag = 
   | 'accessibility'
   | 'active mobility'
@@ -47,39 +54,27 @@ export function getAllResearchPapers(): ResearchPaper[] {
 }
 
 export function getEquityResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/equity/index.json');
-  return papers as ResearchPaper[];
+  return equityPapers as ResearchPaper[];
 }
 
 export function getInfrastructureResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/infrastructure/index.json');
-  return papers as ResearchPaper[];
+  return infrastructurePapers as ResearchPaper[];
 }
 
 export function getHealthResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/health/index.json');
-  return papers as ResearchPaper[];
+  return healthPapers as ResearchPaper[];
 }
 
 export function getPolicyResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/policy/index.json');
-  return papers as ResearchPaper[];
+  return policyPapers as ResearchPaper[];
 }
 
 export function getClimateResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/climate/index.json');
-  return papers as ResearchPaper[];
+  return climatePapers as ResearchPaper[];
 }
 
 export function getEconomicsResearch(): ResearchPaper[] {
-  // Load from JSON file
-  const papers = require('../content/research/economics/index.json');
-  return papers as ResearchPaper[];
+  return economicsPapers as ResearchPaper[];
 }
 
 export function getResearchPapersByTag(tag: ResearchTag): ResearchPaper[] {

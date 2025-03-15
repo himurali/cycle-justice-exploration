@@ -38,7 +38,7 @@ export default function ResearchPapersList({ papers }: ResearchPapersListProps) 
           paper.journal.toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesTags = selectedTags.length === 0 ||
-          selectedTags.every(tag => paper.tags.includes(tag));
+          selectedTags.every(tag => paper.tags.includes(tag as any));
 
         return matchesSearch && matchesTags;
       })
