@@ -105,9 +105,11 @@ const JusticeSlider = () => {
                             borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
                           }}
                         >
-                          <justice.icon className="size-6" />
-                          <span className="font-semibold text-base">{justice.title}</span>
-                          <span className="text-xs opacity-80 font-normal line-clamp-1">
+                          <justice.icon className="size-6 text-current" />
+                          <span className="font-semibold text-base whitespace-nowrap">{justice.title}</span>
+                          <span className="text-xs font-normal line-clamp-1 whitespace-nowrap opacity-90" style={{
+                            color: justice.id === currentJustice.id ? 'white' : justice.color
+                          }}>
                             {justice.symbolism}
                           </span>
                         </TabsTrigger>
@@ -132,11 +134,13 @@ const JusticeSlider = () => {
                           borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
                         }}
                       >
-                        <justice.icon className="size-6 md:size-7" />
-                        <span className="font-semibold text-base md:text-lg">{justice.title}</span>
-                        <span className="text-xs opacity-80 font-normal">
-                          {justice.symbolism}
-                        </span>
+                          <justice.icon className="size-6 md:size-7 text-current" />
+                          <span className="font-semibold text-base md:text-lg whitespace-nowrap">{justice.title}</span>
+                          <span className="text-xs font-normal whitespace-nowrap opacity-90" style={{
+                            color: justice.id === currentJustice.id ? 'white' : justice.color
+                          }}>
+                            {justice.symbolism}
+                          </span>
                       </TabsTrigger>
                     </motion.div>
                   ))}
@@ -211,7 +215,7 @@ const JusticeSlider = () => {
                             className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
                             style={{ backgroundColor: justice.color + '20', color: justice.color }}
                           >
-                            <IconComponent size={36} />
+                            <justice.icon size={36} />
                           </motion.div>
                           <h3 className="text-2xl font-bold mb-2" style={{ color: justice.color }}>
                             {justice.title}

@@ -134,7 +134,7 @@ const ImpactSection = () => {
                         }}
                       >
                         <Icon className="size-6" />
-                        <span className="font-semibold text-base">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
+                        <span className="font-semibold text-base whitespace-nowrap">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
                       </TabsTrigger>
                     </motion.div>
                   ))}
@@ -158,7 +158,7 @@ const ImpactSection = () => {
                       }}
                     >
                       <Icon className="size-6 md:size-7" />
-                      <span className="font-semibold text-base">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
+                      <span className="font-semibold text-base whitespace-nowrap">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
                     </TabsTrigger>
                   </motion.div>
                 ))}
