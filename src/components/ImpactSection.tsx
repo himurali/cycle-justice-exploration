@@ -13,6 +13,7 @@ import {
   LucideIcon
 } from "lucide-react";
 import inequalityDataJson from "../data/inequalityData.json";
+import { useIsMobile } from "../hooks/use-mobile";
 
 interface InequalityDataType {
   id: string;
@@ -43,6 +44,7 @@ const iconMap: Record<string, LucideIcon> = {
 const ImpactSection = () => {
   const [activeTab, setActiveTab] = useState("health");
   const [inequalityData, setInequalityData] = useState<InequalityDataType[]>([]);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Set the inequality data from the JSON file
@@ -114,28 +116,54 @@ const ImpactSection = () => {
             initial="hidden"
             animate="visible"
           >
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 bg-slate-100/70 rounded-lg p-1 mb-8">
-              {Object.entries(justiceIcons).map(([key, { icon: Icon, color }]) => (
-                <motion.div
-                  key={key}
-                  variants={tabItemVariants}
-                  className="w-full"
-                >
-                  <TabsTrigger 
-                    value={key}
-                    className="text-sm md:text-base font-medium w-full py-6 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
-                    style={{ 
-                      color: key === activeTab ? 'white' : color,
-                      backgroundColor: key === activeTab ? color : 'transparent',
-                      borderBottom: key === activeTab ? `3px solid ${color}` : 'none',
-                    }}
+            {isMobile ? (
+              <div className="overflow-x-auto pb-2 -mx-4 px-4">
+                <TabsList className="w-max flex bg-slate-100/70 rounded-lg p-1">
+                  {Object.entries(justiceIcons).map(([key, { icon: Icon, color }]) => (
+                    <motion.div
+                      key={key}
+                      variants={tabItemVariants}
+                    >
+                      <TabsTrigger 
+                        value={key}
+                        className="text-sm font-medium min-w-[100px] py-4 px-3 flex flex-col items-center justify-center gap-2 transition-all duration-300"
+                        style={{ 
+                          color: key === activeTab ? 'white' : color,
+                          backgroundColor: key === activeTab ? color : 'transparent',
+                          borderBottom: key === activeTab ? `3px solid ${color}` : 'none',
+                        }}
+                      >
+                        <Icon className="size-6" />
+                        <span className="font-semibold text-base">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
+                      </TabsTrigger>
+                    </motion.div>
+                  ))}
+                </TabsList>
+              </div>
+            ) : (
+              <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 bg-slate-100/70 rounded-lg p-1 mb-8">
+                {Object.entries(justiceIcons).map(([key, { icon: Icon, color }]) => (
+                  <motion.div
+                    key={key}
+                    variants={tabItemVariants}
+                    className="w-full"
                   >
-                    <Icon className="size-6 md:size-7" />
-                    <span className="font-semibold text-base">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
-                  </TabsTrigger>
-                </motion.div>
-              ))}
-            </TabsList>
+                    <TabsTrigger 
+                      value={key}
+                      className="text-sm md:text-base font-medium w-full py-6 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                      style={{ 
+                        color: key === activeTab ? 'white' : color,
+                        backgroundColor: key === activeTab ? color : 'transparent',
+                        borderBottom: key === activeTab ? `3px solid ${color}` : 'none',
+                      }}
+                    >
+                      <Icon className="size-6 md:size-7" />
+                      <span className="font-semibold text-base">{`${key.charAt(0).toUpperCase()}${key.slice(1)}`}</span>
+                    </TabsTrigger>
+                  </motion.div>
+                ))}
+              </TabsList>
+            )}
           </motion.div>
 
           {/* Content for each tab */}

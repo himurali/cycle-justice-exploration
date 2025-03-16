@@ -13,12 +13,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { justiceTypes } from "../constants/justiceData";
 import { motion } from "framer-motion";
+import { useIsMobile } from "../hooks/use-mobile";
 
 const JusticeSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollAnimation({ threshold: 0.1 });
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.1 });
   const { ref: sliderRef, isVisible: sliderVisible } = useScrollAnimation({ threshold: 0.2 });
+  const isMobile = useIsMobile();
   
   const handleSliderChange = (value: number[]) => {
     setActiveIndex(value[0]);
@@ -74,7 +76,7 @@ const JusticeSlider = () => {
           {/* Justice Type Tabs */}
           <Tabs
             value={currentJustice.id}
-            className="w-full mb-12" // Reduced from mb-18 to mb-12 to bring the slider down
+            className="w-full mb-12" 
             onValueChange={(value) => {
               const newIndex = justiceTypes.findIndex(j => j.id === value);
               if (newIndex !== -1) setActiveIndex(newIndex);
@@ -85,36 +87,66 @@ const JusticeSlider = () => {
               initial="hidden"
               animate="visible"
             >
-              <TabsList className="grid w-full grid-cols-5 bg-slate-100/70">
-                {justiceTypes.map((justice) => (
-                  <motion.div
-                    key={justice.id}
-                    variants={tabItemVariants}
-                    className="w-full"
-                  >
-                    <TabsTrigger 
-                      value={justice.id}
-                      className="text-sm md:text-base font-medium w-full py-4 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
-                      style={{ 
-                        color: justice.id === currentJustice.id ? 'white' : justice.color,
-                        backgroundColor: justice.id === currentJustice.id ? justice.color : 'transparent',
-                        borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
-                      }}
+              {/* Mobile view: scrollable container */}
+              {isMobile ? (
+                <div className="overflow-x-auto pb-2 -mx-4 px-4">
+                  <TabsList className="w-max flex bg-slate-100/70 rounded-md">
+                    {justiceTypes.map((justice) => (
+                      <motion.div
+                        key={justice.id}
+                        variants={tabItemVariants}
+                      >
+                        <TabsTrigger 
+                          value={justice.id}
+                          className="text-sm font-medium min-w-[120px] py-4 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300"
+                          style={{ 
+                            color: justice.id === currentJustice.id ? 'white' : justice.color,
+                            backgroundColor: justice.id === currentJustice.id ? justice.color : 'transparent',
+                            borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
+                          }}
+                        >
+                          <justice.icon className="size-6" />
+                          <span className="font-semibold text-base">{justice.title}</span>
+                          <span className="text-xs opacity-80 font-normal line-clamp-1">
+                            {justice.symbolism}
+                          </span>
+                        </TabsTrigger>
+                      </motion.div>
+                    ))}
+                  </TabsList>
+                </div>
+              ) : (
+                <TabsList className="grid w-full grid-cols-5 bg-slate-100/70">
+                  {justiceTypes.map((justice) => (
+                    <motion.div
+                      key={justice.id}
+                      variants={tabItemVariants}
+                      className="w-full"
                     >
-                      <justice.icon className="size-6 md:size-7" />
-                      <span className="font-semibold text-base md:text-lg">{justice.title}</span>
-                      <span className="text-xs opacity-80 font-normal">
-                        {justice.symbolism}
-                      </span>
-                    </TabsTrigger>
-                  </motion.div>
-                ))}
-              </TabsList>
+                      <TabsTrigger 
+                        value={justice.id}
+                        className="text-sm md:text-base font-medium w-full py-4 px-2 flex flex-col items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
+                        style={{ 
+                          color: justice.id === currentJustice.id ? 'white' : justice.color,
+                          backgroundColor: justice.id === currentJustice.id ? justice.color : 'transparent',
+                          borderBottom: justice.id === currentJustice.id ? `3px solid ${justice.color}` : 'none',
+                        }}
+                      >
+                        <justice.icon className="size-6 md:size-7" />
+                        <span className="font-semibold text-base md:text-lg">{justice.title}</span>
+                        <span className="text-xs opacity-80 font-normal">
+                          {justice.symbolism}
+                        </span>
+                      </TabsTrigger>
+                    </motion.div>
+                  ))}
+                </TabsList>
+              )}
             </motion.div>
           </Tabs>
 
           {/* Main slider control - Increased spacing */}
-          <div className="mb-12 mt-28"> {/* Increased from mt-22 to mt-28 to push the slider further down */}
+          <div className="mb-12 mt-28"> 
             <Slider
               value={[activeIndex]}
               max={justiceTypes.length - 1}
