@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Bike } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -73,7 +74,7 @@ const NavBar = () => {
       href: '#transformation',
       hasSubmenu: true,
       submenu: [
-        { label: 'Cities', href: '#cities' },
+        { label: 'Cities', href: '/transformation-cities', isPageLink: true },
         { label: 'Policy Changes', href: '#policy-changes' }
       ]
     },
