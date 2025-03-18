@@ -197,7 +197,7 @@ export default function TransformationCities() {
                         Part III: The Materials of Justice
                       </AccordionTrigger>
                       <AccordionContent>
-                        <p className="mb-4">Physical and social infrastructure in {selectedCity.name}</p>
+                        <p className="mb-4">Physical and social infrastructure for cycling equity in {selectedCity.name}</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           <Card className="p-4 hover:shadow-md transition-shadow">
                             <h4 className="font-bold mb-2">Step 1: Infrastructure Elements</h4>
@@ -224,7 +224,7 @@ export default function TransformationCities() {
                         Part IV: Public Reasoning and Democracy
                       </AccordionTrigger>
                       <AccordionContent>
-                        <p className="mb-4">Community engagement in {selectedCity.name}</p>
+                        <p className="mb-4">Engaging communities in cycling transformation in {selectedCity.name}</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           <Card className="p-4 hover:shadow-md transition-shadow">
                             <h4 className="font-bold mb-2">Step 1: Public Engagement</h4>
