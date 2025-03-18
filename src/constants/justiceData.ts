@@ -4,7 +4,11 @@ import {
   Group, 
   ShieldX, 
   Rocket, 
-  DollarSign 
+  DollarSign,
+  MapPin,
+  Lightbulb,
+  Building,
+  Users2
 } from "lucide-react";
 
 export interface JusticeType {
@@ -17,6 +21,15 @@ export interface JusticeType {
   color: string;
   imageUrl: string;
   symbolism: string;
+}
+
+export interface BicycleJusticeImpactType {
+  id: string;
+  title: string;
+  description: string;
+  icon: typeof Users;
+  color: string;
+  imageUrl: string;
 }
 
 export const justiceTypes: JusticeType[] = [
@@ -74,5 +87,40 @@ export const justiceTypes: JusticeType[] = [
     color: "#FFD700", // Golden Yellow - Wealth distribution, equity, prosperity
     imageUrl: "https://images.unsplash.com/photo-1599939571322-792a11b2bba1?q=80&w=2070&auto=format&fit=crop",
     symbolism: "Prosperity & Accessibility"
+  }
+];
+
+export const bicycleJusticeImpactTypes: BicycleJusticeImpactType[] = [
+  {
+    id: "demands",
+    title: "The Demands of Justice",
+    description: "Understanding the fundamental needs for cycling justice",
+    icon: MapPin,
+    color: "#B22222", // Deep Red
+    imageUrl: "https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "reasoning",
+    title: "Forms of Reasoning",
+    description: "The logical framework for cycling justice",
+    icon: Lightbulb,
+    color: "#4169E1", // Royal Blue
+    imageUrl: "https://images.unsplash.com/photo-1558383331-f520f2888351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "materials",
+    title: "The Materials of Justice",
+    description: "Physical and social infrastructure for cycling equity",
+    icon: Building,
+    color: "#8B0000", // Dark Crimson
+    imageUrl: "https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "democracy",
+    title: "Public Reasoning and Democracy",
+    description: "Engaging communities in cycling transformation",
+    icon: Users2,
+    color: "#800080", // Vibrant Purple
+    imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
 ];

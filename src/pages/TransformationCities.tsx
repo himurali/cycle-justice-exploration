@@ -10,6 +10,7 @@ import CityTemplate from '@/components/CityTemplate';
 import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { bicycleJusticeImpactTypes } from '@/constants/justiceData';
 
 // Import needed for @splidejs/splide
 import '@splidejs/splide/css';
@@ -127,205 +128,123 @@ export default function TransformationCities() {
                 {/* City Overview Content */}
                 <CityTemplate cityData={selectedCity} />
                 
-                {/* Four Justice Framework Parts with Images */}
+                {/* Bicycle Justice Impact Framework */}
                 <div className="mt-16">
-                  <h2 className="text-3xl font-bold text-center mb-12">The Justice Framework</h2>
+                  <h2 className="text-3xl font-bold text-center mb-4">Bicycle Justice Impact Framework</h2>
+                  <p className="text-xl text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
+                    The four-part process followed by cities that successfully embraced cycling as a form of urban justice
+                  </p>
                   
-                  {/* Part I: The Demands of Justice */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="mb-16"
-                  >
-                    <h3 className="text-2xl font-bold mb-4 border-l-4 border-primary pl-4">
-                      Part I: The Demands of Justice
-                    </h3>
-                    <p className="text-lg mb-6 text-muted-foreground">
-                      Understanding the fundamental needs for cycling justice in {selectedCity.name}
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Recognition of Rights"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Recognition of Rights</h4>
-                          <p className="text-muted-foreground">
-                            Establishing cycling as a fundamental right for all citizens, ensuring equitable access to safe infrastructure.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1544684654-b8a648ca0ce6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Social Movement"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Social Movement</h4>
-                          <p className="text-muted-foreground">
-                            Building community support for cycling through grassroots activism and collective organization.
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Part II: Forms of Reasoning */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="mb-16"
-                  >
-                    <h3 className="text-2xl font-bold mb-4 border-l-4 border-primary pl-4">
-                      Part II: Forms of Reasoning
-                    </h3>
-                    <p className="text-lg mb-6 text-muted-foreground">
-                      The logical framework for cycling justice in {selectedCity.name}
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1558383331-f520f2888351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Data Analysis"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Data Analysis</h4>
-                          <p className="text-muted-foreground">
-                            Understanding cycling patterns and measuring impacts through evidence-based approaches.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1519583272095-6433daf26b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Best Practices"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Best Practices</h4>
-                          <p className="text-muted-foreground">
-                            Learning from successful cycling infrastructure and policies from around the world.
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Part III: The Materials of Justice */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mb-16"
-                  >
-                    <h3 className="text-2xl font-bold mb-4 border-l-4 border-primary pl-4">
-                      Part III: The Materials of Justice
-                    </h3>
-                    <p className="text-lg mb-6 text-muted-foreground">
-                      Physical and social infrastructure for cycling equity in {selectedCity.name}
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Infrastructure Elements"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Infrastructure Elements</h4>
-                          <p className="text-muted-foreground">
-                            Building protected lanes, safe crossings, and secure parking to enable cycling for all.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Social Support"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Social Support</h4>
-                          <p className="text-muted-foreground">
-                            Creating education programs, maintenance support, and community networks for cyclists.
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Part IV: Public Reasoning and Democracy */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mb-16"
-                  >
-                    <h3 className="text-2xl font-bold mb-4 border-l-4 border-primary pl-4">
-                      Part IV: Public Reasoning and Democracy
-                    </h3>
-                    <p className="text-lg mb-6 text-muted-foreground">
-                      Engaging communities in cycling transformation in {selectedCity.name}
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Public Engagement"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Public Engagement</h4>
-                          <p className="text-muted-foreground">
-                            Involving citizens in decision-making through forums, digital tools, and participatory planning.
-                          </p>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src="https://images.unsplash.com/photo-1597733336794-12d05021d510?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                            alt="Implementation"
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <CardContent className="p-6">
-                          <h4 className="text-xl font-bold mb-2">Implementation</h4>
-                          <p className="text-muted-foreground">
-                            Supporting local champions, engaging volunteers, and adapting to community feedback.
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </motion.div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    {bicycleJusticeImpactTypes.map((impact, index) => (
+                      <motion.div
+                        key={impact.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <Card className="overflow-hidden h-full transition-all hover:shadow-lg border-l-4" style={{ borderLeftColor: impact.color }}>
+                          <div className="aspect-video w-full overflow-hidden">
+                            <img 
+                              src={impact.imageUrl}
+                              alt={impact.title}
+                              className="object-cover w-full h-full transform transition-transform hover:scale-105"
+                            />
+                          </div>
+                          <CardContent className="p-6">
+                            <h3 className="text-2xl font-bold mb-2">Part {index + 1}: {impact.title}</h3>
+                            <p className="text-muted-foreground text-lg">
+                              {impact.description} in {selectedCity.name}
+                            </p>
+                            
+                            {impact.id === "demands" && (
+                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Recognition of Rights</h4>
+                                  <p className="text-sm text-muted-foreground">Establishing cycling as a fundamental right</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Social Movement</h4>
+                                  <p className="text-sm text-muted-foreground">Building community support</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Policy Framework</h4>
+                                  <p className="text-sm text-muted-foreground">Creating legislative support</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Implementation</h4>
+                                  <p className="text-sm text-muted-foreground">Putting plans into action</p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {impact.id === "reasoning" && (
+                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Data Analysis</h4>
+                                  <p className="text-sm text-muted-foreground">Understanding patterns and needs</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Best Practices</h4>
+                                  <p className="text-sm text-muted-foreground">Learning from success</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Cost-Benefit Analysis</h4>
+                                  <p className="text-sm text-muted-foreground">Measuring value and impact</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Future Planning</h4>
+                                  <p className="text-sm text-muted-foreground">Preparing for growth</p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {impact.id === "materials" && (
+                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Infrastructure Elements</h4>
+                                  <p className="text-sm text-muted-foreground">Building the physical network</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Support Systems</h4>
+                                  <p className="text-sm text-muted-foreground">Creating community resources</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Economic Framework</h4>
+                                  <p className="text-sm text-muted-foreground">Financing and incentives</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Cultural Integration</h4>
+                                  <p className="text-sm text-muted-foreground">Making cycling part of the culture</p>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {impact.id === "democracy" && (
+                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Citizen Engagement</h4>
+                                  <p className="text-sm text-muted-foreground">Involving the community</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Inclusive Decision-Making</h4>
+                                  <p className="text-sm text-muted-foreground">Collaborative planning</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Community Leadership</h4>
+                                  <p className="text-sm text-muted-foreground">Supporting local champions</p>
+                                </div>
+                                <div className="p-3 bg-slate-50 rounded-md">
+                                  <h4 className="font-semibold">Sustained Engagement</h4>
+                                  <p className="text-sm text-muted-foreground">Maintaining participation</p>
+                                </div>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </TabsContent>
               
