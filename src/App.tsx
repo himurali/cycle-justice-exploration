@@ -27,6 +27,7 @@ import ResearchClimate from "./pages/ResearchClimate";
 import ResearchEconomics from "./pages/ResearchEconomics";
 import ResearchPapers from "./pages/ResearchPapers";
 import Institutions from "./pages/Institutions";
+import TransformationCities from "./pages/TransformationCities";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/stories" element={<Stories />} />
           <Route path="/advocate-stories" element={<AdvocateStories />} />
           <Route path="/city-transformations" element={<TransformationStories />} />
+          <Route path="/transformation-cities" element={<TransformationCities />} />
           <Route path="/community-champions" element={<CommunityChampions />} />
           <Route path="/story/:slug" element={<StoryDetail />} />
           <Route path="/books" element={<Books />} />

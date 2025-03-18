@@ -1,0 +1,117 @@
+
+{
+  "steps": {
+    "part1": {
+      "title": "Part I: The Demands of Justice",
+      "description": "Understanding Amsterdam's cycling transformation needs",
+      "sections": {
+        "step1": {
+          "title": "Recognition of Rights",
+          "sections": [
+            {
+              "title": "The Right to Safe Streets",
+              "description": "How Amsterdam recognized cycling as a fundamental right for all citizens.",
+              "image": "https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Equal Access",
+              "description": "Ensuring cycling infrastructure serves all communities equitably.",
+              "image": "https://images.unsplash.com/photo-1524201464522-bf8f910994cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Democratic Participation",
+              "description": "Involving citizens in the planning and decision-making process.",
+              "image": "https://images.unsplash.com/photo-1559348349-86f1f65817fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Environmental Justice",
+              "description": "Addressing climate change and air quality through cycling infrastructure.",
+              "image": "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+          ]
+        },
+        "step2": {
+          "title": "Social Movement",
+          "sections": [
+            {
+              "title": "Stop de Kindermoord",
+              "description": "The powerful movement against child traffic deaths that catalyzed change.",
+              "image": "https://images.unsplash.com/photo-1544684654-b8a648ca0ce6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Cyclists' Union",
+              "description": "How the Fietsersbond organized cyclists and advocated for rights.",
+              "image": "https://images.unsplash.com/photo-1571333250630-f0230c320b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Political Will",
+              "description": "Building government support for cycling infrastructure.",
+              "image": "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Public Opinion",
+              "description": "Shifting cultural attitudes toward cars and bikes.",
+              "image": "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+          ]
+        }
+      }
+    },
+    "part2": {
+      "title": "Part II: Forms of Reasoning",
+      "description": "Amsterdam's analytical approach to cycling",
+      "sections": {
+        "step1": {
+          "title": "Data-Driven Planning",
+          "sections": [
+            {
+              "title": "Traffic Studies",
+              "description": "How Amsterdam used data to understand mobility patterns.",
+              "image": "https://images.unsplash.com/photo-1582561424557-058531705a6a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Safety Analysis",
+              "description": "Identifying and addressing dangerous areas for cyclists.",
+              "image": "https://images.unsplash.com/photo-1519583272095-6433daf26b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Usage Projections",
+              "description": "Forecasting future cycling demand to plan infrastructure.",
+              "image": "https://images.unsplash.com/photo-1558383331-f520f2888351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Economic Analysis",
+              "description": "Calculating the financial benefits of cycling investments.",
+              "image": "https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+          ]
+        },
+        "step2": {
+          "title": "Design Innovation",
+          "sections": [
+            {
+              "title": "Traffic Calming",
+              "description": "Strategies to reduce vehicle speeds and create safer streets.",
+              "image": "https://images.unsplash.com/photo-1597733336794-12d05021d510?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Intersection Design",
+              "description": "Dutch junction designs that protect cyclists at crossings.",
+              "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Separated Facilities",
+              "description": "Creating dedicated spaces for different road users.",
+              "image": "https://images.unsplash.com/photo-1588873281272-14886ba1f737?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              "title": "Parking Solutions",
+              "description": "Innovative approaches to bicycle storage needs.",
+              "image": "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
