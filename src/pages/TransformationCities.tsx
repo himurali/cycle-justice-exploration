@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Grid3X3 } from 'lucide-react';
+import { MapPin, Grid3X3, LineChart, Info } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import CityTemplate from '@/components/CityTemplate';
@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { bicycleJusticeImpactTypes } from '@/constants/justiceData';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 // Import needed for @splidejs/splide
 import '@splidejs/splide/css';
@@ -152,94 +153,52 @@ export default function TransformationCities() {
                             />
                           </div>
                           <CardContent className="p-6">
-                            <h3 className="text-2xl font-bold mb-2">Part {index + 1}: {impact.title}</h3>
-                            <p className="text-muted-foreground text-lg">
+                            <div className="flex justify-between items-center mb-4">
+                              <h3 className="text-2xl font-bold" style={{ color: impact.color }}>
+                                {index + 1}. {impact.title}
+                              </h3>
+                              <div 
+                                className="w-10 h-10 rounded-full flex items-center justify-center" 
+                                style={{ backgroundColor: `${impact.color}20`, color: impact.color }}
+                              >
+                                <impact.icon size={24} />
+                              </div>
+                            </div>
+                            
+                            <p className="text-muted-foreground text-lg mb-6">
                               {impact.description} in {selectedCity.name}
                             </p>
                             
-                            {impact.id === "demands" && (
-                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Recognition of Rights</h4>
-                                  <p className="text-sm text-muted-foreground">Establishing cycling as a fundamental right</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Social Movement</h4>
-                                  <p className="text-sm text-muted-foreground">Building community support</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Policy Framework</h4>
-                                  <p className="text-sm text-muted-foreground">Creating legislative support</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Implementation</h4>
-                                  <p className="text-sm text-muted-foreground">Putting plans into action</p>
-                                </div>
+                            {/* City-specific data with info tooltip */}
+                            {impact.cityData && impact.cityData[selectedCity.id as keyof typeof impact.cityData] && (
+                              <div className="mb-5 p-3 bg-slate-50 rounded-md flex items-start">
+                                <LineChart className="shrink-0 mt-1 mr-2 h-5 w-5 text-muted-foreground" />
+                                <p className="text-sm italic">
+                                  {impact.cityData[selectedCity.id as keyof typeof impact.cityData]}
+                                </p>
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Button variant="ghost" size="icon" className="h-6 w-6 ml-2 shrink-0">
+                                        <Info className="h-4 w-4" />
+                                      </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      <p className="max-w-xs text-xs">Data sourced from city transportation departments and academic research</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
                               </div>
                             )}
                             
-                            {impact.id === "reasoning" && (
-                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Data Analysis</h4>
-                                  <p className="text-sm text-muted-foreground">Understanding patterns and needs</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {impact.steps.map((step, i) => (
+                                <div key={i} className="p-3 bg-slate-50 rounded-md hover:shadow-md transition-shadow">
+                                  <h4 className="font-semibold">{step.title}</h4>
+                                  <p className="text-sm text-muted-foreground">{step.description}</p>
                                 </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Best Practices</h4>
-                                  <p className="text-sm text-muted-foreground">Learning from success</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Cost-Benefit Analysis</h4>
-                                  <p className="text-sm text-muted-foreground">Measuring value and impact</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Future Planning</h4>
-                                  <p className="text-sm text-muted-foreground">Preparing for growth</p>
-                                </div>
-                              </div>
-                            )}
-                            
-                            {impact.id === "materials" && (
-                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Infrastructure Elements</h4>
-                                  <p className="text-sm text-muted-foreground">Building the physical network</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Support Systems</h4>
-                                  <p className="text-sm text-muted-foreground">Creating community resources</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Economic Framework</h4>
-                                  <p className="text-sm text-muted-foreground">Financing and incentives</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Cultural Integration</h4>
-                                  <p className="text-sm text-muted-foreground">Making cycling part of the culture</p>
-                                </div>
-                              </div>
-                            )}
-                            
-                            {impact.id === "democracy" && (
-                              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Citizen Engagement</h4>
-                                  <p className="text-sm text-muted-foreground">Involving the community</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Inclusive Decision-Making</h4>
-                                  <p className="text-sm text-muted-foreground">Collaborative planning</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Community Leadership</h4>
-                                  <p className="text-sm text-muted-foreground">Supporting local champions</p>
-                                </div>
-                                <div className="p-3 bg-slate-50 rounded-md">
-                                  <h4 className="font-semibold">Sustained Engagement</h4>
-                                  <p className="text-sm text-muted-foreground">Maintaining participation</p>
-                                </div>
-                              </div>
-                            )}
+                              ))}
+                            </div>
                           </CardContent>
                         </Card>
                       </motion.div>

@@ -8,7 +8,11 @@ import {
   MapPin,
   Lightbulb,
   Building,
-  Users2
+  Users2,
+  HeartPulse,
+  Leaf,
+  Coins,
+  Scale
 } from "lucide-react";
 
 export interface JusticeType {
@@ -30,6 +34,15 @@ export interface BicycleJusticeImpactType {
   icon: typeof Users;
   color: string;
   imageUrl: string;
+  steps: {
+    title: string;
+    description: string;
+  }[];
+  cityData?: {
+    amsterdam?: string;
+    copenhagen?: string;
+    paris?: string;
+  };
 }
 
 export const justiceTypes: JusticeType[] = [
@@ -92,35 +105,127 @@ export const justiceTypes: JusticeType[] = [
 
 export const bicycleJusticeImpactTypes: BicycleJusticeImpactType[] = [
   {
-    id: "demands",
-    title: "The Demands of Justice",
-    description: "Understanding the fundamental needs for cycling justice",
-    icon: MapPin,
+    id: "social",
+    title: "Social Justice",
+    description: "Creating equitable infrastructure and accessibility for all communities",
+    icon: Scale,
     color: "#B22222", // Deep Red
-    imageUrl: "https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "https://images.unsplash.com/photo-1559348349-86f1f65817fe?q=80&w=2070&auto=format&fit=crop",
+    steps: [
+      {
+        title: "Fairness & Objectivity",
+        description: "Equal access to cycling infrastructure for all communities"
+      },
+      {
+        title: "Equality of Opportunity",
+        description: "Safe, well-connected cycling lanes in all neighborhoods, not just affluent areas"
+      },
+      {
+        title: "Policy Prioritization",
+        description: "Policies that prioritize pedestrians and cyclists over cars"
+      },
+      {
+        title: "Removal of Poverty & Freedom",
+        description: "Affordable bike-sharing systems and subsidies for low-income groups"
+      }
+    ],
+    cityData: {
+      amsterdam: "80% of Amsterdam residents live within 300m of a cycling route, with bike-sharing costs as low as €0.20/hour",
+      copenhagen: "Over 95% of Copenhageners have access to a bicycle, and bike lanes connect all socioeconomic districts equally",
+      paris: "Paris has invested €250 million in making cycling accessible to all economic backgrounds, with subsidies up to €500 for e-bikes"
+    }
   },
   {
-    id: "reasoning",
-    title: "Forms of Reasoning",
-    description: "The logical framework for cycling justice",
-    icon: Lightbulb,
-    color: "#4169E1", // Royal Blue
-    imageUrl: "https://images.unsplash.com/photo-1558383331-f520f2888351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    id: "environmental",
+    title: "Environmental Justice",
+    description: "Promoting green urban planning and sustainable environments",
+    icon: Leaf,
+    color: "#228B22", // Forest Green
+    imageUrl: "https://images.unsplash.com/photo-1558383331-f520f2888351?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    steps: [
+      {
+        title: "Conservation of Green Spaces",
+        description: "Integration of cycling routes with parks, rivers, and eco-corridors"
+      },
+      {
+        title: "Air & Noise Pollution Reduction",
+        description: "Prioritizing cycling and public transport to cut carbon emissions"
+      },
+      {
+        title: "Sustainable City Planning",
+        description: "Car-free zones, climate-friendly urban spaces, and tree-lined cycling paths"
+      },
+      {
+        title: "Climate Change Mitigation",
+        description: "Reducing urban heat islands through green infrastructure alongside bike routes"
+      }
+    ],
+    cityData: {
+      amsterdam: "Amsterdam's cycling infrastructure has helped reduce CO2 emissions by 40,000 tons annually",
+      copenhagen: "Copenhagen's bike routes have contributed to a 30% reduction in city noise levels and 20% less air pollution",
+      paris: "Paris has created 30km of eco-corridors alongside bike paths, planting over 20,000 trees since 2018"
+    }
   },
   {
-    id: "materials",
-    title: "The Materials of Justice",
-    description: "Physical and social infrastructure for cycling equity",
-    icon: Building,
-    color: "#8B0000", // Dark Crimson
-    imageUrl: "https://images.unsplash.com/photo-1571188654248-7a89213915f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    id: "economic",
+    title: "Economic Justice",
+    description: "Developing sustainable mobility economies that benefit all",
+    icon: Coins,
+    color: "#FFD700", // Golden Yellow
+    imageUrl: "https://images.unsplash.com/photo-1599939571322-792a11b2bba1?q=80&w=2070&auto=format&fit=crop",
+    steps: [
+      {
+        title: "Job Creation & Local Economy",
+        description: "Bicycle repair hubs, local manufacturing, and cycling-based delivery services"
+      },
+      {
+        title: "Affordable Transportation",
+        description: "Lower transport costs for daily commuters using bicycles"
+      },
+      {
+        title: "Mobility as Economic Equalizer",
+        description: "Reducing dependence on expensive fuel-based transport options"
+      },
+      {
+        title: "Infrastructure Investment",
+        description: "Creating construction and maintenance jobs through cycling infrastructure development"
+      }
+    ],
+    cityData: {
+      amsterdam: "The cycling economy in Amsterdam contributes €700 million annually and supports over 14,000 jobs",
+      copenhagen: "Copenhagen residents save an estimated €235 million yearly in healthcare costs through active cycling",
+      paris: "Paris's cycling transformation has created over 4,500 direct jobs in bike services and infrastructure maintenance"
+    }
   },
   {
-    id: "democracy",
-    title: "Public Reasoning and Democracy",
-    description: "Engaging communities in cycling transformation",
-    icon: Users2,
-    color: "#800080", // Vibrant Purple
-    imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    id: "health",
+    title: "Health & Well-being Justice",
+    description: "Promoting active lifestyles and improved public health through cycling",
+    icon: HeartPulse,
+    color: "#8A2BE2", // Blue Violet
+    imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    steps: [
+      {
+        title: "Reducing Sedentary Lifestyles",
+        description: "Encouraging cycling as a daily mode of transport and exercise"
+      },
+      {
+        title: "Preventing Diseases",
+        description: "Lowering risks of obesity, cardiovascular diseases, and stress-related illnesses"
+      },
+      {
+        title: "Mental & Social Well-being",
+        description: "Cycling builds community bonds, fights isolation, and promotes mental wellness"
+      },
+      {
+        title: "Healthcare Cost Reduction",
+        description: "Decreasing public health expenditure through active transportation"
+      }
+    ],
+    cityData: {
+      amsterdam: "Regular cyclists in Amsterdam have 41% lower mortality rates and live an average of 7 months longer",
+      copenhagen: "Copenhagen's cycling culture has reduced healthcare costs by €230 million annually",
+      paris: "Health benefits from Paris's cycling infrastructure save an estimated €167 million in annual healthcare costs"
+    }
   }
 ];
