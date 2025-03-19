@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import Splide from '@splidejs/splide';
 import '@splidejs/splide/css';
@@ -52,11 +52,27 @@ interface CityTemplateProps {
   cityData: CityData;
 }
 
-export default function CityTemplate({ cityData }: CityTemplateProps) {
+const CityTemplate = memo(({ cityData }: CityTemplateProps) => {
   const splideRefs = useRef<HTMLDivElement[]>([]);
   const splideInstances = useRef<Splide[]>([]);
   const [stepsData, setStepsData] = useState<Steps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+  // Preload image function
+  const preloadImage = (src: string) => {
+    if (loadedImages.has(src)) return Promise.resolve();
+    
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages(prev => new Set([...prev, src]));
+        resolve(src);
+      };
+      img.onerror = reject;
+    });
+  };
 
   useEffect(() => {
     const loadStepsData = async () => {
@@ -64,6 +80,11 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
         setIsLoading(true);
         const data = await import(`../data/transformation_steps/${cityData.id}.json`);
         setStepsData(data);
+        
+        // Preload header images
+        preloadImage(cityData.image);
+        preloadImage(cityData.introduction.image);
+        
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading steps data:', error);
@@ -86,8 +107,8 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
 
   useEffect(() => {
     if (stepsData && !isLoading) {
-      // Initialize splide instances after a short delay to ensure DOM is ready
-      const timer = setTimeout(() => {
+      // Use requestAnimationFrame to initialize Splide after paint
+      const rafId = requestAnimationFrame(() => {
         // Clean up existing instances first
         splideInstances.current.forEach((splide) => {
           if (splide) {
@@ -96,44 +117,57 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
         });
         splideInstances.current = [];
 
-        // Initialize new instances
-        Object.keys(stepsData.steps).forEach((_, partIndex) => {
-          const ref = splideRefs.current[partIndex];
-          if (ref) {
-            const splide = new Splide(ref, {
-              type: 'slide',
-              perPage: 1,
-              gap: '2rem',
-              padding: { left: 0, right: 0 },
-              arrows: true,
-              pagination: true,
-              speed: 800,
-              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-              classes: {
-                arrow: 'splide__arrow !bg-background/80 !backdrop-blur-sm',
-                page: 'splide__pagination__page !bg-primary/20 !opacity-100',
-              },
-            });
-            
-            splide.mount();
-            splideInstances.current.push(splide);
-          }
-        });
-      }, 300);
-
-      return () => clearTimeout(timer);
+        // Initialize new instances with setTimeout to ensure DOM is ready
+        const timer = setTimeout(() => {
+          // Initialize new instances
+          Object.keys(stepsData.steps).forEach((_, partIndex) => {
+            const ref = splideRefs.current[partIndex];
+            if (ref) {
+              const splide = new Splide(ref, {
+                type: 'slide',
+                perPage: 1,
+                gap: '2rem',
+                padding: { left: 0, right: 0 },
+                arrows: true,
+                pagination: true,
+                speed: 800,
+                easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                lazyLoad: 'nearby',
+                classes: {
+                  arrow: 'splide__arrow !bg-background/80 !backdrop-blur-sm',
+                  page: 'splide__pagination__page !bg-primary/20 !opacity-100',
+                },
+              });
+              
+              splide.mount();
+              splideInstances.current.push(splide);
+            }
+          });
+        }, 100);
+        
+        return () => clearTimeout(timer);
+      });
+      
+      return () => cancelAnimationFrame(rafId);
     }
   }, [stepsData, isLoading]);
+
+  const isImageLoaded = (src: string) => loadedImages.has(src);
 
   return (
     <div className="bg-background">
       {/* Header Stats */}
       <Card className="mb-12 overflow-hidden">
         <div className="relative h-[300px]">
+          {!isImageLoaded(cityData.image) && (
+            <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
+          )}
           <img
             src={cityData.image}
             alt={cityData.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${!isImageLoaded(cityData.image) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            onLoad={() => preloadImage(cityData.image)}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 text-white">
@@ -184,7 +218,7 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="text-lg leading-relaxed text-center mb-8"
           >
             {cityData.introduction.text}
@@ -193,13 +227,18 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="mt-6"
           >
+            {!isImageLoaded(cityData.introduction.image) && (
+              <div className="h-[400px] w-full bg-slate-200 animate-pulse rounded-lg"></div>
+            )}
             <img
               src={cityData.introduction.image}
               alt="Introduction"
-              className="mx-auto rounded-lg shadow-lg max-h-[400px] object-cover w-full"
+              className={`mx-auto rounded-lg shadow-lg max-h-[400px] object-cover w-full ${!isImageLoaded(cityData.introduction.image) ? 'hidden' : 'block'}`}
+              onLoad={() => preloadImage(cityData.introduction.image)}
+              loading="lazy"
             />
           </motion.div>
         </div>
@@ -236,10 +275,15 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
                               {section.sections.map((subSection, index) => (
                                 <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                                   <div className="aspect-video relative">
+                                    {!isImageLoaded(subSection.image) && (
+                                      <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
+                                    )}
                                     <img
                                       src={subSection.image}
                                       alt={subSection.title}
-                                      className="absolute inset-0 w-full h-full object-cover"
+                                      className={`absolute inset-0 w-full h-full object-cover ${!isImageLoaded(subSection.image) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                                      onLoad={() => preloadImage(subSection.image)}
+                                      loading="lazy"
                                     />
                                   </div>
                                   <div className="p-4">
@@ -264,4 +308,8 @@ export default function CityTemplate({ cityData }: CityTemplateProps) {
       )}
     </div>
   );
-}
+});
+
+CityTemplate.displayName = 'CityTemplate';
+
+export default CityTemplate;

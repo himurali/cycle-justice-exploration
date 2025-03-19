@@ -1,17 +1,19 @@
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Grid3X3, LineChart, Info } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import CityTemplate from '@/components/CityTemplate';
 import { Helmet } from 'react-helmet';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { bicycleJusticeImpactTypes } from '@/constants/justiceData';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+// Lazy load CityTemplate component
+const CityTemplate = lazy(() => import('@/components/CityTemplate'));
 
 // Import needed for @splidejs/splide
 import '@splidejs/splide/css';
@@ -49,13 +51,38 @@ export default function TransformationCities() {
   const [selectedCity, setSelectedCity] = useState<CityData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+  const preloadImage = (src: string) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages(prev => new Set(prev).add(src));
+        resolve(src);
+      };
+      img.onerror = reject;
+    });
+  };
 
   useEffect(() => {
     const loadCitiesData = async () => {
       try {
-        const response = await import('../data/cities.json');
-        setCitiesData(response.default);
-        setSelectedCity(response.default.cities[0]);
+        // Optimize data fetching with Promise.all
+        const [citiesResponse] = await Promise.all([
+          import('../data/cities.json')
+        ]);
+        
+        setCitiesData(citiesResponse.default);
+        setSelectedCity(citiesResponse.default.cities[0]);
+        
+        // Start preloading key images after data is loaded
+        if (citiesResponse.default.cities[0]) {
+          const cityData = citiesResponse.default.cities[0];
+          preloadImage(cityData.image);
+          preloadImage(cityData.introduction.image);
+        }
+        
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading cities data:', error);
@@ -65,6 +92,14 @@ export default function TransformationCities() {
 
     loadCitiesData();
   }, []);
+
+  // Preload images when city changes
+  useEffect(() => {
+    if (selectedCity) {
+      preloadImage(selectedCity.image);
+      preloadImage(selectedCity.introduction.image);
+    }
+  }, [selectedCity?.id]);
 
   if (isLoading || !citiesData || !selectedCity) {
     return (
@@ -78,6 +113,8 @@ export default function TransformationCities() {
     );
   }
 
+  const isImageLoaded = (src: string) => loadedImages.has(src);
+
   return (
     <>
       <Helmet>
@@ -90,7 +127,7 @@ export default function TransformationCities() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-12"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Cycling Cities</h1>
@@ -127,7 +164,13 @@ export default function TransformationCities() {
               
               <TabsContent value="overview">
                 {/* City Overview Content */}
-                <CityTemplate cityData={selectedCity} />
+                <Suspense fallback={
+                  <div className="flex justify-center items-center py-20">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                  </div>
+                }>
+                  <CityTemplate cityData={selectedCity} />
+                </Suspense>
                 
                 {/* Bicycle Justice Impact Framework */}
                 <div className="mt-16">
@@ -137,72 +180,81 @@ export default function TransformationCities() {
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    {bicycleJusticeImpactTypes.map((impact, index) => (
-                      <motion.div
-                        key={impact.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <Card className="overflow-hidden h-full transition-all hover:shadow-lg border-l-4" style={{ borderLeftColor: impact.color }}>
-                          <div className="aspect-video w-full overflow-hidden">
-                            <img 
-                              src={impact.imageUrl}
-                              alt={impact.title}
-                              className="object-cover w-full h-full transform transition-transform hover:scale-105"
-                            />
-                          </div>
-                          <CardContent className="p-6">
-                            <div className="flex justify-between items-center mb-4">
-                              <h3 className="text-2xl font-bold" style={{ color: impact.color }}>
-                                {index + 1}. {impact.title}
-                              </h3>
-                              <div 
-                                className="w-10 h-10 rounded-full flex items-center justify-center" 
-                                style={{ backgroundColor: `${impact.color}20`, color: impact.color }}
-                              >
-                                <impact.icon size={24} />
-                              </div>
+                    <AnimatePresence>
+                      {bicycleJusticeImpactTypes.map((impact, index) => (
+                        <motion.div
+                          key={impact.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: index * 0.08 }}
+                          exit={{ opacity: 0 }}
+                          layout
+                        >
+                          <Card className="overflow-hidden h-full transition-all hover:shadow-lg border-l-4" style={{ borderLeftColor: impact.color }}>
+                            <div className="aspect-video w-full overflow-hidden relative">
+                              {!isImageLoaded(impact.imageUrl) && (
+                                <div className="absolute inset-0 bg-slate-200 animate-pulse"></div>
+                              )}
+                              <img 
+                                src={impact.imageUrl}
+                                alt={impact.title}
+                                className={`object-cover w-full h-full transform transition-transform hover:scale-105 ${!isImageLoaded(impact.imageUrl) ? 'opacity-0' : 'opacity-100'}`}
+                                onLoad={() => preloadImage(impact.imageUrl)}
+                                loading="lazy"
+                              />
                             </div>
-                            
-                            <p className="text-muted-foreground text-lg mb-6">
-                              {impact.description} in {selectedCity.name}
-                            </p>
-                            
-                            {/* City-specific data with info tooltip */}
-                            {impact.cityData && impact.cityData[selectedCity.id as keyof typeof impact.cityData] && (
-                              <div className="mb-5 p-3 bg-slate-50 rounded-md flex items-start">
-                                <LineChart className="shrink-0 mt-1 mr-2 h-5 w-5 text-muted-foreground" />
-                                <p className="text-sm italic">
-                                  {impact.cityData[selectedCity.id as keyof typeof impact.cityData]}
-                                </p>
-                                <TooltipProvider>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <Button variant="ghost" size="icon" className="h-6 w-6 ml-2 shrink-0">
-                                        <Info className="h-4 w-4" />
-                                      </Button>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      <p className="max-w-xs text-xs">Data sourced from city transportation departments and academic research</p>
-                                    </TooltipContent>
-                                  </Tooltip>
-                                </TooltipProvider>
-                              </div>
-                            )}
-                            
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              {impact.steps.map((step, i) => (
-                                <div key={i} className="p-3 bg-slate-50 rounded-md hover:shadow-md transition-shadow">
-                                  <h4 className="font-semibold">{step.title}</h4>
-                                  <p className="text-sm text-muted-foreground">{step.description}</p>
+                            <CardContent className="p-6">
+                              <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-2xl font-bold" style={{ color: impact.color }}>
+                                  {index + 1}. {impact.title}
+                                </h3>
+                                <div 
+                                  className="w-10 h-10 rounded-full flex items-center justify-center" 
+                                  style={{ backgroundColor: `${impact.color}20`, color: impact.color }}
+                                >
+                                  <impact.icon size={24} />
                                 </div>
-                              ))}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
+                              </div>
+                              
+                              <p className="text-muted-foreground text-lg mb-6">
+                                {impact.description} in {selectedCity.name}
+                              </p>
+                              
+                              {/* City-specific data with info tooltip */}
+                              {impact.cityData && impact.cityData[selectedCity.id as keyof typeof impact.cityData] && (
+                                <div className="mb-5 p-3 bg-slate-50 rounded-md flex items-start">
+                                  <LineChart className="shrink-0 mt-1 mr-2 h-5 w-5 text-muted-foreground" />
+                                  <p className="text-sm italic">
+                                    {impact.cityData[selectedCity.id as keyof typeof impact.cityData]}
+                                  </p>
+                                  <TooltipProvider>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 ml-2 shrink-0">
+                                          <Info className="h-4 w-4" />
+                                        </Button>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        <p className="max-w-xs text-xs">Data sourced from city transportation departments and academic research</p>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                </div>
+                              )}
+                              
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {impact.steps.map((step, i) => (
+                                  <div key={i} className="p-3 bg-slate-50 rounded-md hover:shadow-md transition-shadow">
+                                    <h4 className="font-semibold">{step.title}</h4>
+                                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
                   </div>
                 </div>
               </TabsContent>
@@ -328,7 +380,13 @@ export default function TransformationCities() {
                 </Card>
                 
                 {/* Detailed Content through the existing CityTemplate */}
-                <CityTemplate cityData={selectedCity} />
+                <Suspense fallback={
+                  <div className="flex justify-center items-center py-20">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                  </div>
+                }>
+                  <CityTemplate cityData={selectedCity} />
+                </Suspense>
               </TabsContent>
             </Tabs>
           </div>
