@@ -9,6 +9,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    https: {
+      minVersion: 'TLSv1.2', // Enforce minimum TLS version
+      rejectUnauthorized: false, // For development only
+    },
   },
   plugins: [
     react(),
